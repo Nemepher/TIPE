@@ -23,7 +23,17 @@ def ycbcr_to_rgb (im):
     return np.uint8(output)
 
 def mean (im):
-
     input = np.float64(np.array(im))
     m = np.sum(input)//np.size(im)
     return m
+
+def dicho_search_nearest (L, v):
+    if L[0]>v : return 0
+    l,r=0,len(L)-1
+    while l<r:
+        m=(l+r)//2
+        if L[m]<v: l=m+1
+        else :     r = m
+        
+    return L[l]
+    

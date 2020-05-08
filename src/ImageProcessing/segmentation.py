@@ -31,14 +31,10 @@ def outline(im, threshold=5000) :
     f=np.vectorize(f)
     return np.uint8(f(G))
 
-def grayscale_segmentation(im, prec):
-
-    range = np.linespace(0,255,prec)
+def grayscale_segmentation(im, level=2):
     m=mean(im)
-    f= np.vectorize(lambda x : 255 if x>=m else 0)
-    def f (x,v,p):
-        if x>=v:
-            return 
-        else : 
-            return 
+    v=min(255-m,m)/level
+    values=np.linspace(m-v,m+v,2*level)
+    print(m,values) 
+    f = np.vectorize(lambda x : dicho_search_nearest(values, x))
     return f(im)
