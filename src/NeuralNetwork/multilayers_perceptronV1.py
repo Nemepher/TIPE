@@ -5,8 +5,8 @@ from cost_functions import *
 default_settings = {
         "cost_function": sum_of_square,
         "activation_function": sigmoid,
-        "learning_rate": 0.5,
-        "size": [3,3,1], #[size of input layer, ... , size of output layer] 
+        "learning_rate": 0.6,
+        "size": [3,1], #[size of input layer, ... , size of output layer] 
         "init_bias": 0.01,
         "min_weight":-0.01,
         "max_weight":0.01
@@ -41,11 +41,13 @@ class NeuralNetwork:
         return outputs 
    
 
-    def update_weights( self, gradient ):
-
+    def update_weights( self, gradient, learning_rate=self.learning_rate ):
         for k in range( self.num_layers ):
-            self.weights[k] -= self.learning_rate*gradient[0][k]
-            self.biases[k] -= self.learning_rate*gradient[1][k]
+            self.weights[k] -= learning_rate*gradient[k]
+
+    def update_biases( self, gradient, learning_rate=self.learning_rate ):
+        fork in range( self.num_layers ):
+            self.biases[k] -= learning_rate*gradient[k]
 
 
     def gradient( self, inputs, expected_outputs ):
@@ -67,8 +69,17 @@ class NeuralNetwork:
         return weights_gradient, biases_gradient
 
 
+    def training( self, X, Y, batch_size=10, epoch=1, learning_rate=self.learning_rate ): 
+        n = len(X)
+        for _ in range(epoch) :
+            indices = np.arrange(n)
+            np.random.shuffle(indices)
+            X = X[indices]
+            Y = Y[indices]
+    
 
-
+    def evaluate():
+        return 0
 
 NN = NeuralNetwork()
 #print("\n",NN.feedforward([1,2,4],True),"\n")
