@@ -1,4 +1,7 @@
-import numpy as np
+import numpy as np 
+import sqlite3
+import pickle
+from progress.bar import IncrementalBar
 from activation_functions import *
 from cost_functions import *
 
@@ -68,6 +71,8 @@ class Perceptron:
 
     def train( self, X, Y, learning_rate, batch_size=10, epoch=200 ): 
         
+        bar = IncrementalBar( 'Epoch', max=epoch )
+
         n = len(X)
         
         for _ in range(epoch) :
@@ -90,7 +95,8 @@ class Perceptron:
                 
                 self.update_weights( temp_weights_gradient, learning_rate ) 
                 self.update_biases( temp_biases_gradient, learning_rate )
-
+            
+            bar.next()
 
     def evaluate( self, X, Y ):
         
@@ -99,4 +105,37 @@ class Perceptron:
         mean_error = self.cost_function( X_forwarded, Y) / n
         range_of_forwarded_values = np.max(X_forwarded) - np.min(X_forwarded)
         return 1 - ( mean_error / range_of_forwarded_values )
+
+
+    def export_to_bs( self, filename ): 
+        
+       with open( filename, 'wb' ) as f:
+           print("\nPickling... ")
+           pickle.dump(self.__dict__, f)
+           print("completed!\n")
+    
+    def import_from_bs( self, filename ):
+        
+        with open( filename, 'rb' ) as f:
+            print("\nUnpickling... ")
+            self.__dict__.update( pickle.load( f ) )
+            print("completed!\n")
+
+
+    def export_to_db( self, filename ):  #TODO mais pas nécessaire
+        
+        if name[-7:] != '.sqlite' : filename += '.sqlite'
+        conn = sqlite3.connect(filename)
+        cur = conn.cursor()
+        '''
+        cur.execute(
+               "DROP TABLE IF EXISTS 'layers';DROP TABLE IF EXISTS 'weights';DROP TABLE IF EXISTS 'biases';
+                CREATE TABLE layers  ( id INT PRIMARY KEY AUTO INCREMENT=0, size INT NOT NULL);
+                CREATE TABLE weights ( id INT PRILARY KEY AUTO INCREMENT=0, weight FLOAT NOT NULL);
+                CREATE TABLE biases  ( id INT PRIMARY KEY AUTO INCREMENT=0, bias FLOAT NOT NULL);")
+        '''
+        insert_query = ""
+        conn.commit()
+        conn.close()
+
 
