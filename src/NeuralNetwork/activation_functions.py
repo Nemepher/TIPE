@@ -6,3 +6,7 @@ def sigmoid (inputs, derivative=False):
         outputs = np.exp(-inputs)*(outputs**2)
     return outputs
 
+def ReLU (inputs, derivative=False):
+    if derivative:
+        return inputs>0
+    return outputs = np.max(inputs,np.zeros_like(inputs))

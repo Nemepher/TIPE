@@ -1,6 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from multilayer_perceptron import *
+from progress.bar import ChargingBar
+from progress.spinner import Spinner
 
 
 ## Exemple 1 : Simple apprentissage "manuel"##
@@ -69,7 +71,6 @@ def ex4():
     Y = np.array([ np.random.uniform(0,0) for k in range(500) ])
 
     NN = Perceptron(settings)
-    NN.train(X,Y,300,1200,1)
     
     Xe = np.arange(0,10)
     Ye = [NN.evaluate(X,Y)]
@@ -79,4 +80,53 @@ def ex4():
     plt.plot(Xe,Ye)
     plt.show()
 
-ex4()
+## Test graphique, on trace un rond  ##
+def ex5(x,y,R,L):
+    # Figure and selected points
+    S = np.linspace(0,np.pi*2)
+    plt.fill([x+R*np.cos(t) for t in S],[y+R*np.sin(t) for t in S])
+    X = np.array([ np.random.uniform(0,L,2) for k in range(700) ])
+    Y = np.array([ ((X[k][0]-x)**2 + (X[k][1]-y)**2)<=R for k in range(700) ]) 
+    plt.plot(X[:,0],X[:,1],'+',color="red")    
+    plt.axis([0,L,0,L])
+    plt.show()
+
+    #Creating NN
+    settings = {
+        "cost_function": sum_of_square,
+        "activation_function": sigmoid,
+        "size": [2,4,4,1], #[size of input layer, ... , size of output layer] 
+        "init_bias": 0.1,
+        "min_weight":-1,
+        "max_weight":1
+    }
+    NN = Perceptron(settings)
+    
+    # Initial figure
+    x = np.linspace(0,L,L+1) 
+    Xm = np.array([ [i,j] for j in x for i in x ])
+    Ym = np.array([ [NN.feedforward(Xm[k+len(x)*l])[0] for k in range(len(x))] for l in range(len(x)) ])
+    plt.imshow(Ym, cmap='hot')
+    plt.axis([0,L,0,L])
+    plt.show()
+    
+    # Training
+    bar = ChargingBar('training', max = 20)
+    Xe = np.arange(0,20)
+    Ye = [NN.evaluate(X,Y)]
+    for k in range(1,20):
+        NN.train(X,Y,1,200,70)
+        Ye.append(NN.evaluate(X,Y))
+        bar.next()
+    plt.plot(Xe,Ye)
+    bar.finish()
+    plt.show()
+    
+    # After-training results
+    Ym = np.array([ [NN.feedforward(Xm[k+len(x)*l])[0] for k in range(len(x))] for l in range(len(x)) ])
+    plt.imshow(Ym, cmap='hot')
+    plt.axis([0,L,0,L])
+    plt.show()
+   
+
+ex5(10,0,8,10)

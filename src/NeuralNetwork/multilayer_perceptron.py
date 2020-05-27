@@ -1,7 +1,6 @@
 import numpy as np 
 import sqlite3
 import pickle
-from progress.bar import IncrementalBar
 from activation_functions import *
 from cost_functions import *
 
@@ -71,8 +70,6 @@ class Perceptron:
 
     def train( self, X, Y, learning_rate, batch_size=10, epoch=200 ): 
         
-        bar = IncrementalBar( 'Epoch', max=epoch )
-
         n = len(X)
         
         for _ in range(epoch) :
@@ -96,7 +93,6 @@ class Perceptron:
                 self.update_weights( temp_weights_gradient, learning_rate ) 
                 self.update_biases( temp_biases_gradient, learning_rate )
             
-            bar.next()
 
     def evaluate( self, X, Y ):
         
@@ -122,20 +118,6 @@ class Perceptron:
             print("completed!\n")
 
 
-    def export_to_db( self, filename ):  #TODO mais pas nécessaire
-        
-        if name[-7:] != '.sqlite' : filename += '.sqlite'
-        conn = sqlite3.connect(filename)
-        cur = conn.cursor()
-        '''
-        cur.execute(
-               "DROP TABLE IF EXISTS 'layers';DROP TABLE IF EXISTS 'weights';DROP TABLE IF EXISTS 'biases';
-                CREATE TABLE layers  ( id INT PRIMARY KEY AUTO INCREMENT=0, size INT NOT NULL);
-                CREATE TABLE weights ( id INT PRILARY KEY AUTO INCREMENT=0, weight FLOAT NOT NULL);
-                CREATE TABLE biases  ( id INT PRIMARY KEY AUTO INCREMENT=0, bias FLOAT NOT NULL);")
-        '''
-        insert_query = ""
-        conn.commit()
-        conn.close()
+  
 
 
