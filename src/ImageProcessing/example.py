@@ -3,17 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from utils import *
 from segmentation import *
+from lumiDistrib import * 
 
-
-#print(dicho_search_nearest([1,50,100],47))
-
-image=imageio.imread("assets/colored.png")
+image=imageio.imread("../../assets/foret.png")
 
 
 image2 = rgb_to_ycbcr(image)[:,:,2]
 #imageio.imwrite("gray.png", image2[:,:,0])
-plt.imshow(image2,cmap="gray")
-plt.axis('off')
+#plt.imshow(image2,cmap="gray")
+h = luminance_distribution( image2 )
+plt.bar(np.arange(0,256),h, width=2)
 plt.show()
 
 '''
