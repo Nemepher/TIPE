@@ -1,39 +1,34 @@
-import numpy as np
-
-def rgb_to_ycbcr (im):
-
-    input = np.float64(np.array(im)) #RGB
-
-    #YCbCR #Can be done with a dot product
-    output=np.empty_like(input)
-    output[:,:,0] = 0.299*input[:,:,0] + 0.587*input[:,:,1] + 0.114*input[:,:,2] #Y
-    output[:,:,1] = -0.1687*input[:,:,0] - 0.3313*input[:,:,1] + 0.5*input[:,:,2] +128 #Cb
-    output[:,:,2] = 0.5*input[:,:,0] - 0.4187*input[:,:,1] - 0.0813*input[:,:,2] +128 #Cr
-    return np.uint8(output)
-
-def ycbcr_to_rgb (im):
-
-    input = np.float64(np.array(im)) #YCbCr #the int to float conversion is essential !
-
-    #RGB #Can be done with a dot product
-    output=np.empty_like(input)
-    output[:,:,0] = input[:,:,0] + 1.402*(input[:,:,2]-128) #R
-    output[:,:,1] = input[:,:,0] - 0.34414*(input[:,:,1]-128) - 0.71414*(input[:,:,2]-128) #G
-    output[:,:,2] = input[:,:,0] + 1.772*(input[:,:,1]-128) #B
-    return np.uint8(output)
-
-def mean (im):
-    input = np.float64(np.array(im))
-    m = np.sum(input)//np.size(im)
-    return m
-
-def dicho_search_nearest (L, v):
+def dicho_search_nearest ( L, v ):
+    
     if L[0]>v : return 0
     l,r=0,len(L)-1
     while l<r:
         m=(l+r)//2
         if L[m]<v: l=m+1
         else :     r = m
-        
-    return L[l]
     
+    return L[l]
+
+
+def convolution ( im, ker, borders=0 ):
+
+    padding = (np.array(ker.shape)-1)
+    N,M = padding//2
+
+    #smaller image to apply the kernel to (no copying)
+    temp = np.zeros(im.shape)
+    for i in range(N,im.shape[0]-N-1):
+        for j in range(M,im.shape[1]-M-1):
+                temp[i,j]=np.sum(ker*im[i:i+2*N+1,j:j+2*M+1])
+    return temp
+
+    #np.pad !!!!    
+
+    '''
+    #larger image to apply the kernel to
+    temp = borders*np.ones(np.shape(im)+padding)
+    temp[N:-N,M:-M]=im
+    return np.array([ [ np.sum(ker*temp[ i:i+2*N+1, j:j+2*M+1]) for j in range(np.shape(im)[1]) ] for i in range(np.shape(im)[0]) ])
+    '''
+
+

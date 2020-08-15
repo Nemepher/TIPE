@@ -2,8 +2,7 @@ import numpy as np
 import imageio
 import matplotlib.pyplot as plt
  
-
-def floodfill(array, severity,  outcol, x, y) :
+def floodfill ( , severity,  outcol, x, y) :
     incol = np.copy(array[x,y])
     shape = np.shape(array)
     margin = [severity]*3
@@ -32,7 +31,7 @@ def middle(array, severity,  outcol, x, y) :
     return [np.mean(insideX), np.mean(insideY)]
 
 
-image = (np.array(imageio.imread("assets/bw.png")))
+image = (np.array(imageio.imread("../../assets/bw.png")))
 plt.imshow(image)
 plt.show()
 
