@@ -9,4 +9,4 @@ def sigmoid (inputs, derivative=False):
 def ReLU (inputs, derivative=False):
     if derivative:
         return inputs>0
-    return outputs = np.max(inputs,np.zeros_like(inputs))
+    return np.max(inputs,np.zeros_like(inputs))

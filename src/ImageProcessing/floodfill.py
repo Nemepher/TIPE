@@ -2,7 +2,7 @@ import numpy as np
 import imageio
 import matplotlib.pyplot as plt
  
-def floodfill ( , severity,  outcol, x, y) :
+def floodfill ( array , severity,  outcol, x, y) :
     incol = np.copy(array[x,y])
     shape = np.shape(array)
     margin = [severity]*3
@@ -35,6 +35,6 @@ image = (np.array(imageio.imread("../../assets/bw.png")))
 plt.imshow(image)
 plt.show()
 
-floodfill(image, 0,  (0,0,0), 20,290)
+floodfill(image, 0.1 ,  (0,0,0), 20,290)
 plt.imshow(image)
 plt.show()

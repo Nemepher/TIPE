@@ -9,6 +9,16 @@ def dicho_search_nearest ( L, v ):
     
     return L[l]
 
+def dicho_search (L, v):
+
+    if L[0]>v : return 0
+    l,r=0,len(L)-1
+    while l<r:
+        m=(l+r)//2
+        if L[m]<v: l=m+1
+        else :     r = m
+    
+    return r
 
 def convolution ( im, ker, borders=0 ):
 

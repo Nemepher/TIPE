@@ -17,10 +17,17 @@ ax = fig.add_subplot(2,2,1)
 ax.imshow(image2,cmap="gray")
 
 t= luminance_distribution(image2)
-a,d = find_peaks(t, height=0.02, distance=5)
-print(a,d)
+a,d = find_peaks(t, height=0.02, distance=10)
+l=d["peak_heights"]
+l2=sorted(l, reverse=True)
+m1=dicho_search(l,l2[0])
+m2=dicho_search(l,l2[1])
+print(a,l,l2[0],l2[1],m1,m2)
+
+#trouver les deux sommets les plus importants!
 ax = fig.add_subplot(2,2,2)
 ax.plot(t)
+
 
 image3 = threshold( image2, 127+1)
 ax = fig.add_subplot(2,2,3)
