@@ -16,6 +16,7 @@ from color_conversion import *
     - Profit ???
 '''
 
+
 def gauss1D( a, x ):
     ''' a : standard deviation '''
     return 1/(np.sqrt(2*np.pi)*a)*np.exp(-x*x/(2*a*a)) 
@@ -93,15 +94,41 @@ def pyramid( array, height, threshold=1, a0=1, ratio=1.4 ):
  
     return p1,p2,p3
 
+
+
 def maxima( array, height, threshold=1, a0=1, ratio=1.4 ):
     ''' p2 '''
     ''' attention aux bords trompeurs qui ne doivent pas etre pris en compte!! '''
     ''' comparaisons avec les voisins sur le meme plan et sur tous les plan précedents et suivants 
         ne le faire que pour les valeures négatives (on ne le fait que pour les points interieurs '''
     
+    
+    
+    p = []
     temp = array
+    for i in range(height):
+
+        temp2 = convolute( temp, gaussKernel2D(a0*(ratio)**i) )
+        diff = temp-temp2
+        p.append(diff)
+
+    padding = int(np.ceil(a0*(ratio)**(height-1)))
+    X,Y = array.shape 
+
+    for x in range( padding, X-padding ):
+        for y in range( padding, Y-padding ):
+            m=array[x,y]
+            i=0
+            for h in range(1,height):
+                pass
+            
+    
 
     
+
+
+
+
 
 print(gaussKernel2D(0.5),"\n", 1/16*np.array([[1,2,1],[2,4,2],[1,2,1]]))
 image = imageio.imread("../../assets/tree1.jpg")
