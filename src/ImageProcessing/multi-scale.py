@@ -93,12 +93,14 @@ def pyramid( array, height, threshold=1, a0=1, ratio=1.4 ):
  
     return p1,p2,p3
 
-def maxima( p_array ):
+def maxima( array, height, threshold=1, a0=1, ratio=1.4 ):
     ''' p2 '''
     ''' attention aux bords trompeurs qui ne doivent pas etre pris en compte!! '''
     ''' comparaisons avec les voisins sur le meme plan et sur tous les plan précedents et suivants 
         ne le faire que pour les valeures négatives (on ne le fait que pour les points interieurs '''
     
+    temp = array
+
     
 
 print(gaussKernel2D(0.5),"\n", 1/16*np.array([[1,2,1],[2,4,2],[1,2,1]]))
