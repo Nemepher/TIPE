@@ -47,14 +47,12 @@ def gaussKernel2D( a, normalized=True ):
 
 def convolute( array, kernel ):
 
-    padding = np.array( kernel.shape )
+    padding = np.array( kernel.shape ) -1
     N,M = padding//2
-    X,Y = array.shape
-    temp = np.zeros( (X,Y) )
-
-    for i in range( N+1, X-N ):
-        for j in range( M+1, Y-M ):
-            temp[i,j] = np.sum( kernel * array[ i-N:i+N+1, j-N:j+M+1 ] )
+    temp = np.zeros( array.shape )
+    for i in range( N, array.shape[0] -2*N-1 ):
+        for j in range( M, array.shape[1] -2*M-1 ):
+            temp[i+N,j+M] = np.sum( kernel * array[ i:i+2*N+1, j:j+2*M+1 ] )
             
     return temp
 
@@ -77,12 +75,18 @@ def pyramid( array, height, threshold=1, a0=1, ratio=1.4 ):
     
     for i in range(height):
 
-        temp2 = convolute( array, gaussKernel2D(a0*(ratio)**i) )
+        temp2 = convolute( temp, gaussKernel2D(a0*(ratio)**i) )
         p1.append(temp2)
 
         diff = temp-temp2
         p2.append(diff)
 
+        '''
+        t=threshold*(1)
+        diff[(-t<=diff) & (diff<=0)]=0
+        diff[(-t>diff) | (diff>t) ]=1  
+        '''
+        #diff[ diff<=0 ] = 0
         diff[diff>0] = 1
         p3.append(diff)
         
@@ -98,77 +102,70 @@ def maxima( array, height, threshold=1, a0=1, ratio=1.4 ):
     ''' comparaisons avec les voisins sur le meme plan et sur tous les plan précedents et suivants 
         ne le faire que pour les valeures négatives (on ne le fait que pour les points interieurs ''' 
 
-    N = int( np.ceil(a0*(ratio)**(height-1)))
+    padding = int( np.ceil(a0*(ratio)**(height-1)) )
+    N = padding//2
     X,Y = np.shape( array ) 
     p = np.empty((height,X,Y))
-    temp = array 
+    temp = array
 
     for i in range(height):
 
-        temp2 = convolute( array, gaussKernel2D(a0*(ratio)**i) )
+        temp2 = convolute( temp, gaussKernel2D(a0*(ratio)**i) )
         p[i] = temp-temp2
         temp = temp2
-    ''' 
-    m = np.array( [ [ np.argmin(p[:,i,j]) for j in range(N+1,Y-N) ] for i in range(N+1,X-N) ] ) 
+    
+    m = np.array( [ [ np.argmin(p[:,i,j]) for j in range(N+1,Y-N) ] for i in range(N+1,X-N) ] )
     n = np.empty((X-2*N,Y-2*N))
    
+
     for x in range(X-2*N-1):
         for y in range(Y-2*N-1):
 
             d = m[x,y]
             v = p[d,N+1+x,N+1+y]
-            #if v == np.min(p[d,N+x:N+x+3,N+y:N+y+3]) : n[x,y] = d
-            #else : n[x,y] = -1
-            n[x,y] = v
-    '''
-    m = np.array( [ [ np.argmin(p[:,i,j]) for j in range(Y) ] for i in range(X) ] ) 
-    n = np.empty((X,Y))
-   
-    for x in range(1,X-1):
-        for y in range(1,Y-1):
-
-            d = m[x,y]
-            v = p[d,x,y]
-            if ( v == np.min(p[:,x-1:x+1,y-1:y+1])) : n[x,y] = d
+            if v == np.min(p[d,N+x:N+x+3,N+y:N+y+3]) : n[x,y] = d
             else : n[x,y] = -1
-            
+    
     return p,m,n
      
 
 
+image = imageio.imread("../../assets/testing.png")
+image = np.dot(image[...,:3], [0.2989, 0.5870, 0.1140])
 
-image = imageio.imread("../../assets/testing2.png")
-image = np.dot(image[...,:3], [0.2989, 0.5870, 0.1140]) #Super duper sweet!
-X,Y = np.shape( image  ) 
-h=8
-a=3
-p,m,n = maxima(image,h, a0=a)
+p,m,n = maxima(image,4, a0=1.5)
 
+print(p,m)
 
 fig= plt.figure()
 ax=fig.add_subplot(1,3,1)
-ax.imshow(n,cmap="binary")
-ax=fig.add_subplot(1,3,2)
-ax.imshow(m,cmap="binary")
-ax=fig.add_subplot(1,3,3)
 ax.imshow(image, cmap="gray")
+ax=fig.add_subplot(1,3,2)
+ax.imshow(n,cmap="binary")
 
-for x in range(1,X-1):
-    for y in range(1,Y-1):
-        a = n[x,y]
-        if a > 1 and a<5 :
-            c = plt.Circle((x,y),a,color='b',fill=False)
-            ax.add_artist(c)
+plt.show()
 
-p1,p2,p3 = pyramid( image, h, a0=a)
+
+image = imageio.imread("../../assets/testing.png")
+image = rgb_to_ycbcr(image)[:,:,2]
+
+h=4
+p1,p2,p3 = pyramid( image, h, a0=1.5)
 fig = plt.figure()
 for i in range(h):
     ax=fig.add_subplot(h,1,i+1)
     ax.imshow(p1[i],vmin=0,vmax=255, cmap="gray")
+'''
 fig=plt.figure()
 for i in range(h):
     ax=fig.add_subplot(h,1,i+1)
-    ax.imshow(p2[i],cmap="PiYG")
+    ax.imshow(p2[i],vmin=-i,vmax=i,cmap="PiYG")
+fig=plt.figure()
+for i in range(h):
+    ax=fig.add_subplot(h,1,i+1)
+    ax.imshow(p3[i],vmin=0,vmax=1,cmap="gray")
+'''
+
 plt.show()
 
 '''
