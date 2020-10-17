@@ -1,7 +1,9 @@
 import imageio
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 from color_conversion import *
+
 
 '''Log ou DoG ? DoG, plus simple (difference, des gaussien successifs... et plus rapide, aproximation suffisante)
    To do:  
@@ -92,11 +94,7 @@ def pyramid( array, height, threshold=1, a0=1, ratio=1.4 ):
 
 
 
-def maxima( array, height, threshold=1, a0=1, ratio=1.4 ):
-    ''' p2 '''
-    ''' attention aux bords trompeurs qui ne doivent pas etre pris en compte!! '''
-    ''' comparaisons avec les voisins sur le meme plan et sur tous les plan précedents et suivants 
-        ne le faire que pour les valeures négatives (on ne le fait que pour les points interieurs ''' 
+def minimas( array, height, a0=1, ratio=1.4 ):
 
     N = int( np.ceil(a0*(ratio)**(height-1)))
     X,Y = np.shape( array ) 
@@ -108,58 +106,79 @@ def maxima( array, height, threshold=1, a0=1, ratio=1.4 ):
         temp2 = convolute( array, gaussKernel2D(a0*(ratio)**i) )
         p[i] = temp-temp2
         temp = temp2
-    ''' 
-    m = np.array( [ [ np.argmin(p[:,i,j]) for j in range(N+1,Y-N) ] for i in range(N+1,X-N) ] ) 
-    n = np.empty((X-2*N,Y-2*N))
-   
-    for x in range(X-2*N-1):
-        for y in range(Y-2*N-1):
-
-            d = m[x,y]
-            v = p[d,N+1+x,N+1+y]
-            #if v == np.min(p[d,N+x:N+x+3,N+y:N+y+3]) : n[x,y] = d
-            #else : n[x,y] = -1
-            n[x,y] = v
-    '''
-    m = np.array( [ [ np.argmin(p[:,i,j]) for j in range(Y) ] for i in range(X) ] ) 
-    n = np.empty((X,Y))
-   
-    for x in range(1,X-1):
-        for y in range(1,Y-1):
-
-            d = m[x,y]
-            v = p[d,x,y]
-            if ( v == np.min(p[:,x-1:x+1,y-1:y+1])) : n[x,y] = d
-            else : n[x,y] = -1
-            
-    return p,m,n
+    
+    #minis_map = np.array( [ [ [ p[h,i,j] if ( p[h,i,j]<-1 and p[h,i,j] == np.min(p[h-1:h+2,i-1:i+2,j-1:j+2]) ) else 0 for j in range(N+2,Y-N-1) ] for i in range(N+2,X-N-1) ] for h in range(1,height) ] )
+    minis_list =[]
+    
+    for h in range(height-2,-1,-1):
+        for x in range(X-2*N-3):
+            for y in range(Y-2*N-3):
+                
+                mini = np.min( p[h:h+3, N+1+x:N+4+x, N+1+y:N+4+y] )
+                
+                if mini<-1 and mini == p[h+1, N+2+x, N+2+y] : 
+                    
+                    inside = False
+                    for i in range(len(minis_list)):
+                        x2,y2,H = minis_list[i]
+                        if (x2-(N+2+x))**2+(y2-(N+2+y))**2 < (a0*ratio**H)**2 : 
+                            inside = True
+                            break
+                          
+                    if not inside : minis_list.append((N+2+x,N+2+y,h+1))
+                    
+    return p, minis_list
      
 
+def imshowcircles ( image, ax, cmap="gray" ) :
+    ax.imshow(image, cmap)
+    for i in range(len(m)):
+        x,y,h = m[i]
+        c = plt.Circle((y,x),a*r**h,color='b',fill=False)
+        ax.add_artist(c)
+
+def extract_circles ( image, m, a0, ratio, name ):
+    for i in range(len(m)):
+        x,y,h = m[i]
+        radius = int(a0*ratio**h)
+        imageio.imwrite("../../assets/processed_data/"+name+"/"+str(i)+".png", image[x-radius:x+radius+1,y-radius:y+radius+1,:])
 
 
-image = imageio.imread("../../assets/testing2.png")
-image = np.dot(image[...,:3], [0.2989, 0.5870, 0.1140]) #Super duper sweet!
+image0 = imageio.imread("../../assets/tree3.jpg")
+image = np.dot(image0[...,:3], [0.2989, 0.5870, 0.1140]) #Super duper sweet!
 X,Y = np.shape( image  ) 
+min_r=5
 h=8
-a=3
-p,m,n = maxima(image,h, a0=a)
+a=2.5
+r=1.2
 
+_,m = minimas(image, h, a0=a, ratio=r)
 
 fig= plt.figure()
-ax=fig.add_subplot(1,3,1)
-ax.imshow(n,cmap="binary")
-ax=fig.add_subplot(1,3,2)
+ax=fig.add_subplot(1,1,1)
+imshowcircles(image,ax) 
+plt.show()
+
+"""
+name="test2"
+if not os.path.exists("../../assets/processed_data/"+name) : os.mkdir("../../assets/processed_data/"+name)
+extract_circles( image0, m, a, r, name)
+"""
+'''
+ax=fig.add_subplot(2,2,1)
 ax.imshow(m,cmap="binary")
-ax=fig.add_subplot(1,3,3)
-ax.imshow(image, cmap="gray")
-
-for x in range(1,X-1):
-    for y in range(1,Y-1):
-        a = n[x,y]
-        if a > 1 and a<5 :
-            c = plt.Circle((x,y),a,color='b',fill=False)
-            ax.add_artist(c)
-
+ax=fig.add_subplot(2,2,2)
+ax.imshow(n,cmap="binary")
+ax=fig.add_subplot(2,2,3)
+ax.imshow(o,cmap="binary")
+'''
+'''
+fig = plt.figure()
+for k in range(h-1):
+    ax=fig.add_subplot(1,h-1,k+1)
+    ax.imshow(n[k,:,:], cmap="binary")
+'''
+'''
 p1,p2,p3 = pyramid( image, h, a0=a)
 fig = plt.figure()
 for i in range(h):
@@ -169,8 +188,7 @@ fig=plt.figure()
 for i in range(h):
     ax=fig.add_subplot(h,1,i+1)
     ax.imshow(p2[i],cmap="PiYG")
-plt.show()
-
+'''
 '''
 fig=plt.figure()
 ax=fig.add_subplot(2,1,1)
@@ -180,7 +198,6 @@ ax=fig.add_subplot(2,1,2)
 ax.imshow( image2, cmap="gray")
 plt.show()
 '''
-
 '''
 fig = plt.figure()
 ax = fig.add_subplot(2,2,1)
