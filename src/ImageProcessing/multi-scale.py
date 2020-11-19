@@ -121,7 +121,7 @@ def minimas( array, height, a0=1, ratio=1.4 ):
                     inside = False
                     for i in range(len(minis_list)):
                         x2,y2,H = minis_list[i]
-                        if (x2-(N+2+x))**2+(y2-(N+2+y))**2 < (a0*ratio**H)**2 : 
+                        if (x2-(N+2+x))**2+(y2-(N+2+y))**2 < 1.2*(a0*ratio**H)**2 : 
                             inside = True
                             break
                           
@@ -144,19 +144,22 @@ def extract_circles ( image, m, a0, ratio, name ):
         imageio.imwrite("../../assets/processed_data/"+name+"/"+str(i)+".png", image[x-radius:x+radius+1,y-radius:y+radius+1,:])
 
 
-image0 = imageio.imread("../../assets/tree3.jpg")
+image0 = imageio.imread("../../assets/ggmap2.png")
 image = np.dot(image0[...,:3], [0.2989, 0.5870, 0.1140]) #Super duper sweet!
+#inverting image, optional but usefull => the background has to be clear since we serch the minimas!!
+image = 255-image
+
 X,Y = np.shape( image  ) 
 min_r=5
-h=8
-a=2.5
+h=6#8
+a=3#2.5
 r=1.2
 
 _,m = minimas(image, h, a0=a, ratio=r)
 
 fig= plt.figure()
 ax=fig.add_subplot(1,1,1)
-imshowcircles(image,ax) 
+imshowcircles(image0,ax) 
 plt.show()
 
 """
