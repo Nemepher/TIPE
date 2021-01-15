@@ -1,0 +1,14 @@
+\babel@toc {french}{}
+\contentsline {section}{\numberline {1}D\IeC {\'e}tection des houppiers}{2}% 
+\contentsline {subsection}{\numberline {1.1}Laplacien et approche multi \IeC {\'e}chelle}{2}% 
+\contentsline {subsection}{\numberline {1.2}mise en place}{2}% 
+\contentsline {subsection}{\numberline {1.3}\'{E}valuation des r\IeC {\'e}sultats}{2}% 
+\contentsline {section}{\numberline {2}Identification des esp\IeC {\`e}ces}{2}% 
+\contentsline {subsection}{\numberline {2.1}Propre alogorithme ou tensorflow}{2}% 
+\contentsline {subsection}{\numberline {2.2}M\IeC {\'e}thodologie de construction d'une base de donn\IeC {\'e} fiable}{2}% 
+\contentsline {subsection}{\numberline {2.3}entrainement et quelle type de mod\IeC {\`e}le }{3}% 
+\contentsline {section}{\numberline {3}Prolongements envisagables}{3}% 
+\contentsline {section}{R\'ef\'erences}{3}% 
+\contentsline {section}{\numberline {A}R}{3}% 
+\contentsline {section}{\numberline {B}r\IeC {\'e}sultats pour l'identification}{3}% 
+\contentsline {section}{\numberline {C}C algorithmes}{3}% 

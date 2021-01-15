@@ -144,7 +144,7 @@ def extract_circles ( image, m, a0, ratio, name ):
         imageio.imwrite("../../assets/processed_data/"+name+"/"+str(i)+".png", image[x-radius:x+radius+1,y-radius:y+radius+1,:])
 
 
-image0 = imageio.imread("../../assets/ggmap2.png")
+image0 = imageio.imread("../../assets/ggmap.png")
 image = np.dot(image0[...,:3], [0.2989, 0.5870, 0.1140]) #Super duper sweet!
 #inverting image, optional but usefull => the background has to be clear since we serch the minimas!!
 image = 255-image

@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[toc]{appendix}
+\usepackage[nottoc]{tocbibind}
+\pagestyle{headings}
+
+\title{Détection et identification d'arbre à partir d'imagerie satellite/aerienne}
+\author{Augustin Albert}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section*{Introduction}
+	\subsection*{Position du problème}
+		-pourquoi vouloir faire ça, utilité/contexte	
+		-1 pb extraction de données : differentes méthodes qui requièrent plus ou moins de materiel/images de qualité
+		-2 pb traitement des données
+
+	\subsection*{\'{E}tat actuel de la recherche}
+		-voir papiers 
+
+	\subsection*{Objectifs du TIPE}		
+		-limitation à des images aériennes: pourquoi(moins couteux, accessible sur internet, differents modes d'aquisitions,  enjeux/difficultés
+		-d'une part à concevoir ... pour detecter les a
+		-d'une autre part à l'utiliser pour contruire une base de donné permetant identification ulterierure sur la base du machin learning
+		-application au site du parc regional...
+		
+\section{Détection des houppiers}
+	Intro: Méthode naive de detection des zones plus lumineuses. La luminosité des arbres peut beaucoup varier sur une meme image (à moins d'avoir des images de haute qualité "prise en une seule fois" (ex papier). Une solution = Détection de blobs 
+
+	\subsection{Laplacien et approche multi échelle}
+		-definition
+		-sa réponse à un contour 
+		-lorsque deux contours sont suffisament proches, la réponse au centre est minimale
+		-mais  il ne détecte qu'une echelle de taille 
+		-LoG et son approximation Dog (def et explication de pk un coefficient normalisateur)  
+		-séparabilité du filtre de gauss (optimisation de l'algorithme de convolution)
+	
+	\subsection{mise en place}
+		-filtre gaussien et convolution 
+		-pyramide d'image
+		-selection des minimums 
+		-selectin des meilleurs paramètres (très  
+
+	\subsection{\'{E}valuation des résultats}
+		-évalutation de la complexité 
+		-propres résultats
+		-comparaison avec les résultats des papiers 
+
+\section{Identification des espèces}
+	
+	\subsection{Propre alogorithme ou  tensorflow}
+	
+	\subsection{Méthodologie de construction d'une base de donné fiable}
+		- trop long de faire à la main + 
+		- géoportail (verif autorisation... cé) et extration sur des zones ou la couverture d'espèce est uniforme : res --- images triées en 2
+	
+	\subsection{entrainement et quelle type de modèle }
+		-
+
+\section{Prolongements envisagables}
+	-on obtient qu'un cercle autour des arbres
+	-une methode watershed segmentation avec marqueurs que l'on à trouvé pourrait etre envisagble pour delinéer parfaitement les arbres (voir papier) 
+
+\nocite{NatesanResNet} %à supprimer après!! 
+\bibliographystyle{alpha}
+\bibliography{references}
+
+\begin{appendix}
+	\section{R}	
+		-résultats intermédiare (pyramide de gauss)
+		-les deux 
+		-douglas seul 
+		-feuillus seul
+	
+	\section{résultats pour l'identification}
+		-echantillon banque fourni pour feuillus
+		-echantillon banque fourni pour douglas 
+		-echantillon aléatoire parmis des images non deja vus
+
+	\section{C algorithmes}
+\end{appendix}
+
+\end{document}
+
+
