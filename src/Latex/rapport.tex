@@ -1,9 +1,12 @@
 \documentclass{article}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
+\usepackage{pgfplots}
 \usepackage[toc]{appendix}
 \usepackage[nottoc]{tocbibind}
 \pagestyle{headings}
+
+\pgfplotsset{width=5cm,compat=1.16}
 
 \title{Détection et identification d'arbre à partir d'imagerie satellite/aerienne}
 \author{Augustin Albert}
@@ -29,37 +32,69 @@
 		-application au site du parc regional...
 		
 \section{Détection des houppiers}
-	Intro: Méthode naive de detection des zones plus lumineuses. La luminosité des arbres peut beaucoup varier sur une meme image (à moins d'avoir des images de haute qualité "prise en une seule fois" (ex papier). Une solution = Détection de blobs 
+	Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses. La luminosité des arbres peut beaucoup varier sur une meme image (à moins d'avoir des images de haute qualité "prise en une seule fois" (ex papier). Une solution = Détection de blobs. 2 problemes : -différence de luminosité et différence d'échelle.
 
-	\subsection{Laplacien et approche multi échelle}
-		-definition
-		-sa réponse à un contour 
-		-lorsque deux contours sont suffisament proches, la réponse au centre est minimale
-		-mais  il ne détecte qu'une echelle de taille 
-		-LoG et son approximation Dog (def et explication de pk un coefficient normalisateur)  
-		-séparabilité du filtre de gauss (optimisation de l'algorithme de convolution)
-	
+	\subsection{Laplacien du gaussien  et approche multi échelle}
+		L'approche multi-échelle 
+		-definition : permet d'obtenir une réponse particulière lors d'un echellon du signal. Le filtre LoG est défini comme le laplacien du filtre gaussien. (filtre = opérateur ? -> Fiche voca)
+		\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
+		\[{LoG}_{\sigma}:=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
+		Demo : à faire 
+
+		-schema: sa réponse à un contour
+		convolution du filtre avec un signal crénau
+		
+		-schemas rapprochemet du blob pour differentes taille du blob 
+		
+		-Le filtre permet la detection de contour en recherchant les points d'annulation. On cherche ici à l'utiliser pour la détection de blob. (minimum) lorsque deux contours sont suffisament proches, la réponse au centre du blob est minimal à condition que la taille caractéristique du blob corresponde au paramètre sigma. relation demo r = racine 2 sigam carré 
+
+		-mais la réponse de l'operateur s'attenue lorsque $\sigma$ augmente. Il est donc nécessaire de normaliser l'operateur. (Quel coef ? sigma carré) 
+		
+		-schemas normalisé ou non 
+
+		-Appliquer log a differente echelle permet donc de ramener la detection de blob à la recherche d'un minimum par rapport à l'espace (centre du blob) et l'echelle (taille carctéristique) ) 
+
+		\begin{tikzpicture}
+			\begin{axis}[]	
+			\addplot[ domain = -10:10,samples=100 ]{x^2 -2*x};
+			\addplot[ domain = -10:10,samples=100 ]{x^3 -2*x};
+			\end{axis}
+		\end{tikzpicture}
+
 	\subsection{mise en place}
-		-filtre gaussien et convolution 
-		-pyramide d'image
-		-selection des minimums 
-		-selectin des meilleurs paramètres (très  
+	Implementaion en python
+		-filtre gaussien et convolution :	
+			-approximation Dog (avec demo) qui sera utilisé (partique) 
+			-convolution et séparabilité du filtre de gauss (optimisation de l'algorithme de convolution) En pratique, convolution de scypy qui sera utilisé (bien plus rapide)
+	
+		-pyramide d'image puis difference pour réaliser une matrice numpy 3 dimensionelle dans laquelle on recherchera des minimums local ou global selon l'axe
+		
+		-selection des minimums :
+			-utilisation de numpy
+			-dans quel ordre et pourquoi ?
+			-verification pour eviter la superposition (pourqoi et comment : certain ordre et on verifie que ce n'est pas dans les précedents)
+	
+		-selection des meilleurs paramètres (très heuristique comme méthode, nécessite des essais => la méthodes n'est pas completement automatique. (dépend de la taille caractéristique des arbres, de l'echelle choisie) donner les paramètre pour l'echelle et tout.
+
+		facteur limitant i
 
 	\subsection{\'{E}valuation des résultats}
 		-évalutation de la complexité 
 		-propres résultats
+		faire tableau 3 colonnes pour les trois images différentes
+		% repéré 
 		-comparaison avec les résultats des papiers 
 
 \section{Identification des espèces}
 	
-	\subsection{Propre alogorithme ou  tensorflow}
+	\subsection{Propre algorithme ou tensorflow}
 	
 	\subsection{Méthodologie de construction d'une base de donné fiable}
 		- trop long de faire à la main + 
 		- géoportail (verif autorisation... cé) et extration sur des zones ou la couverture d'espèce est uniforme : res --- images triées en 2
 	
 	\subsection{entrainement et quelle type de modèle }
-		-
+		-citer papier , à la main 
 
 \section{Prolongements envisagables}
 	-on obtient qu'un cercle autour des arbres
@@ -70,18 +105,18 @@
 \bibliography{references}
 
 \begin{appendix}
-	\section{R}	
+	\section{Résultats}	
 		-résultats intermédiare (pyramide de gauss)
 		-les deux 
 		-douglas seul 
 		-feuillus seul
-	
-	\section{résultats pour l'identification}
 		-echantillon banque fourni pour feuillus
 		-echantillon banque fourni pour douglas 
 		-echantillon aléatoire parmis des images non deja vus
 
-	\section{C algorithmes}
+	\section{Démos}
+		
+	\section{algorithmes}
 \end{appendix}
 
 \end{document}
