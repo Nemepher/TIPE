@@ -32,42 +32,38 @@
 		-application au site du parc regional...
 		
 \section{Détection des houppiers}
-	Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses. La luminosité des arbres peut beaucoup varier sur une meme image (à moins d'avoir des images de haute qualité "prise en une seule fois" (ex papier). Une solution = Détection de blobs. 2 problemes : -différence de luminosité et différence d'échelle.
+	Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses. La luminosité des arbres peut beaucoup varier sur une meme image (à moins d'avoir des images de haute qualité "prise en une seule fois" (ex papier). Une solution = Détection de blobs. 2 problemes : -différence de luminosité et différence d'échelle. Citer algo pour. de pixels plus lumineux que leur voisins correspondants aux houppiers
 
-	\subsection{Laplacien du gaussien  et approche multi échelle}
-		L'approche multi-échelle 
-		-definition : permet d'obtenir une réponse particulière lors d'un echellon du signal. Le filtre LoG est défini comme le laplacien du filtre gaussien. (filtre = opérateur ? -> Fiche voca)
-		\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
-		\[{LoG}_{\sigma}:=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
-		Demo : à faire 
-
-		-schema: sa réponse à un contour
-		convolution du filtre avec un signal crénau
-		
-		-schemas rapprochemet du blob pour differentes taille du blob 
-		
-		-Le filtre permet la detection de contour en recherchant les points d'annulation. On cherche ici à l'utiliser pour la détection de blob. (minimum) lorsque deux contours sont suffisament proches, la réponse au centre du blob est minimal à condition que la taille caractéristique du blob corresponde au paramètre sigma. relation demo r = racine 2 sigam carré 
-
-		-mais la réponse de l'operateur s'attenue lorsque $\sigma$ augmente. Il est donc nécessaire de normaliser l'operateur. (Quel coef ? sigma carré) 
-		
-		-schemas normalisé ou non 
-
-		-Appliquer log a differente echelle permet donc de ramener la detection de blob à la recherche d'un minimum par rapport à l'espace (centre du blob) et l'echelle (taille carctéristique) ) 
-
-		\begin{tikzpicture}
-			\begin{axis}[]	
-			\addplot[ domain = -10:10,samples=100 ]{x^2 -2*x};
-			\addplot[ domain = -10:10,samples=100 ]{x^3 -2*x};
-			\end{axis}
-		\end{tikzpicture}
-
-	\subsection{mise en place}
-	Implementaion en python
-		-filtre gaussien et convolution :	
-			-approximation Dog (avec demo) qui sera utilisé (partique) 
-			-convolution et séparabilité du filtre de gauss (optimisation de l'algorithme de convolution) En pratique, convolution de scypy qui sera utilisé (bien plus rapide)
+	\subsection{Laplacien du gaussien et approche multi échelle}
+		Afin de prendre en compte des houppiers dont le diamètre peut varier considérablement entre les différentes espèces mais aussi au sein d'une même espèce, une approche multi-échelle est nécessaire. Nous utiliserons la théorie échelle-temps dévellopée par (\ref Lindbergh). Une pyramide d'echelle est réalisée en lissant successivement l'image originelle avec un filtre gaussien de paramètre $\sigma$ : le paramètre d'échelle. L'image originelle est convolé autant de fois que nécessaire par la fonction gaussiene suivante, le paramètre $\sigma$ étant multiplié par un ratio fixé à !!!!! important !!!! à chaqe étape : 
 	
-		-pyramide d'image puis difference pour réaliser une matrice numpy 3 dimensionelle dans laquelle on recherchera des minimums local ou global selon l'axe
+	\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
+
+	On applique alors un opérateur laplacien normalisé aux images résultante afin d'obtenir la pyramide d'échelle du laplacien du Gaussien (LoG). L'image obtenue à chaque niveau est alors la convolution de l'image originelle par la fonction Log :
+
+
+	\[{LoG}_{\sigma}:=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
+
+	En pratique, le LoG est approximé par la différence du gaussien (DoG) obtenue en réalisant la difference des images floutées entre chaque niveau de la pyramide d'échelle.  
+
+	Cette pyramide d'échelle du LoG permet d'extraire des caractéristiques indépendament de leur échelle en exploitant la réponse de l'opérateur LoG appliqué à un signal échelon. (figure 5). Lorsque le rayon caractéristique du blob $r$ varie, le minimum (maximum en valeur absolue) du LoG est atteint au centre du blob. Lorsque le paramètre $\sigma$ varie, la réponse au centre est minimale lorsque $r$ est relié à $\sigma$ par la relation $\sigma=\frac{r}{\sqrt{2}}$. La réponse du LoG non normalisé s'attenuant lorsque $\sigma$ augmente, l'opérateur à été multiplié par $\sigma^{2}$ pour que la réponse soit indépendante de l'échelle.
+
+	La détection des blobs se ramène ainsi à la recherche d'un minimum local relativement à l'espace et global relativement à l'échelle pour identifier à la fois les centres des houppier et la taille caractéristique de leur rayon. 
+	
+	-figure 1 réponse à un echellon 
+	-figure 2 un blob mais différents paramètres de largeur et de parametre !!
+	
+	
+	\subsection{Mise en place de l'algorithme}
+
+	L'algorithme envisagé à été implémenté à l'aide du langage Python et utilise la bibliothèque Numpy afin d'accélérer le traitement des tableaux. Il comporte trois étapes. Premièrement, l'image à traité est convertie en nuance de gris et éventuellement inversée afin que le fond soit plus clair que les houppiers. (une intervention humaine est nécessaire). 
+	
+	La seconde étape consiste à générer la pyramide d'echelle du DoG. Le choix Les noyaux de Gauss et la convolution ont été implémenté en exploitant la séparablilité du filtre de Gauss pour accélérer le calcul, mais en définitive, la convolution fourni par le module scipy à été utilisé. (Bien plus rapide). Les résultats sont stockés dans un tableau Numpy 3D. !!!!! heuristaique et choix des parametres !!!! 
+
+	Finalement, les minimums sont calculé en parcourant le tableau afin d'éliminer d'éventuelles détection à l'interieur d'une zone déja ... 
+	Afin 
+
+	imensionelle dans laquelle on recherchera des minimums local ou global selon l'axe
 		
 		-selection des minimums :
 			-utilisation de numpy
@@ -77,6 +73,7 @@
 		-selection des meilleurs paramètres (très heuristique comme méthode, nécessite des essais => la méthodes n'est pas completement automatique. (dépend de la taille caractéristique des arbres, de l'echelle choisie) donner les paramètre pour l'echelle et tout.
 
 		facteur limitant i
+		choix final des paramètres : + image utilisées (taille des arbres sur le terrain et échelle de l'image) 
 
 	\subsection{\'{E}valuation des résultats}
 		-évalutation de la complexité 
@@ -86,18 +83,21 @@
 		-comparaison avec les résultats des papiers 
 
 \section{Identification des espèces}
-	
-	\subsection{Propre algorithme ou tensorflow}
-	
+
+	Choix du machin learning comme dans de nombreux papiers (meme si pas les memes donnees de base) Propre implementation dévellopé mais aps complet et ne permet pas à ce jour de traiter efficacement des images (maque le truc de convolution et reste lent en comparaison des systemes professionels) Le choix s'est donc porté sur Tensorflow.  
+
 	\subsection{Méthodologie de construction d'une base de donné fiable}
-		- trop long de faire à la main + 
+		Il aurait été fastidieux d'étiqetter à la main un nombre important d'images, d'autant plus qu'elles sont de basses réolution. Afin   
 		- géoportail (verif autorisation... cé) et extration sur des zones ou la couverture d'espèce est uniforme : res --- images triées en 2
 	
 	\subsection{entrainement et quelle type de modèle }
-		-citer papier , à la main 
+		-citer papier , à la main car ici le cas est plus simple mais l'on pourrais généraliser. (difference avec eux)
 
 \section{Prolongements envisagables}
-	-on obtient qu'un cercle autour des arbres
+
+	Différents prolongement serait envisagables: 
+	-Sensible aux ... séparer préalablement et éventuellement grossiemerement les zones forêstières des zones d'habitation ou  industrielle. Même une route bétonné peut éventuellement altérer les réusltats. batiement/contruction quo fausserait les resultat. 
+	De plus obtient qu'un cercle autour des arbres
 	-une methode watershed segmentation avec marqueurs que l'on à trouvé pourrait etre envisagble pour delinéer parfaitement les arbres (voir papier) 
 
 \nocite{NatesanResNet} %à supprimer après!! 
@@ -105,6 +105,11 @@
 \bibliography{references}
 
 \begin{appendix}
+
+	\section{Compléments}
+		Lien avec filtre basse fréquence (downsampling, pourqoi?)
+		le filtre de gauss retire les hautes fréquences donc permet d' augmenter la fréquence d'échantillonage 'théorme de shannon sans qu'il y ait d'artefacts. 
+	
 	\section{Résultats}	
 		-résultats intermédiare (pyramide de gauss)
 		-les deux 
@@ -113,11 +118,13 @@
 		-echantillon banque fourni pour feuillus
 		-echantillon banque fourni pour douglas 
 		-echantillon aléatoire parmis des images non deja vus
-
-	\section{Démos}
-		
+	
 	\section{algorithmes}
 \end{appendix}
+
+
+a faire : réaliser les tableaux de comparaison, mettre en forme le code 
+ecrire les preuves 
 
 \end{document}
 

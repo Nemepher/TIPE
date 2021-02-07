@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.1.7)  21 JAN 2021 11:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2019/dev/Debian) (preloaded format=pdflatex 2021.1.7)  4 FEB 2021 11:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -609,34 +609,41 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
-[3] (./rapport.bbl) [4] (./rapport.aux) ) 
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+
+LaTeX Warning: Reference `L' on page 2 undefined on input line 38.
+
+[2] [3] (./rapport.bbl) [4] [5] (./rapport.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 23433 strings out of 493955
- 602970 string characters out of 6160075
- 790554 words of memory out of 5000000
- 26752 multiletter control sequences out of 15000+600000
+ 22989 strings out of 493955
+ 590132 string characters out of 6160075
+ 789554 words of memory out of 5000000
+ 26308 multiletter control sequences out of 15000+600000
  13271 words of font info for 32 fonts, out of 8000000 for 9000
  350 hyphenation exceptions out of 8191
- 73i,9n,127p,729b,1916s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/aalbert/.texlive2018/texmf-var
-/fonts/pk/ljfour/jknappen/ec/ecti1000.600pk> </home/aalbert/.texlive2018/texmf-
-var/fonts/pk/ljfour/jknappen/ec/ecsl1000.600pk> </home/aalbert/.texlive2018/tex
-mf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/aalbert/.texlive2018/
-texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk> </home/aalbert/.texlive20
-18/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> </home/aalbert/.texliv
-e2018/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/aalbert/.tex
-live2018/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/aalbert/.
-texlive2018/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk></usr/share/te
-xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb>
-Output written on rapport.pdf (4 pages, 132783 bytes).
+ 73i,6n,127p,729b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/aalbert/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1000.6
+00pk> </home/aalbert/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/ec/ecsl100
+0.600pk> </home/aalbert/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx
+1200.600pk> </home/aalbert/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/ec/e
+crm1000.600pk> </home/aalbert/.texlive2018/texmf-var/fonts/pk/ljfour/jknappen/e
+c/ecbx1000.600pk> </home/aalbert/.texlive2018/texmf-var/fonts/pk/ljfour/jknappe
+n/ec/ecbx1440.600pk> </home/aalbert/.texlive2018/texmf-var/fonts/pk/ljfour/jkna
+ppen/ec/ecrm1200.600pk> </home/aalbert/.texlive2018/texmf-var/fonts/pk/ljfour/j
+knappen/ec/ecrm1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
+0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on rapport.pdf (5 pages, 141617 bytes).
 PDF statistics:
- 346 PDF objects out of 1000 (max. 8388607)
- 60 compressed objects within 1 object stream
+ 357 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
