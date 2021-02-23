@@ -1,7 +1,9 @@
 \documentclass{article}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
+\usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{subcaption}
 \usepackage[toc]{appendix}
 \usepackage[nottoc]{tocbibind}
 \pagestyle{headings}
@@ -52,8 +54,50 @@
 	
 	-figure 1 réponse à un echellon 
 	-figure 2 un blob mais différents paramètres de largeur et de parametre !!
-	
-	
+
+\begin{figure}
+	\centering
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\caption{1}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\caption{2}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\caption{3}
+	\end{subfigure}
+	\caption{test2}
+\end{figure}
+
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[scale=.7]
+		\begin{scope}[yslant=0.5, xslant=-1]
+			\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+			\draw[step=5mm, black] (1,1) grid (4,4);
+			\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+		\end{scope}
+		\begin{scope}[yshift=50, yslant=0.5, xslant=-1]
+			\fill[step=5mm, white] (1,1) rectangle (4,4);
+			\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+			\fill[step=5mm, red] (2.5,2) rectangle (3,2.5);
+			\draw[step=5mm, black] (1,1) grid (4,4);
+			\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+		\end{scope}
+		\begin{scope}[yshift=100, yslant=0.5, xslant=-1]
+			\fill[step=5mm, white] (1,1) rectangle (4,4);
+			\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+			\draw[step=5mm, black] (1,1) grid (4,4);
+			\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+		\end{scope}
+		\end{tikzpicture}
+	\caption{test un deux}
+\end{figure}
+
 	\subsection{Mise en place de l'algorithme}
 
 	L'algorithme envisagé à été implémenté à l'aide du langage Python et utilise la bibliothèque Numpy afin d'accélérer le traitement des tableaux. Il comporte trois étapes. Premièrement, l'image à traité est convertie en nuance de gris et éventuellement inversée afin que le fond soit plus clair que les houppiers. (une intervention humaine est nécessaire). 
