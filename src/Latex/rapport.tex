@@ -100,21 +100,15 @@
 
 	\subsection{Mise en place de l'algorithme}
 
-	L'algorithme envisagé à été implémenté à l'aide du langage Python et utilise la bibliothèque Numpy afin d'accélérer le traitement des tableaux. Il comporte trois étapes. Premièrement, l'image à traité est convertie en nuance de gris et éventuellement inversée afin que le fond soit plus clair que les houppiers. (une intervention humaine est nécessaire). 
+	L'algorithme envisagé à été implémenté à l'aide du langage Python et utilise la bibliothèque Numpy afin d'accélérer le traitement des tableaux. Il comporte trois étapes. 
 	
-	La seconde étape consiste à générer la pyramide d'echelle du DoG. Le choix Les noyaux de Gauss et la convolution ont été implémenté en exploitant la séparablilité du filtre de Gauss pour accélérer le calcul, mais en définitive, la convolution fourni par le module scipy à été utilisé. (Bien plus rapide). Les résultats sont stockés dans un tableau Numpy 3D. !!!!! heuristaique et choix des parametres !!!! 
-
-	Finalement, les minimums sont calculé en parcourant le tableau afin d'éliminer d'éventuelles détection à l'interieur d'une zone déja ... 
-	Afin 
-
-	imensionelle dans laquelle on recherchera des minimums local ou global selon l'axe
-		
-		-selection des minimums :
-			-utilisation de numpy
-			-dans quel ordre et pourquoi ?
-			-verification pour eviter la superposition (pourqoi et comment : certain ordre et on verifie que ce n'est pas dans les précedents)
+	- L'image à traité est convertie en nuance de gris et éventuellement inversée afin que le fond soit plus clair que les houppiers. (une intervention humaine est nécessaire). 
 	
-		-selection des meilleurs paramètres (très heuristique comme méthode, nécessite des essais => la méthodes n'est pas completement automatique. (dépend de la taille caractéristique des arbres, de l'echelle choisie) donner les paramètre pour l'echelle et tout.
+	- La pyramide d'échelle du DoG est généré. Les noyaux de Gauss et la convolution ont été implémenté en exploitant la séparablilité du filtre de Gauss pour accélérer le calcul, mais en définitive, la convolution fourni par le module scipy à été utilisé. Les résultats sont stockés dans un tableau Numpy 3D.  
+
+	- Les minimums sont calculés en parcourant le tableau par profondeur croissante afin de ne conserver que les houppiers de rayon maximum lors d'éventuels chevauchements.    
+	
+	3 paramètres permettent d'ajuster les résultats. La sélection des paramètres dépend fortement du (très heuristique comme méthode, nécessite des essais => la méthodes n'est pas completement automatique. (dépend de la taille caractéristique des arbres, de l'echelle choisie) donner les paramètre pour l'echelle et tout.
 
 		facteur limitant i
 		choix final des paramètres : + image utilisées (taille des arbres sur le terrain et échelle de l'image) 
