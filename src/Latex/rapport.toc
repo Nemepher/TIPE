@@ -2,12 +2,12 @@
 \contentsline {section}{\numberline {1}Détection des houppiers}{2}%
 \contentsline {subsection}{\numberline {1.1}Laplacien du gaussien et approche multi échelle}{2}%
 \contentsline {subsection}{\numberline {1.2}Mise en place de l'algorithme}{3}%
-\contentsline {subsection}{\numberline {1.3}\'{E}valuation des résultats}{4}%
-\contentsline {section}{\numberline {2}Identification des espèces}{4}%
-\contentsline {subsection}{\numberline {2.1}Méthodologie de construction d'une base de donné fiable}{4}%
-\contentsline {subsection}{\numberline {2.2}entrainement et quelle type de modèle }{4}%
-\contentsline {section}{\numberline {3}Prolongements envisagables}{4}%
-\contentsline {section}{R\'ef\'erences}{5}%
-\contentsline {section}{\numberline {A}Compléments}{5}%
-\contentsline {section}{\numberline {B}Résultats}{5}%
-\contentsline {section}{\numberline {C}algorithmes}{5}%
+\contentsline {subsection}{\numberline {1.3}\'{E}valuation des résultats}{5}%
+\contentsline {section}{\numberline {2}Identification des espèces}{5}%
+\contentsline {subsection}{\numberline {2.1}Méthodologie de construction d'une base de donné fiable}{5}%
+\contentsline {subsection}{\numberline {2.2}entrainement et quelle type de modèle }{5}%
+\contentsline {section}{\numberline {3}Prolongements envisagables}{6}%
+\contentsline {section}{R\'ef\'erences}{6}%
+\contentsline {section}{\numberline {A}Compléments}{6}%
+\contentsline {section}{\numberline {B}Résultats}{6}%
+\contentsline {section}{\numberline {C}algorithmes}{6}%

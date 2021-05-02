@@ -1,15 +1,20 @@
 \documentclass{article}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
+\usepackage{graphicx}
 \usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{pgf}
 \usepackage{pgfplots}
+\usepackage{caption}
 \usepackage{subcaption}
 \usepackage[nottoc]{tocbibind}
+
 \pagestyle{headings}
-
 \pgfplotsset{width=5cm,compat=1.16}
+\captionsetup{font=footnotesize}
 
-\title{Détection et identification d'arbre à partir d'imagerie satellite/aerienne}
+\title{Détection et identification d'arbre à partir d'imagerie satellite}
 \author{Augustin Albert}
 
 \begin{document}
@@ -18,63 +23,85 @@
 \tableofcontents
 
 \section*{Introduction}
-	\subsection*{Position du problème}
-		-pourquoi vouloir faire ça, utilité/contexte	
-		-1 pb extraction de données : differentes méthodes qui requièrent plus ou moins de materiel/images de qualité
-		-2 pb traitement des données
 
-	\subsection*{\'{E}tat actuel de la recherche}
-		-voir papiers 
+L'étude et le suivi de la répartition des espèces au sein de larges zones forestières est un problème complexe aux applications nombreuses :
+gestion des ressources naturelles, protection de la biodiversité, etc... Les études de terrain peuvent se révéler longues, coûteuses et imprécises du à la nécessité d'interpoler les données recueillies. 
+Parvenir à automatiser ce processus est donc un enjeu critique. 
 
-	\subsection*{Objectifs du TIPE}		
-		-limitation à des images aériennes: pourquoi(moins couteux, accessible sur internet, differents modes d'aquisitions,  enjeux/difficultés
+Les techniques existantes reposent sur l'utilisation de données satellite ou aériennes : L'utilisation d'images est une méthode peu coûteuse nécessitant peu de materiel et pas d'intervention sur le terrain lorsque 
+des images satellites récentes de résolution suffisantes, qui deviennent de plus en plus accessible.  
+
+UAV LIdar
+
+Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses. La luminosité des arbres peut beaucoup varier sur une meme image (à moins d'avoir des images de haute qualité "prise en une seule fois" (ex papier). Une solution = Détection de blobs. 2 problemes : -différence de luminosité et différence d'échelle. Citer algo pour. de pixels plus lumineux que leur voisins correspondants aux houppiers
+
+
+\subsection*{Objectifs du TIPE}		
+\begin{enumerate}
+	\item implementer un algorithme de détection et de délimitation de houppiers (Cime d'arbres) basé sur des images satellites de resolution "moyenne" à l'aide de la théorie de l'Espace d'échelle (« Scale-space ») 
+	\item entraîner un reseau neurone à l'aide de la bibliothèque Tensorflow afin d'identifier des espèces à partir d'images de houppiers de basse résolution 
+	\item appliquer ces derniers au parc ... présentant une variété d'espèces et des paternes plus ou moins réguliers pour confronter les résultats obtenus aux données de terrain et aux techniques existantes.    
+\end{enumerate}
+	
+		-limitation à des images aériennes: pourquoi(moins coûteux, accessible sur internet, différents modes d'acquisitions,  enjeux/difficultés
 		-d'une part à concevoir ... pour detecter les a
-		-d'une autre part à l'utiliser pour contruire une base de donné permetant identification ulterierure sur la base du machin learning
+		-d'autre part à l'utiliser pour construire une base de donné permettant identification ultérieure sur la base du machin learning
 		-application au site du parc regional...
 		
+	
 \section{Détection des houppiers}
-	Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses. La luminosité des arbres peut beaucoup varier sur une meme image (à moins d'avoir des images de haute qualité "prise en une seule fois" (ex papier). Une solution = Détection de blobs. 2 problemes : -différence de luminosité et différence d'échelle. Citer algo pour. de pixels plus lumineux que leur voisins correspondants aux houppiers
 
 	\subsection{Laplacien du gaussien et approche multi échelle}
-		Afin de prendre en compte des houppiers dont le diamètre peut varier considérablement entre les différentes espèces mais aussi au sein d'une même espèce, une approche multi-échelle est nécessaire. Nous utiliserons la théorie échelle-temps dévellopée par (\ref Lindbergh). Une pyramide d'echelle est réalisée en lissant successivement l'image originelle avec un filtre gaussien de paramètre $\sigma$ : le paramètre d'échelle. L'image originelle est convolé autant de fois que nécessaire par la fonction gaussiene suivante, le paramètre $\sigma$ étant multiplié par un ratio fixé à !!!!! important !!!! à chaqe étape : 
+	+dectection de blobs
+	Afin de prendre en compte des houppiers dont le diamètre peut varier considérablement entre les différentes espèces mais aussi au sein d'une même espèce, une approche multi-échelle est nécessaire. Nous utiliserons la théorie échelle-temps développée par (\ref Lindbergh). 
+	
+	Celle-ci consiste à lisser l'image original de manière répété pour générer une pyramide d'échelle qui sera exploitée ultérieurement. L'image originelle est lissée et éventuellement sous-échantillonnée autant de fois que nécessaire au moyen d'un filtre gaussien dont le paramètre d'échelle $\sigma$ est multiplié à chaque étape par un ratio fixe. ( Voir~\ref{fig:ex} ) Cela revient à convoler l'image par la fonction gaussienne suivante : 
 	
 	\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
 
-	On applique alors un opérateur laplacien normalisé aux images résultante afin d'obtenir la pyramide d'échelle du laplacien du Gaussien (LoG). L'image obtenue à chaque niveau est alors la convolution de l'image originelle par la fonction Log :
-
+	On applique alors un opérateur laplacien normalisé aux images résultante afin d'obtenir la pyramide d'échelle du laplacien du Gaussien ( "LoG" ). L'image obtenue à chaque niveau est alors la convolution de l'image originelle par la fonction Log :
 
 	\[{LoG}_{\sigma}:=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
 
-	En pratique, le LoG est approximé par la différence du gaussien (DoG) obtenue en réalisant la difference des images floutées entre chaque niveau de la pyramide d'échelle.  
+	En pratique, le LoG est approximé par la différence du gaussien ( "DoG" ) obtenue en réalisant la difference des images floutées entre chaque niveau de la pyramide d'échelle. (D'ou la nécessité de ne pas sous échantillonner les images intermédiaires pour qu'elles conservent la même dimension)
 
-	Cette pyramide d'échelle du LoG permet d'extraire des caractéristiques indépendament de leur échelle en exploitant la réponse de l'opérateur LoG appliqué à un signal échelon. (figure 5). Lorsque le rayon caractéristique du blob $r$ varie, le minimum (maximum en valeur absolue) du LoG est atteint au centre du blob. Lorsque le paramètre $\sigma$ varie, la réponse au centre est minimale lorsque $r$ est relié à $\sigma$ par la relation $\sigma=\frac{r}{\sqrt{2}}$. La réponse du LoG non normalisé s'attenuant lorsque $\sigma$ augmente, l'opérateur à été multiplié par $\sigma^{2}$ pour que la réponse soit indépendante de l'échelle.
+	La pyramide d'échelle de l'opérateur LoG permet d'extraire des caractéristiques indépendamment de leur échelle en exploitant la réponse de l'opérateur LoG appliqué à un signal échelon. ( Voir~\ref{fig:graph} ). Lorsque le rayon caractéristique du blob $r$ varie, le minimum (maximum en valeur absolue) du LoG est atteint au centre du blob. Lorsque le paramètre $\sigma$ varie, la réponse au centre est minimale lorsque $r$ est relié à $\sigma$ par la relation $\sigma=\frac{r}{\sqrt{2}}$. La réponse du LoG non normalisé s'attenuant lorsque $\sigma$ augmente, l'opérateur est multiplié par $\sigma^{2}$ pour que la réponse soit indépendante de l'échelle.
 
-	La détection des blobs se ramène ainsi à la recherche d'un minimum local relativement à l'espace et global relativement à l'échelle pour identifier à la fois les centres des houppier et la taille caractéristique de leur rayon. 
-	
-	-figure 1 réponse à un echellon 
-	-figure 2 un blob mais différents paramètres de largeur et de parametre !!
+	La détection des blobs se ramène ainsi à la recherche d'un minimum local relativement à l'espace et global relativement à l'échelle pour identifier à la fois les centres des houppiers et la taille caractéristique de leur rayon. 
 
 \begin{figure}
 	\centering
+	\includegraphics[scale=0.15]{img.png}
+	\caption{Example de pyramide d'image, Original, CC BY-SA 1.0}
+	\label{fig:ex}
+\end{figure}
+
+\begin{figure}
 	\begin{subfigure}{.5\textwidth}
-		\centering
-		\caption{1}
+		\scalebox{0.3}{\input{fig1.pgf}}
+		\caption{Réponse à une marche}
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
-		\centering
-		\caption{2}
+		\scalebox{0.3}{\input{fig2.pgf}}
+		\caption{Réponse à un créneau pour $\sigma=1$, $\sigma=2$ et $\sigma=3$ }
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
-		\centering
-		\caption{3}
+		\scalebox{0.3}{\input{fig3.pgf}}
+		\caption{Réponses à des créneaux pour $\sigma=1$}
 	\end{subfigure}
-	\caption{test2}
+	\caption{Réponse de l'opérateur LoG à différents signaux}
+	\label{fig:graph}
 \end{figure}
 
 
+	\subsection{Mise en place de l'algorithme}
+
+	
 \begin{figure}
 	\centering
-	\begin{tikzpicture}[scale=.7]
+	\begin{tikzpicture}[scale=.6]
+		\draw [<-, > = angle 90, line width=0.3mm, black] (-4, 8) -- (-4, 3);
+		\node[align=left] at (-2.75,7.75) {échelle};
 		\begin{scope}[yslant=0.5, xslant=-1]
 			\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
 			\draw[step=5mm, black] (1,1) grid (4,4);
@@ -94,19 +121,20 @@
 			\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
 		\end{scope}
 		\end{tikzpicture}
-	\caption{test un deux}
+	\caption{Calcul des minimums dans la pyramide d'échelle de l'opérateur DoG}
+	\label{fig:sche}
 \end{figure}
 
-	\subsection{Mise en place de l'algorithme}
 
-	L'algorithme envisagé à été implémenté à l'aide du langage Python et utilise la bibliothèque Numpy afin d'accélérer le traitement des tableaux. Il comporte trois étapes. 
-	
-	- L'image à traité est convertie en nuance de gris et éventuellement inversée afin que le fond soit plus clair que les houppiers. (une intervention humaine est nécessaire). 
-	
-	- La pyramide d'échelle du DoG est généré. Les noyaux de Gauss et la convolution ont été implémenté en exploitant la séparablilité du filtre de Gauss pour accélérer le calcul, mais en définitive, la convolution fourni par le module scipy à été utilisé. Les résultats sont stockés dans un tableau Numpy 3D.  
+	L'algorithme envisagé à été implémenté à l'aide du langage Python et utilise la bibliothèque Numpy afin d'accélérer le traitement des tableaux. Son fonctionnement est le suivant:
 
-	- Les minimums sont calculés en parcourant le tableau par profondeur croissante afin de ne conserver que les houppiers de rayon maximum lors d'éventuels chevauchements.    
-	
+	\begin{enumerate}
+	\item L'image à traiter est convertie en nuance de gris et éventuellement inversée afin que le fond soit plus clair que les houppiers. (une intervention humaine est nécessaire). 
+	\item La pyramide d'échelle de l'opérateur DoG est générée et stockée dans un tableau Numpy à 3 dimension. Les noyaux de Gauss et la convolution ont été implémenté en exploitant la séparabilité du filtre de Gauss pour accélérer le calcul mais en définitive la convolution fourni par le module Scipy à été utilisée.  
+	\item En pratique, différentes détection peuvent avoir lieu dans la même colonne. Le maximum relatif à l'échelle devient alors local et des multiples détections n'est conservé que celle de rayon caractéristique maximal. 
+	Les minimums sont donc calculé en parcourant le tableau par échelle décroissante ( Du plus flouté au moins flouté ) afin de ne conserver que les houppiers de rayon maximum lors d'éventuels chevauchements. Chaque case du tableau étant comparée à ses 26 voisins uniquement ( Voir~\ref{fig:sche} ) 
+	\end{enumerate}
+
 	3 paramètres permettent d'ajuster les résultats. La sélection des paramètres dépend fortement du (très heuristique comme méthode, nécessite des essais => la méthodes n'est pas completement automatique. (dépend de la taille caractéristique des arbres, de l'echelle choisie) donner les paramètre pour l'echelle et tout.
 
 		facteur limitant i
@@ -124,7 +152,7 @@
 	Choix du machin learning comme dans de nombreux papiers (meme si pas les memes donnees de base) Propre implementation dévellopé mais aps complet et ne permet pas à ce jour de traiter efficacement des images (maque le truc de convolution et reste lent en comparaison des systemes professionels) Le choix s'est donc porté sur Tensorflow.  
 
 	\subsection{Méthodologie de construction d'une base de donné fiable}
-		Il aurait été fastidieux d'étiqetter à la main un nombre important d'images, d'autant plus qu'elles sont de basses réolution. Afin   
+		Il aurait été fastidieux d'étiqetter à la main un nombre important d'images de basses résolution.   
 		- géoportail (verif autorisation... cé) et extration sur des zones ou la couverture d'espèce est uniforme : res --- images triées en 2
 	
 	\subsection{entrainement et quelle type de modèle }
