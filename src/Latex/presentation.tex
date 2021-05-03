@@ -33,16 +33,22 @@
 	\titlepage
 \end{frame}
 \begin{frame}
-	\centering{\large{Insezrer la problematiqeu}} 
+	\centering{\large{Inserer la problematique}} 
 	\tableofcontents
 \end{frame}
 
 \section{Détection des houppiers}
 
 \begin{frame}
-	Explication de la theorie
+	Explication de la théorie: problème de detection de blob a multiples échelles : Théorie ... lindbergh
 	\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
 	\[{LoG}_{\sigma}:=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
+	$\sigma=\frac{r}{\sqrt{2}}$
+\end{frame}
+
+\begin{frame}
+	Paramètres du systeme et méthode heuristique -> possibilité d'avoir plusieurs arbre possible si suffisamment fin.
+	$\sigma$, le nombre d'octave o et le nombre d'intervalle pour chaque octave i. La hauteur est $o \times i$ et le ratio $2^{\frac{1}{i}}$. 
 \end{frame}
 
 \begin{frame}
@@ -69,7 +75,8 @@
 			\item convolution de l'image par le filtre ( complexité réduite grace à la séparabilité du filtre )
 			\item stockage dans un tableau Numpy 3D
 		\end{itemize}
-		\item Détection des minimums : le tableau parcouru par échelle décroissante et chaque case est comparée à ses 26 voisins.
+		\item Détection des minimums : le tableau est parcouru par échelle décroissante pour éviter les superpositions, chaque case est comparée à ses 26 voisins, seul les rayons supérieurs à un seuil sont conservés.  
+		\item \'{E}xtration des houppiers : le rayon adapté est calculé d'après ici ref 
 	\end{enumerate}	
 \end{frame}
 
@@ -104,33 +111,45 @@
 	\end{figure}
 \end{frame}
 
+\begin{frame}
+	contexte et presentation du parc 
+
+	Première mise en evidence et quantification de la transformation du paysage.
+
+	\begin{figure}
+	\includegraphics[scale=0.15]{index.png}
+	\caption{Pyramide d'échelle de l'opérateur LoG grossière ( 6 octaves sans intervalle ). Image originale \copyright IGN, 2021  }
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\subfloat[Agencement désordoné de feuillus, \copyright IGN, 2021]{\includegraphics[scale=0.14]{res1.png}}
+		\subfloat[Feuillus désordonnés et dougals semi-ordonné, \copyright IGN, 2021]{\includegraphics[scale=0.14]{res2.png}} %TODO!!!
+		\caption{Résultats obtenus pour 5 octaves, 5 intervalles et $\sigma=0.5$}
+	\end{figure}
+\end{frame}
+
 
 \section{Identification des espèces}
-\begin{frame}
-	\begin{block}{ titre du block }
-		Texte, équations, image, tableau etc ...
-  	\end{block}
-  
-  	\begin{alertblock}{ titre du block }
-		Texte, équations, image, tableau etc ...
-  	\end{alertblock}
 
- 	\begin{exampleblock}{ titre du block }
-		Texte, équations, image, tableau etc ...
-	\end{exampleblock}
+\begin{frame}
+	
 \end{frame}
 
 \section{\'{E}valuation des résultats et prolongements envisageables}
-\begin{frame}
 
+\begin{frame}
+	tableau detection pour chaque espèce et resultat d'autres papiers 
 \end{frame}
 
 \begin{frame}
-
-\end{frame}
-
-\begin{frame}
-
+	Différents prolongement sont envisagables: 
+	\begin{enumerate}
+	\item Sensible aux ... séparer préalablement et éventuellement grossiemerement les zones forêstières des zones d'habitation ou  industrielle. Même une route bétonné peut éventuellement altérer les réusltats. batiement/contruction quo fausserait les resultat. 
+	De plus obtient qu'un cercle autour des arbres
+	\item une methode watershed segmentation avec marqueurs que l'on à trouvé pourrait etre envisagble pour delinéer parfaitement les arbres (voir papier) 
+	\end{enumerate}
 \end{frame}
 
 \end{document}
