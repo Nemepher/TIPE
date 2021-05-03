@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  2 MAY 2021 11:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  2 MAY 2021 12:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -537,23 +537,23 @@ File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
 (src/Latex/rapport.aux)
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Info: Redefining \degres on input line 19.
-LaTeX Info: Redefining \dots on input line 19.
-LaTeX Info: Redefining \up on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Info: Redefining \degres on input line 20.
+LaTeX Info: Redefining \dots on input line 20.
+LaTeX Info: Redefining \up on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -618,17 +618,12 @@ enefit from \pgfplotsset{compat=1.17} (current compat level: 1.16).
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 21.
+(Font)              <12> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 21.
+(Font)              <8> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 21.
-(src/Latex/rapport.toc
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 3.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 3.
-)
+(Font)              <6> on input line 22.
+(src/Latex/rapport.toc)
 \tf@toc=\write4
 \openout4 = `rapport.toc'.
 
@@ -636,58 +631,80 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 {/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
 
-LaTeX Warning: Reference `L' on page 2 undefined on input line 55.
+LaTeX Warning: Reference `L' on page 2 undefined on input line 56.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 58.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 58.
+
+LaTeX Warning: Reference `fig:ex' on page 2 undefined on input line 58.
+
+
+LaTeX Warning: Reference `fig:graph' on page 2 undefined on input line 71.
 
 [2]
-<img.png, id=23, 803.0pt x 1003.75pt>
+<img.png, id=26, 803.0pt x 1003.75pt>
 File: img.png Graphic file (type png)
 <use img.png>
-Package pdftex.def Info: img.png  used on input line 73.
+Package pdftex.def Info: img.png  used on input line 77.
 (pdftex.def)             Requested size: 120.4448pt x 150.556pt.
  (src/Latex/fig1.pgf) (src/Latex/fig2.pgf) (src/Latex/fig3.pgf)
-Overfull \hbox (173.0987pt too wide) in paragraph at lines 88--89
+Overfull \hbox (173.0987pt too wide) in paragraph at lines 92--93
 [][] 
  []
 
 
-Overfull \hbox (2.22168pt too wide) in paragraph at lines 79--91
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 83--95
 []$[]$ $[]$
  []
 
-[3 <src/Latex/img.png>] [4] [5] (src/Latex/rapport.bbl) [6]
-(src/Latex/rapport.aux)
+
+LaTeX Warning: Reference `fig:sche' on page 3 undefined on input line 138.
+
+[3 <src/Latex/img.png>] [4]
+
+LaTeX Warning: Citation `NatesanResNet' undefined on input line 175.
+
+(src/Latex/rapport.bbl [5]) [6] (src/Latex/rapport.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 25195 strings out of 481718
- 638026 string characters out of 5926910
+ 25199 strings out of 481718
+ 638084 string characters out of 5926910
  991365 words of memory out of 6000000
- 40505 multiletter control sequences out of 15000+600000
- 544030 words of font info for 45 fonts, out of 8000000 for 9000
+ 40508 multiletter control sequences out of 15000+600000
+ 544849 words of font info for 46 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
  73i,8n,127p,760b,783s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr
 /share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/cm-super/sfbx1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-
-super/sfbx1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/s
-fbx1440.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfcc0800
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/cm-super/sfti1000.pfb>
-Output written on src/Latex/rapport.pdf (6 pages, 1003201 bytes).
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sf
+bx1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1200.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfcc0800.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/cm-super/sfsl1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm
+-super/sfti1000.pfb>
+Output written on src/Latex/rapport.pdf (6 pages, 1017623 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
+ 106 PDF objects out of 1000 (max. 8388607)
+ 76 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  18 words of extra memory for PDF output out of 10000 (max. 10000000)
 

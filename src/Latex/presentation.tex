@@ -1,18 +1,137 @@
 \documentclass{beamer}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
+\usepackage{subfig}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{pgf}
+
 \usetheme{Madrid}
 \usecolortheme{crane}
 \useoutertheme{miniframes}
 \useinnertheme{circles}
 
-\title{teserezrf}
+\definecolor{blendedblue}{rgb}{0.2,0.2,0.7}
+
+\setbeamercolor{palette primary}{bg=blendedblue,fg=white}
+\setbeamercolor{palette secondary}{bg=blendedblue,fg=white}
+\setbeamercolor{palette tertiary}{bg=blendedblue,fg=white}
+\setbeamercolor{palette quaternary}{bg=blendedblue,fg=white}
+\setbeamercolor{structure}{fg=blendedblue} 
+\setbeamercolor{section in toc}{fg=blendedblue}
+\setbeamercolor{block title}{fg=white,bg=blendedblue}       
+\setbeamercolor{block title example}{fg=white}
+\setbeamercolor{block title alerted}{fg=white}
+\setbeamercolor{subsection in head/foot}{bg=blendedblue!70,fg=white}
+
+\title{Titre}
+\author{Augustin Albert}
+
 \begin{document}
+
 \begin{frame}
 	\titlepage
 \end{frame}
 \begin{frame}
-	test
+	\centering{\large{Insezrer la problematiqeu}} 
+	\tableofcontents
 \end{frame}
+
+\section{Détection des houppiers}
+
+\begin{frame}
+	Explication de la theorie
+	\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
+	\[{LoG}_{\sigma}:=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\subfloat[Réponse à une marche\label{fig:a}]{\scalebox{0.3}{\input{fig1.pgf}}}
+		\subfloat[Réponse à un créneau pour $\sigma=1$, $\sigma=2$ et $\sigma=3$ \label{fig:b}]{\scalebox{0.3}{\input{fig2.pgf}}}
+		\caption{Réponse de l'opérateur LoG à différents signaux}
+	\end{figure}
+\end{frame}
+\begin{frame}
+	\begin{figure}
+		\subfloat[Réponses à des créneaux pour $\sigma=1$\label{fig:c}]{\scalebox{0.3}{\input{fig3.pgf}}}
+		\caption{Réponse de l'opérateur LoG à différents signaux}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	Mise en place de l'algorithme
+	\begin{enumerate}
+		\item Conversion en nuance de gris ( Inversion éventuelle ) 
+		\item Génération de la pyramide d'échelle : 
+		\begin{itemize}
+			\item creation du filtre de gauss adapté
+			\item convolution de l'image par le filtre ( complexité réduite grace à la séparabilité du filtre )
+			\item stockage dans un tableau Numpy 3D
+		\end{itemize}
+		\item Détection des minimums : le tableau parcouru par échelle décroissante et chaque case est comparée à ses 26 voisins.
+	\end{enumerate}	
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\subfloat[Example de pyramide d'image, Original, CC BY-SA 1.0]{\includegraphics[scale=0.15]{img.png}}
+		\subfloat[Calcul des minimums dans la pyramide d'échelle de l'opérateur DoG]{
+			\begin{tikzpicture}[scale=.6]
+				\draw [<-, > = angle 90, line width=0.3mm, black] (-4, 8) -- (-4, 3);
+				\node[align=left] at (-2.75,7.75) {échelle};
+				\begin{scope}[yslant=0.5, xslant=-1]
+					\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+					\draw[step=5mm, black] (1,1) grid (4,4);
+					\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+				\end{scope}
+				\begin{scope}[yshift=50, yslant=0.5, xslant=-1]
+					\fill[step=5mm, white] (1,1) rectangle (4,4);
+					\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+					\fill[step=5mm, red] (2.5,2) rectangle (3,2.5);
+					\draw[step=5mm, black] (1,1) grid (4,4);
+					\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+				\end{scope}
+				\begin{scope}[yshift=100, yslant=0.5, xslant=-1]
+					\fill[step=5mm, white] (1,1) rectangle (4,4);
+					\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+					\draw[step=5mm, black] (1,1) grid (4,4);
+					\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+				\end{scope}
+				\end{tikzpicture}
+		}
+		\caption{Utilisation de la pyramide d'image}
+	\end{figure}
+\end{frame}
+
+
+\section{Identification des espèces}
+\begin{frame}
+	\begin{block}{ titre du block }
+		Texte, équations, image, tableau etc ...
+  	\end{block}
+  
+  	\begin{alertblock}{ titre du block }
+		Texte, équations, image, tableau etc ...
+  	\end{alertblock}
+
+ 	\begin{exampleblock}{ titre du block }
+		Texte, équations, image, tableau etc ...
+	\end{exampleblock}
+\end{frame}
+
+\section{\'{E}valuation des résultats et prolongements envisageables}
+\begin{frame}
+
+\end{frame}
+
+\begin{frame}
+
+\end{frame}
+
+\begin{frame}
+
+\end{frame}
+
 \end{document}
 

@@ -31,7 +31,7 @@ Parvenir à automatiser ce processus est donc un enjeu critique.
 Les techniques existantes reposent sur l'utilisation de données satellite ou aériennes : L'utilisation d'images est une méthode peu coûteuse nécessitant peu de materiel et pas d'intervention sur le terrain lorsque 
 des images satellites récentes de résolution suffisantes, qui deviennent de plus en plus accessible.  
 
-UAV LIdar
+UAV LIdar -> methodes plus simples qui ne requierent que des images st HR. Différentes méthodes existent, detection de blob ? LoG
 
 Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses. La luminosité des arbres peut beaucoup varier sur une meme image (à moins d'avoir des images de haute qualité "prise en une seule fois" (ex papier). Une solution = Détection de blobs. 2 problemes : -différence de luminosité et différence d'échelle. Citer algo pour. de pixels plus lumineux que leur voisins correspondants aux houppiers
 
@@ -53,11 +53,14 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 
 	\subsection{Laplacien du gaussien et approche multi échelle}
 	+dectection de blobs
-	Afin de prendre en compte des houppiers dont le diamètre peut varier considérablement entre les différentes espèces mais aussi au sein d'une même espèce, une approche multi-échelle est nécessaire. Nous utiliserons la théorie échelle-temps développée par (\ref Lindbergh). 
+	Le problème de Afin de prendre en compte des houppiers dont le diamètre peut varier considérablement entre les différentes espèces mais aussi au sein d'une même espèce, une approche multi-échelle est nécessaire. Nous utiliserons la théorie échelle-temps développée par (\ref Lindbergh). 
 	
 	Celle-ci consiste à lisser l'image original de manière répété pour générer une pyramide d'échelle qui sera exploitée ultérieurement. L'image originelle est lissée et éventuellement sous-échantillonnée autant de fois que nécessaire au moyen d'un filtre gaussien dont le paramètre d'échelle $\sigma$ est multiplié à chaque étape par un ratio fixe. ( Voir~\ref{fig:ex} ) Cela revient à convoler l'image par la fonction gaussienne suivante : 
 	
 	\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
+
+	Dans la littérature, ce ratio est 2. Puisque la taille de l'image est réduite de moitié à chaque étape, chaque niveau est appelé octave en référence à la théorie musicale. Il peut être intéressant de rajouter des intervalles supplémentaires, ce qui est fait dans la suite. 
+	On dispose donc de 3 paramètres: $\sigma$, le nombre d'octave o et le nombre d'intervalle pour chaque octave i. La hauteur ( nombre de niveau de la pyramide ) est alors $o \times i$ et le ratio $2^{\frac{1}{i}}$. 
 
 	On applique alors un opérateur laplacien normalisé aux images résultante afin d'obtenir la pyramide d'échelle du laplacien du Gaussien ( "LoG" ). L'image obtenue à chaque niveau est alors la convolution de l'image originelle par la fonction Log :
 
@@ -140,23 +143,26 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 		facteur limitant i
 		choix final des paramètres : + image utilisées (taille des arbres sur le terrain et échelle de l'image) 
 
-	\subsection{\'{E}valuation des résultats}
-		-évalutation de la complexité 
-		-propres résultats
-		faire tableau 3 colonnes pour les trois images différentes
-		% repéré 
-		-comparaison avec les résultats des papiers 
 
 \section{Identification des espèces}
 
-	Choix du machin learning comme dans de nombreux papiers (meme si pas les memes donnees de base) Propre implementation dévellopé mais aps complet et ne permet pas à ce jour de traiter efficacement des images (maque le truc de convolution et reste lent en comparaison des systemes professionels) Le choix s'est donc porté sur Tensorflow.  
+	L'identification d'espèce est un problème de reconnaissance de forme ( "pattern recognition" ) pour lequel les algorithmes d'apprentissage automatique excellent. 
+	Dans le cadre de notre problème, toutes les espèces présentes sur le site du parc ... sont connues. Le choix se porte donc sur un apprentissage de type supervisé.
+	Un algorithme de reseau de neurones à été écrit, mais celui-ci ne permettant pas à ce jour le traitement d'image, la bibliothèque Tensorflow à été utilisée à la place.
 
 	\subsection{Méthodologie de construction d'une base de donné fiable}
-		Il aurait été fastidieux d'étiqetter à la main un nombre important d'images de basses résolution.   
+		Il aurait été fastidieux d'étiquetter à la main un nombre important d'images de basses résolution.   
 		- géoportail (verif autorisation... cé) et extration sur des zones ou la couverture d'espèce est uniforme : res --- images triées en 2
 	
 	\subsection{entrainement et quelle type de modèle }
 		-citer papier , à la main car ici le cas est plus simple mais l'on pourrais généraliser. (difference avec eux)
+
+\section{\'{E}valuation des résultats}
+	-évalutation de la complexité 
+	-propres résultats
+	faire tableau 3 colonnes pour les trois images différentes
+	% repéré 
+	-comparaison avec les résultats des papiers 
 
 \section{Prolongements envisagables}
 
@@ -165,6 +171,7 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 	De plus obtient qu'un cercle autour des arbres
 	-une methode watershed segmentation avec marqueurs que l'on à trouvé pourrait etre envisagble pour delinéer parfaitement les arbres (voir papier) 
 
+	
 \nocite{NatesanResNet} %à supprimer après!! 
 \bibliographystyle{alpha}
 \bibliography{references}
