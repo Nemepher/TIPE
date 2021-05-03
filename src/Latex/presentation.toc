@@ -1,4 +1,4 @@
 \babel@toc {french}{}
 \beamer@sectionintoc {1}{Détection des houppiers}{3}{0}{1}
-\beamer@sectionintoc {2}{Identification des espèces}{8}{0}{2}
-\beamer@sectionintoc {3}{\'{E}valuation des résultats et prolongements envisageables}{9}{0}{3}
+\beamer@sectionintoc {2}{Identification des espèces}{10}{0}{2}
+\beamer@sectionintoc {3}{\'{E}valuation des résultats et prolongements envisageables}{11}{0}{3}
