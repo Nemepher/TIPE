@@ -27,6 +27,8 @@
 \title{Titre}
 \author{Augustin Albert}
 
+%TODO utlisier frametitle 
+
 \begin{document}
 
 \begin{frame}
@@ -40,6 +42,7 @@
 \section{Détection des houppiers}
 
 \begin{frame}
+	\frametitle{Détection des houppiers}
 	Explication de la théorie: problème de detection de blob a multiples échelles : Théorie ... lindbergh
 	\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
 	\[{LoG}_{\sigma}:=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
@@ -53,14 +56,15 @@
 
 \begin{frame}
 	\begin{figure}
-		\subfloat[Réponse à une marche\label{fig:a}]{\scalebox{0.3}{\input{fig1.pgf}}}
-		\subfloat[Réponse à un créneau pour $\sigma=1$, $\sigma=2$ et $\sigma=3$ \label{fig:b}]{\scalebox{0.3}{\input{fig2.pgf}}}
+		\subfloat[Réponse à une marche]{\scalebox{0.3}{\input{fig1.pgf}}}
+		\subfloat[Réponse à un créneau pour $\sigma=1$, $\sigma=2$ et $\sigma=3$]{\scalebox{0.3}{\input{fig2.pgf}}}
 		\caption{Réponse de l'opérateur LoG à différents signaux}
 	\end{figure}
 \end{frame}
+
 \begin{frame}
 	\begin{figure}
-		\subfloat[Réponses à des créneaux pour $\sigma=1$\label{fig:c}]{\scalebox{0.3}{\input{fig3.pgf}}}
+		\subfloat[Réponses à des créneaux pour $\sigma=1$]{\scalebox{0.3}{\input{fig3.pgf}}}
 		\caption{Réponse de l'opérateur LoG à différents signaux}
 	\end{figure}
 \end{frame}
@@ -125,7 +129,7 @@
 \begin{frame}
 	\begin{figure}
 		\subfloat[Agencement désordoné de feuillus, \copyright IGN, 2021]{\includegraphics[scale=0.14]{res1.png}}
-		\subfloat[Feuillus désordonnés et dougals semi-ordonné, \copyright IGN, 2021]{\includegraphics[scale=0.14]{res2.png}} %TODO!!!
+		\subfloat[Feuillus désordonnés et dougals semi-ordonné, \copyright IGN, 2021]{\includegraphics[scale=0.13]{res2.png}} %TODO!!!
 		\caption{Résultats obtenus pour 5 octaves, 5 intervalles et $\sigma=0.5$}
 	\end{figure}
 \end{frame}
@@ -134,12 +138,37 @@
 \section{Identification des espèces}
 
 \begin{frame}
+	\frametitle{Identification des espèces}
+	\begin{columns}
+		\column{0.5\textwidth}
+		Type de machine learning
+		
+		Utilisation de Tensorflow
 	
+		Creation d'une base de donnée : methodo et nombre d'images
+	
+		modèle choisi
+	
+		\column{0.5\textwidth}
+		\centering
+		\includegraphics[scale=0.35]{train.png}
+	\end{columns}
+	
+\end{frame}
+
+\begin{frame}
+	\begin{figure}
+		\includegraphics[scale=0.3]{res3.png}
+		\includegraphics[scale=0.3]{res4.png}
+		\includegraphics[scale=0.3]{res5.png}
+		\caption{Test du modèle: Feuillus et Douglas étiquettés et arbres non étiquettés, \copyright IGN, 2021 ( Légende: \%Douglas/\%Feuillus )}
+	\end{figure}
 \end{frame}
 
 \section{\'{E}valuation des résultats et prolongements envisageables}
 
 \begin{frame}
+	\frametitle{\'{E}valuation des résultats et prolongements envisageables}
 	tableau detection pour chaque espèce et resultat d'autres papiers 
 \end{frame}
 
