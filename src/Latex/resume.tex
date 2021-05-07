@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+\title{Detection des houppiers}
+\begin{document}
+\maketitle
+
+[Motivation du choix de l'étude](50 mots)
+[Ancrage au thème de l'année](50 mots) 
+L'étude et le suivi de la répartition des espèces au sein de larges zones forestières est un problème complexe aux applications nombreuses :
+gestion des ressources naturelles (énergie), protection de la biodiversité (environnement), prédiction de zones à risques d'incendie (sécurité) etc... Les études de terrain peuvent se révéler longues, coûteuses et imprécises du à la nécessité d'interpoler les données recueillies. 
+En particulier, l'analyse automatisé d'images satéllites de plus en plus accesssibles et de haute définition ne requière pas d'interventaion sur le terrain. 
+Je m'interesserai ici à une application de la theorie de l'espace d'echelle et à l'apprentisage automatique  
+
+\section{Professeur encadrant}
+Mr Pinguet
+
+\section{Positionnement thématique}
+INFORMATIQUE (Informatique pratique), INFORMATIQUE (Informatique théorique)
+
+\section{Mots-clés}
+Français :
+Espace d'échelle
+Apprentissage automatique 
+Détection
+Classification 
+Arbre
+
+Anglais :
+Scale-space
+Machine learning
+Detection
+Classification
+Tree
+
+\section{Bibliographie commentée}
+
+\section{problématique retenue}
+
+\section{Objectifs du TIPE}
+
+\begin{enumerate}
+    \item fonctionnement de la théorie espace échelle / + filtre passe bas
+	\item implementer un algorithme de détection et de délimitation de houppiers (Cime d'arbres) basé sur des images satellites de resolution "moyenne" à l'aide de la théorie de l'Espace d'échelle (« Scale-space ») 
+    \item fonctionnement resau de neurone ?
+    \item entraîner un reseau neurone à l'aide de la bibliothèque Tensorflow afin d'identifier des espèces à partir d'images de houppiers de basse résolution 
+	\item appliquer ces derniers au parc ... présentant une variété d'espèces et des paternes plus ou moins réguliers pour confronter les résultats obtenus aux données de terrain et aux techniques existantes.    
+\end{enumerate}
+	
+
+\section{Réferences Bibliographiques}
+
+\section{DOT}
+4-8
+50 mots
+
+familiarisation avec les modèles rgb et ycbcr, écriture de fonction utiles : transformation en niveau de gris, histograme de la luminance et ecriture d'algorithmes naifs pour se familiariser avec le probleme (maximum de luminance, etc...)
+REcherche : Les techniques usuelles (littératures) requierent souvent du materiel avancé ou image très haute résolution donc recherche sur la détection de blob à partir d'image: théorie machin Le choix de truc me semble particulièrement adapté au problème et requiert peu de ressources. ( En fait, utilisé dans certains papiers)
+étude de la theorie espace echelle et recherche de papiers utilisant cette technique 
+Ecriture d'un algorthme de détection basé sur la théorie en utilisant des des fonctions fournies par le module numpy et scipy 
+Approfondissement de la convolution, étude de la séparabilité du filtre et de la fft pour accélérer et remplacement par des fonction maisons 
+etude du fonctionnement d'u resau de neuron et écriture d'un perceptron. Atttention : a ce jour ne traite pas les images. La bibliothèque tensorflow à ete utilisé pour réaliser les test.
+Application au parc naturel ezfe, en pleine mutaution fournissant des examples pertinance de l'algorithme et  comparaison des résultats.
+
+\end{document}
