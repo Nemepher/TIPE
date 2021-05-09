@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  2 MAY 2021 12:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  9 MAY 2021 14:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -391,18 +391,26 @@ File: tikzlibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 tex
 File: pgflibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 \arrowsize=\dimen196
-)) (/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/wrapfig/wrapfig.sty
+\wrapoverhang=\dimen197
+\WF@size=\dimen198
+\c@WF@wrappedlines=\count272
+\WF@box=\box56
+\WF@everypar=\toks29
+Package: wrapfig 2003/01/31  v 3.6
+)
+(/usr/share/texlive/texmf-dist/tex/latex/pgfplots/pgfplots.sty
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
 Package: pgfplots 2020/02/29 v1.17 Data Visualization (1.17)
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
-\t@pgfplots@toka=\toks29
-\t@pgfplots@tokb=\toks30
-\t@pgfplots@tokc=\toks31
-\pgfplots@tmpa=\dimen197
-\c@pgfplots@coordindex=\count272
-\c@pgfplots@scanlineindex=\count273
+\t@pgfplots@toka=\toks30
+\t@pgfplots@tokb=\toks31
+\t@pgfplots@tokc=\toks32
+\pgfplots@tmpa=\dimen199
+\c@pgfplots@coordindex=\count273
+\c@pgfplots@scanlineindex=\count274
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code
 .tex))
@@ -419,14 +427,14 @@ tructure.code.tex)
 tructureext.code.tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray
 .code.tex
-\c@pgfplotsarray@tmp=\count274
+\c@pgfplotsarray@tmp=\count275
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatri
 x.code.tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshare
 d.code.tex
-\c@pgfplotstable@counta=\count275
-\t@pgfplotstable@a=\toks32
+\c@pgfplotstable@counta=\count276
+\t@pgfplotstable@a=\toks33
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque
 .code.tex)
@@ -438,7 +446,7 @@ de.tex))
 .tex)
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.sur
 fshading.code.tex
-\c@pgfplotslibrarysurf@no=\count276
+\c@pgfplotslibrarysurf@no=\count277
 
 (/usr/share/texlive/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surf
 shading.pgfsys-pdftex.def)))
@@ -465,16 +473,16 @@ e.tex)
 zlibrarydecorations.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.cod
 e.tex
-\pgfdecoratedcompleteddistance=\dimen198
-\pgfdecoratedremainingdistance=\dimen199
-\pgfdecoratedinputsegmentcompleteddistance=\dimen256
-\pgfdecoratedinputsegmentremainingdistance=\dimen257
-\pgf@decorate@distancetomove=\dimen258
-\pgf@decorate@repeatstate=\count277
-\pgfdecorationsegmentamplitude=\dimen259
-\pgfdecorationsegmentlength=\dimen260
+\pgfdecoratedcompleteddistance=\dimen256
+\pgfdecoratedremainingdistance=\dimen257
+\pgfdecoratedinputsegmentcompleteddistance=\dimen258
+\pgfdecoratedinputsegmentremainingdistance=\dimen259
+\pgf@decorate@distancetomove=\dimen260
+\pgf@decorate@repeatstate=\count278
+\pgfdecorationsegmentamplitude=\dimen261
+\pgfdecorationsegmentlength=\dimen262
 )
-\tikz@lib@dec@box=\box56
+\tikz@lib@dec@box=\box57
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarydecorations.pathmorphing.code.tex
@@ -484,13 +492,13 @@ decorations.pathmorphing.code.tex))
 zlibrarydecorations.pathreplacing.code.tex
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrary
 decorations.pathreplacing.code.tex))
-\pgfplots@numplots=\count278
-\pgfplots@xmin@reg=\dimen261
-\pgfplots@xmax@reg=\dimen262
-\pgfplots@ymin@reg=\dimen263
-\pgfplots@ymax@reg=\dimen264
-\pgfplots@zmin@reg=\dimen265
-\pgfplots@zmax@reg=\dimen266
+\pgfplots@numplots=\count279
+\pgfplots@xmin@reg=\dimen263
+\pgfplots@xmax@reg=\dimen264
+\pgfplots@ymin@reg=\dimen265
+\pgfplots@ymax@reg=\dimen266
+\pgfplots@zmin@reg=\dimen267
+\pgfplots@zmax@reg=\dimen268
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibraryplotmarks.code.tex
@@ -505,22 +513,23 @@ Package: caption 2020/01/03 v3.4h Customizing captions (AR)
 (/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2020/01/03 v1.8h caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 61.
-\captionmargin=\dimen267
-\captionmargin@=\dimen268
-\captionwidth=\dimen269
-\caption@tempdima=\dimen270
-\caption@indent=\dimen271
-\caption@parindent=\dimen272
-\caption@hangindent=\dimen273
+\captionmargin=\dimen269
+\captionmargin@=\dimen270
+\captionwidth=\dimen271
+\caption@tempdima=\dimen272
+\caption@indent=\dimen273
+\caption@parindent=\dimen274
+\caption@hangindent=\dimen275
 Package caption Info: Standard document class detected.
 )
-\c@caption@flags=\count279
-\c@continuedfloat=\count280
+\c@caption@flags=\count280
+\c@continuedfloat=\count281
+Package caption Info: wrapfig package is loaded.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2020/01/22 v1.3d Sub-captions (AR)
-\c@subfigure=\count281
-\c@subtable=\count282
+\c@subfigure=\count282
+\c@subtable=\count283
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tocbibind/tocbibind.sty
 Package: tocbibind 2010/10/13 v1.5k extra ToC listings
@@ -531,43 +540,43 @@ Package tocbibind Note: Using section or other style headings.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count283
-\l__pdf_internal_box=\box57
+\l__kernel_color_stack_int=\count284
+\l__pdf_internal_box=\box58
 )
 (src/Latex/rapport.aux)
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
-LaTeX Font Info:    ... okay on input line 20.
-LaTeX Info: Redefining \degres on input line 20.
-LaTeX Info: Redefining \dots on input line 20.
-LaTeX Info: Redefining \up on input line 20.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Info: Redefining \degres on input line 21.
+LaTeX Info: Redefining \dots on input line 21.
+LaTeX Info: Redefining \up on input line 21.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count284
-\scratchdimen=\dimen274
-\scratchbox=\box58
-\nofMPsegments=\count285
-\nofMParguments=\count286
-\everyMPshowfont=\toks33
-\MPscratchCnt=\count287
-\MPscratchDim=\dimen275
-\MPnumerator=\count288
-\makeMPintoPDFobject=\count289
-\everyMPtoPDFconversion=\toks34
+\scratchcounter=\count285
+\scratchdimen=\dimen276
+\scratchbox=\box59
+\nofMPsegments=\count286
+\nofMParguments=\count287
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count288
+\MPscratchDim=\dimen277
+\MPnumerator=\count289
+\makeMPintoPDFobject=\count290
+\everyMPtoPDFconversion=\toks35
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 
@@ -618,93 +627,89 @@ enefit from \pgfplotsset{compat=1.17} (current compat level: 1.16).
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 22.
+(Font)              <12> on input line 23.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 22.
+(Font)              <8> on input line 23.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 22.
-(src/Latex/rapport.toc)
+(Font)              <6> on input line 23.
+(src/Latex/rapport.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 3.
+)
 \tf@toc=\write4
 \openout4 = `rapport.toc'.
 
  [1
 
 {/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: Reference `L' on page 2 undefined on input line 56.
-
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 58.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 58.
-
-LaTeX Warning: Reference `fig:ex' on page 2 undefined on input line 58.
+Underfull \hbox (badness 10000) in paragraph at lines 67--67
+[]\T1/cmr/m/sc/8 Figure \T1/cmr/m/n/8 1 ^^U
+ []
 
 
-LaTeX Warning: Reference `fig:graph' on page 2 undefined on input line 71.
+Underfull \hbox (badness 10000) in paragraph at lines 67--67
+|\T1/cmr/m/n/8 Mo-dé-li-sa-tion
+ []
+
+
+LaTeX Warning: Reference `L' on page 2 undefined on input line 70.
 
 [2]
-<img.png, id=26, 803.0pt x 1003.75pt>
+<img.png, id=23, 803.0pt x 1003.75pt>
 File: img.png Graphic file (type png)
 <use img.png>
-Package pdftex.def Info: img.png  used on input line 77.
-(pdftex.def)             Requested size: 120.4448pt x 150.556pt.
- (src/Latex/fig1.pgf) (src/Latex/fig2.pgf) (src/Latex/fig3.pgf)
-Overfull \hbox (173.0987pt too wide) in paragraph at lines 92--93
+Package pdftex.def Info: img.png  used on input line 78.
+(pdftex.def)             Requested size: 80.3047pt x 100.38087pt.
+ [3 <src/Latex/img.png>] (src/Latex/fig1.pgf) (src/Latex/fig2.pgf)
+(src/Latex/fig3.pgf)
+Overfull \hbox (173.0987pt too wide) in paragraph at lines 118--119
 [][] 
  []
 
 
-Overfull \hbox (2.22168pt too wide) in paragraph at lines 83--95
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 109--121
 []$[]$ $[]$
  []
 
-
-LaTeX Warning: Reference `fig:sche' on page 3 undefined on input line 138.
-
-[3 <src/Latex/img.png>] [4]
-
-LaTeX Warning: Citation `NatesanResNet' undefined on input line 175.
-
-(src/Latex/rapport.bbl [5]) [6] (src/Latex/rapport.aux)
+[4] [5] (src/Latex/rapport.bbl) [6] [7] (src/Latex/rapport.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 25199 strings out of 481718
- 638084 string characters out of 5926910
- 991365 words of memory out of 6000000
- 40508 multiletter control sequences out of 15000+600000
- 544849 words of font info for 46 fonts, out of 8000000 for 9000
+ 25273 strings out of 481718
+ 639236 string characters out of 5926910
+ 989514 words of memory out of 6000000
+ 40577 multiletter control sequences out of 15000+600000
+ 545184 words of font info for 47 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
- 73i,8n,127p,760b,783s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sf
-bx1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1200.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></u
-sr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfcc0800.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/cm-super/sfsl1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm
--super/sfti1000.pfb>
-Output written on src/Latex/rapport.pdf (6 pages, 1017623 bytes).
+ 73i,8n,127p,804b,780s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr
+/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1000
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></
+usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/cm-super/sfcc0800.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/c
+m-super/sfsl1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super
+/sfti1000.pfb>
+Output written on src/Latex/rapport.pdf (7 pages, 1038676 bytes).
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
- 76 compressed objects within 1 object stream
+ 116 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 18 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 24 words of extra memory for PDF output out of 10000 (max. 10000000)
 

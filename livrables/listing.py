@@ -57,50 +57,49 @@ def extraction(img, minis, sigma, ratio, dir, prefix=""):
 
 # Convolution, noyaux de Gauss et FFT (Fast Fourier Transform) 
 
-def gauss1D( a, x ):
-    ''' a : standard deviation '''
-    return 1/(np.sqrt(2*np.pi)*a)*np.exp(-x*x/(2*a*a)) 
+def kernel_Gauss(sigma, twoD=True):
+    size = 2*int(np.ceil(sigma))+3
+    if twoD:
+        kernel = np.fromfunction(lambda x, y: (1/(2*np.pi*sigma**2)) * np.exp((-1*((x-(size-1)/2)**2+(y-(size-1)/2)**2)) / (2*sigma**2)), (size, size))
+    else:
+        kernel = np.fromfunction(lambda x: np.exp((-1*(x-(size-1)/2)**2) / (2*sigma**2)), (size,))
+    return kernel / np.sum(kernel)
+
+def etendre(image,d):
+    etendu = np.c_[ np.flip(image[:,2:2+d],1), image, np.flip(image[:,-2-d+1:-1],1)]
+    etendu = np.r_[ np.flip(etendu[2:2+d],1), etendu, np.flip(etendu[-2-d+1:-1],1)]
+    for i in range(d-1) :
+        etendu[i,i] = etendu[2*d-i,2*d-i]
+        etendu[-i-1,-i-1] = etendu[-2*d-i-1,-2*d-i-1]
+        etendu[i,-i-1] = etendu[2*d-i,-2*d-i-1]
+        etendu[-i-1,i] = etendu[-2*d-i-1,2*d-i]
+    return etendu
+
+def convolution(image, noyau ):
+    d = (noyau.shape[0]-1)//2
     
-def gauss2D( a, x, y ):
-    ''' a : standard deviation '''
-    return 1/(2*np.pi*a*a)*np.exp(-(x*x+y*y)/(2*a*a))
+    etendu = etendre(image,d)
 
-def gaussKernel1D( a, horizontal=True, normalized=True):
-    ''' Discrete approximation of the Gaussian kernel. The Gaussian is effectively zero more than 3 standard devation from the mean.
-    The gaussian needs to be normalized (sum of all coef equals to 1) If not the image is brightened.'''
-    
-    size = int(np.ceil(a))
-    temp = np.array( [[gauss1D(a,i) for i in range(-size,size+1)]] ) 
-    
-    if normalized : temp = temp/np.sum(temp)
-    if horizontal : return temp
-    return temp.T
+    resultat = np.zeros((image.shape[0], image.shape[1]))
+    for i in range(d,image.shape[0]):
+        for j in range(d,image.shape[1]):
+            resultat[i,j] = np.sum((etendu[i-d:i+d+1, j-d:j+d+1]*noyau)) #beaucoup de copies, très mauvais
+    return resultat
 
-def gaussKernel2D( a, normalized=True ):
-    ''' Discrete approximation of the Gaussian kernel. The Gaussian is effectively zero more than 3 standard devation from the mean. '''
-    
-    size = int(np.ceil(a))
-    temp = np.array( [[gauss2D(a,i,j) for i in range(-size,size+1)] for j in range(-size,size+1)] ) 
-    
-    if normalized : temp = temp/np.sum(temp)
-    return temp
+def convolution_separabilite(image, noyauX, noyauY):
+    d = (noyauX.shape[0]-1)//2
 
-def convolute( array, kernel ):
+    etendu = etendre(image,d)
 
-    padding = np.array( kernel.shape )
-    N,M = padding//2
-    X,Y = array.shape
-    temp = np.zeros( (X,Y) )
+    resX = np.zeros((image.shape[0]+2*d, image.shape[1]))
+    print(np.shape(resX))
+    for i, v in enumerate(noyauX):
+        resX += v * etendu[:, i : image.shape[1] + i]
+    resY = np.zeros((image.shape[0], image.shape[1]))
+    for i, v in enumerate(noyauY):
+        resY += v * resX[i : image.shape[0] + i]
+    return resY
 
-    for i in range( N+1, X-N ):
-        for j in range( M+1, Y-M ):
-            temp[i,j] = np.sum( kernel * array[ i-N:i+N+1, j-N:j+M+1 ] )
-            
-    return temp
-
-convolution en deux temps avec la séparabilité du filtre de gauss
-
-fft
 
 # Pyramide d'échelle et recherche des minimums 
 

@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
+\usepackage{wrapfig}
 \usepackage{pgf}
 \usepackage{pgfplots}
 \usepackage{caption}
@@ -51,13 +52,33 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 	
 \section{Détection des houppiers}
 
-	\subsection{Laplacien du gaussien et approche multi échelle}
-	+dectection de blobs
-	Le problème de Afin de prendre en compte des houppiers dont le diamètre peut varier considérablement entre les différentes espèces mais aussi au sein d'une même espèce, une approche multi-échelle est nécessaire. Nous utiliserons la théorie échelle-temps développée par (\ref Lindbergh). 
+	\subsection{L'approche multi échelle}
+
+	Première approche : detection de contours pour séparer les arbres du fond ne suffit pas => ne produit pas nécessairement des contours permetenat de séparer en région et ne donne pas d'information sur celles ci. + problème foret dense.
+	On modélise alors un houppier par la figure hum. 
+
+	Nécessaire de détecter les amats de pixels
+	
+	\begin{wrapfigure}{r}{2cm}
+
+		\begin{tikzpicture}
+			\shadedraw[shading=radial,outer color=black,middle color=gray,inner color=gray] circle(0.8cm);	
+		\end{tikzpicture}
+		\caption{Modélisation d'un houppier}
+	 \end{wrapfigure}
+
+	Afin de prendre en compte des houppiers dont le diamètre peut varier considérablement entre les différentes espèces mais aussi au sein d'une même espèce, une approche multi-échelle est nécessaire. Nous utiliserons la théorie échelle-temps développée par (\ref Lindbergh). 
 	
 	Celle-ci consiste à lisser l'image original de manière répété pour générer une pyramide d'échelle qui sera exploitée ultérieurement. L'image originelle est lissée et éventuellement sous-échantillonnée autant de fois que nécessaire au moyen d'un filtre gaussien dont le paramètre d'échelle $\sigma$ est multiplié à chaque étape par un ratio fixe. ( Voir~\ref{fig:ex} ) Cela revient à convoler l'image par la fonction gaussienne suivante : 
 	
 	\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
+
+	\begin{wrapfigure}{l}{3cm}
+		\centering
+		\includegraphics[scale=0.1]{img.png}
+		\caption{Example de pyramide d'image, Original, CC BY-SA 1.0}
+		\label{fig:ex}
+	\end{wrapfigure}	 
 
 	Dans la littérature, ce ratio est 2. Puisque la taille de l'image est réduite de moitié à chaque étape, chaque niveau est appelé octave en référence à la théorie musicale. Il peut être intéressant de rajouter des intervalles supplémentaires, ce qui est fait dans la suite. 
 	On dispose donc de 3 paramètres: $\sigma$, le nombre d'octave o et le nombre d'intervalle pour chaque octave i. La hauteur ( nombre de niveau de la pyramide ) est alors $o \times i$ et le ratio $2^{\frac{1}{i}}$. 
@@ -72,12 +93,17 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 
 	La détection des blobs se ramène ainsi à la recherche d'un minimum local relativement à l'espace et global relativement à l'échelle pour identifier à la fois les centres des houppiers et la taille caractéristique de leur rayon. 
 
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.15]{img.png}
-	\caption{Example de pyramide d'image, Original, CC BY-SA 1.0}
-	\label{fig:ex}
-\end{figure}
+
+	attention => bien préciser que ca simplifie les calculs de faire de proche en proche. 
+	
+	\subsection{Convolution et séparabilité du filtre gaussien}
+	If a filter is separable, we can decompose such filter into a sequence of two 1D filters in different directions (usually horizontal, and then vertical). Each pass filters with a 1D filter, first with M, and then the second pass with N taps, in total M+N operations. This requires storing the intermediate results – either in memory, or locally (line buffering, tiled local memory optimizations). While you pay the cost of storing the intermediate results and synchronizing the passes, you get linear and not quadratic scaling. Therefore, typically for any filter sizes larger than ~4×4 (depends on the hardware, implementation etc) using separable filters is going to be significantly faster than the naive, non-separable approach.
+
+	s'attarder sur la séparabilité des filtres, comment marche, preuve de la séparabilité du filtre
+
+	FFT pour accélérer les calculs mais pas nécessaire dans ce cas. Taille du filtre > internet
+
+
 
 \begin{figure}
 	\begin{subfigure}{.5\textwidth}
@@ -99,34 +125,6 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 
 	\subsection{Mise en place de l'algorithme}
 
-	
-\begin{figure}
-	\centering
-	\begin{tikzpicture}[scale=.6]
-		\draw [<-, > = angle 90, line width=0.3mm, black] (-4, 8) -- (-4, 3);
-		\node[align=left] at (-2.75,7.75) {échelle};
-		\begin{scope}[yslant=0.5, xslant=-1]
-			\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
-			\draw[step=5mm, black] (1,1) grid (4,4);
-			\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
-		\end{scope}
-		\begin{scope}[yshift=50, yslant=0.5, xslant=-1]
-			\fill[step=5mm, white] (1,1) rectangle (4,4);
-			\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
-			\fill[step=5mm, red] (2.5,2) rectangle (3,2.5);
-			\draw[step=5mm, black] (1,1) grid (4,4);
-			\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
-		\end{scope}
-		\begin{scope}[yshift=100, yslant=0.5, xslant=-1]
-			\fill[step=5mm, white] (1,1) rectangle (4,4);
-			\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
-			\draw[step=5mm, black] (1,1) grid (4,4);
-			\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
-		\end{scope}
-		\end{tikzpicture}
-	\caption{Calcul des minimums dans la pyramide d'échelle de l'opérateur DoG}
-	\label{fig:sche}
-\end{figure}
 
 
 	L'algorithme envisagé à été implémenté à l'aide du langage Python et utilise la bibliothèque Numpy afin d'accélérer le traitement des tableaux. Son fonctionnement est le suivant:
@@ -143,7 +141,37 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 		facteur limitant i
 		choix final des paramètres : + image utilisées (taille des arbres sur le terrain et échelle de l'image) 
 
+	
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[scale=.6]
+			\draw [<-, > = angle 90, line width=0.3mm, black] (-4, 8) -- (-4, 3);
+			\node[align=left] at (-2.75,7.75) {échelle};
+			\begin{scope}[yslant=0.5, xslant=-1]
+				\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+				\draw[step=5mm, black] (1,1) grid (4,4);
+				\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+			\end{scope}
+			\begin{scope}[yshift=50, yslant=0.5, xslant=-1]
+				\fill[step=5mm, white] (1,1) rectangle (4,4);
+				\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+				\fill[step=5mm, red] (2.5,2) rectangle (3,2.5);
+				\draw[step=5mm, black] (1,1) grid (4,4);
+				\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+			\end{scope}
+			\begin{scope}[yshift=100, yslant=0.5, xslant=-1]
+				\fill[step=5mm, white] (1,1) rectangle (4,4);
+				\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+				\draw[step=5mm, black] (1,1) grid (4,4);
+				\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+			\end{scope}
+			\end{tikzpicture}
+		\caption{Calcul des minimums dans la pyramide d'échelle de l'opérateur DoG}
+		\label{fig:sche}
+	\end{figure}
+	
 
+	
 \section{Identification des espèces}
 
 	L'identification d'espèce est un problème de reconnaissance de forme ( "pattern recognition" ) pour lequel les algorithmes d'apprentissage automatique excellent. 
