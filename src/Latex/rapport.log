@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  9 MAY 2021 14:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  9 MAY 2021 19:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -644,72 +644,101 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [1
 
 {/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 67--67
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
 []\T1/cmr/m/sc/8 Figure \T1/cmr/m/n/8 1 ^^U
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 67--67
+Underfull \hbox (badness 10000) in paragraph at lines 60--60
 |\T1/cmr/m/n/8 Mo-dé-li-sa-tion
  []
 
 
-LaTeX Warning: Reference `L' on page 2 undefined on input line 70.
+LaTeX Warning: Reference `L' on page 2 undefined on input line 63.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 67--68
+
+ []
 
 [2]
 <img.png, id=23, 803.0pt x 1003.75pt>
 File: img.png Graphic file (type png)
 <use img.png>
-Package pdftex.def Info: img.png  used on input line 78.
+Package pdftex.def Info: img.png  used on input line 71.
 (pdftex.def)             Requested size: 80.3047pt x 100.38087pt.
- [3 <src/Latex/img.png>] (src/Latex/fig1.pgf) (src/Latex/fig2.pgf)
-(src/Latex/fig3.pgf)
-Overfull \hbox (173.0987pt too wide) in paragraph at lines 118--119
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--80
+
+ []
+
+(src/Latex/fig1.pgf) (src/Latex/fig2.pgf) (src/Latex/fig3.pgf)
+Overfull \hbox (173.0987pt too wide) in paragraph at lines 100--101
 [][] 
  []
 
 
-Overfull \hbox (2.22168pt too wide) in paragraph at lines 109--121
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 91--103
 []$[]$ $[]$
  []
 
-[4] [5] (src/Latex/rapport.bbl) [6] [7] (src/Latex/rapport.aux)
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[3 <src/Latex/img.png>]
+Overfull \hbox (3.8086pt too wide) in paragraph at lines 115--116
+\T1/cmr/m/n/10 D'après le théo-rème de Shan-non, il est donc pos-sible de sous-
+échantillonner
+ []
+
+[4]
+Overfull \hbox (2.89215pt too wide) in paragraph at lines 138--139
+\T1/cmr/m/n/10 échelle dé-crois-sante, ie par rayon dé-tec-tés dé-crois-sants (
+cf for-mule), chaque
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5] (src/Latex/rapport.bbl [6]) [7] (src/Latex/rapport.aux)
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  ) 
 Here is how much of TeX's memory you used:
- 25273 strings out of 481718
- 639236 string characters out of 5926910
- 989514 words of memory out of 6000000
- 40577 multiletter control sequences out of 15000+600000
- 545184 words of font info for 47 fonts, out of 8000000 for 9000
+ 25270 strings out of 481718
+ 639202 string characters out of 5926910
+ 993514 words of memory out of 6000000
+ 40575 multiletter control sequences out of 15000+600000
+ 544849 words of font info for 46 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
- 73i,8n,127p,804b,780s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr
-/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
-lic/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1000
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></
-usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/sha
-re/texlive/texmf-dist/fonts/type1/public/cm-super/sfcc0800.pfb></usr/share/texl
-ive/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
-ublic/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/c
-m-super/sfsl1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super
-/sfti1000.pfb>
-Output written on src/Latex/rapport.pdf (7 pages, 1038676 bytes).
+ 73i,8n,127p,760b,780s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sf
+bx1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1200.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/cm-super/sfcc0800.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/cm-super/sfrm0700.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/cm-super/sfsl1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm
+-super/sfti1000.pfb>
+Output written on src/Latex/rapport.pdf (7 pages, 1043337 bytes).
 PDF statistics:
- 116 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 113 PDF objects out of 1000 (max. 8388607)
+ 81 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  24 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {2.2}entrainement et quelle type de modèle }{6}%
 \contentsline {section}{\numberline {3}\'{E}valuation des résultats}{6}%
 \contentsline {section}{\numberline {4}Prolongements envisagables}{6}%
-\contentsline {section}{R\'ef\'erences}{6}%
-\contentsline {section}{\numberline {A}Compléments}{6}%
+\contentsline {section}{R\'ef\'erences}{7}%
+\contentsline {section}{\numberline {A}Compléments}{7}%
 \contentsline {section}{\numberline {B}Résultats}{7}%
 \contentsline {section}{\numberline {C}algorithmes}{7}%
