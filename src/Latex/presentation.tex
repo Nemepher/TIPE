@@ -2,9 +2,20 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{subfig}
+\usepackage{amssymb}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
 \usepackage{pgf}
+\usepackage{xcolor}
+\usepackage{newunicodechar}
+
+\newcommand\Warning{%
+ \makebox[1.4em][c]{%
+ \makebox[0pt][c]{\raisebox{.1em}{\small!}}%
+ \makebox[0pt][c]{\color{red}\Large$\bigtriangleup$}}}%
+
+\newunicodechar{⚠}{\Warning}
+
 
 \usetheme{Madrid}
 \usecolortheme{crane}
@@ -42,14 +53,115 @@
 \section{Détection des houppiers}
 
 \begin{frame}
-	\frametitle{Détection des houppiers}
-	Explication de la théorie: problème de detection de blob a multiples échelles : Théorie ... lindbergh
-	\[G_{\sigma}:=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
-	\[{LoG}_{\sigma}:=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
-	$\sigma=\frac{r}{\sqrt{2}}$
+	\frametitle{Modélisation des houppiers}
+	\begin{columns}
+
+	\column{0.5\textwidth}
+	\centering
+
+	\begin{figure}
+		\begin{tikzpicture}
+			\shadedraw[shading=radial,outer color=black,middle color=gray,inner color=gray] circle(0.8cm);	
+		\end{tikzpicture}
+	\caption{Modélisation d'un houppier}
+	\end{figure}
+
+	Différentes approches : 
+	\begin{itemize}
+		\item[$\times$] seuillage de la luminosité
+		\item[$\times$] détection simple de contours
+		\item[\checkmark] détection de blob
+	\end{itemize}
+
+	\column{0.5\textwidth}
+		\centering
+		Une approche élégante : la théorie de l'Espace d'échelle de Lindbergh
+
+		\begin{figure}
+			\includegraphics[scale=0.12]{img.png}
+			\caption{Exemple de pyramide d'image, Original, CC BY-SA 1.0}
+		\end{figure}
+
+\end{columns}
 \end{frame}
 
 \begin{frame}
+
+		\frametitle{Principe de la théorie de l'Espace d'échelle}
+		\begin{center}
+		Générer une famille d'image dont les détails fins disparaissent progressivement : \textbf{la pyramide d'échelle}\\
+		\end{center}
+
+		⚠ Aucune génération d'artefacts supplémentaires 
+		
+		$\Rightarrow$ filtre gaussien\\
+		
+		\[G_{\sigma}(x,y):=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]\\
+
+		\`{A} chaque étape, $\sigma$ est multiplié par un ratio.
+
+		3 paramètres: 
+		\begin{itemize}
+			\item $\sigma$
+			\item le nombre d'octave o
+			\item le nombre d'intervalle i
+		\end{itemize}
+
+	\end{frame}
+
+\begin{frame}
+		\centering
+		Application de l'opérateur laplacien normalisé : \textbf{pyramide d'échelle du LoG}
+		\[{LoG}_{\sigma}(x,y):=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
+
+		\begin{columns}
+			\column{0.5\textwidth}
+			\centering
+			On recherche dans la pyramide :
+			\begin{itemize}
+				\item minimum local relativement à l'espace
+				\item minimum global relativement à l'échelle\\
+			\end{itemize}
+
+			On obtient : 
+			\begin{itemize}
+				\item centre des houppiers
+				\item rayons caractéristiques r :  $\sqrt{2}\sigma=r$
+			\end{itemize}
+
+			\column{0.5\textwidth}
+			\centering
+			\begin{figure}
+				\begin{tikzpicture}[scale=.6]
+					\draw [<-, > = angle 90, line width=0.3mm, black] (-4, 8) -- (-4, 3);
+					\node[align=left] at (-2.75,7.75) {échelle};
+					\begin{scope}[yslant=0.5, xslant=-1]
+						\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+						\draw[step=5mm, black] (1,1) grid (4,4);
+						\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+					\end{scope}
+					\begin{scope}[yshift=50, yslant=0.5, xslant=-1]
+						\fill[step=5mm, white] (1,1) rectangle (4,4);
+						\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+						\fill[step=5mm, red] (2.5,2) rectangle (3,2.5);
+						\draw[step=5mm, black] (1,1) grid (4,4);
+						\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+					\end{scope}
+					\begin{scope}[yshift=100, yslant=0.5, xslant=-1]
+						\fill[step=5mm, white] (1,1) rectangle (4,4);
+						\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
+						\draw[step=5mm, black] (1,1) grid (4,4);
+						\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
+					\end{scope}
+					\end{tikzpicture}
+				\caption{Calcul des minimums dans la pyramide d'échelle de l'opérateur DoG}
+			\end{figure}
+		\end{columns}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Comportement du LoG}
 	\begin{figure}
 		\subfloat[Réponse à une marche]{\scalebox{0.3}{\input{fig1.pgf}}}
 		\subfloat[Réponse à un créneau pour $\sigma=1$, $\sigma=2$ et $\sigma=3$]{\scalebox{0.3}{\input{fig2.pgf}}}
@@ -65,66 +177,77 @@
 \end{frame}
 
 \begin{frame}
-	convolution 
- 	separabilité du filtre
+	\frametitle{Convolution et séparabilité du filtre gaussien}
+	\begin{center}
+	Filtrage = Produit de convolution discrèt
+	Nombre d'opérations élémentaire : $\simeq NM \times h^{2}$\\
+	\end{center}
+
+	Réduction du nombre d'opérations :  
+	\begin{itemize}
+		\item Approximation du LoG par la différence des gaussiennes ( "DoG" ) 
+		\item Taille du noyau gaussien : $1 + 3 \times E(\sigma)$
+		\item Noyau gaussien séparable $\Rightarrow$ $NM \times 2h$ 
+		$G_{\sigma}(x,y)=G_{1D, \sigma}(x) \times G_{1D, \sigma}(y)$ o\`{u} $G_{1D, \sigma}(y) := \frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{x^{2}}{2\sigma^{2}})$
+		\item Sous-échantillonnage (théorème de Shannon) 
+	\end{itemize}
+
 \end{frame}
 
-\begin{frame}
-	Paramètres du systeme et méthode heuristique -> possibilité d'avoir plusieurs arbre possible si suffisamment fin.
-	$\sigma$, le nombre d'octave o et le nombre d'intervalle pour chaque octave i. La hauteur est $o \times i$ et le ratio $2^{\frac{1}{i}}$. 
-\end{frame}
-
-\begin{frame}
-	Mise en place de l'algorithme
+	\begin{frame}
+	\frametitle{Mise en place de l'algorithme}
 	\begin{enumerate}
-		\item Conversion en nuance de gris ( Inversion éventuelle ) 
+		\item Conversion en nuance de gris
 		\item Génération de la pyramide d'échelle : 
 		\begin{itemize}
-			\item creation du filtre de gauss adapté
-			\item convolution de l'image par le filtre 
+			\item creation du noyau gaussien
+			\item convolution de l'image 
 			\item stockage dans un tableau Numpy 3D
 		\end{itemize}
-		\item Détection des minimums : le tableau est parcouru par échelle décroissante pour éviter les superpositions, chaque case est comparée à ses 26 voisins, seul les rayons supérieurs à un seuil sont conservés.  
-		\item \'{E}xtration des houppiers : le rayon adapté est calculé d'après ici ref 
+		\item Détection des minimums : 
+		\begin{itemize}
+			\item parcours du tableau par échelle décroissante
+			\item comparaison des cases aux 26 voisins
+			\item élimination des chevauchements et des petits rayons 
+		\end{itemize}
+		\item Extraction des houppiers
 	\end{enumerate}	
 \end{frame}
 
 \begin{frame}
+	\frametitle{Application au parc naturel régional du Morvan}
+	\begin{columns}
+		\column{0.65\textwidth}
+	\begin{itemize}
+		\item forêt historique de feuillus
+		\item remplacement par de la monoculture intensive de pin Douglas
+		\item 50 \% du parc est aujourd'hui constitué de conifères
+	\end{itemize}
+
+	Imagerie aérienne via Géoportail \copyright IGN :
+	\begin{itemize}
+	\item haute résolution : < 0,1m/pixels
+	\item échelle : 1:1000
+	\end{itemize}
+
+	Paramètres retenus :
+	\begin{itemize}
+		\item rayons Douglas : 1-5m
+		\item rayons feuillus : 5-15m
+		\item 5 octaves, 5 intervalles et $\sigma=0.5$
+	\end{itemize}
+
+	\column{0.35\textwidth}
+	\centering
 	\begin{figure}
-		\subfloat[Example de pyramide d'image, Original, CC BY-SA 1.0]{\includegraphics[scale=0.15]{img.png}}
-		\subfloat[Calcul des minimums dans la pyramide d'échelle de l'opérateur DoG]{
-			\begin{tikzpicture}[scale=.6]
-				\draw [<-, > = angle 90, line width=0.3mm, black] (-4, 8) -- (-4, 3);
-				\node[align=left] at (-2.75,7.75) {échelle};
-				\begin{scope}[yslant=0.5, xslant=-1]
-					\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
-					\draw[step=5mm, black] (1,1) grid (4,4);
-					\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
-				\end{scope}
-				\begin{scope}[yshift=50, yslant=0.5, xslant=-1]
-					\fill[step=5mm, white] (1,1) rectangle (4,4);
-					\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
-					\fill[step=5mm, red] (2.5,2) rectangle (3,2.5);
-					\draw[step=5mm, black] (1,1) grid (4,4);
-					\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
-				\end{scope}
-				\begin{scope}[yshift=100, yslant=0.5, xslant=-1]
-					\fill[step=5mm, white] (1,1) rectangle (4,4);
-					\fill[step=5mm, blue] (2,1.5) rectangle (3.5,3);
-					\draw[step=5mm, black] (1,1) grid (4,4);
-					\draw[step=5mm, thick, black] (1,1) rectangle (4,4);
-				\end{scope}
-				\end{tikzpicture}
-		}
-		\caption{Utilisation de la pyramide d'image}
+		\includegraphics[scale=0.21,angle=90]{ilu.png}
 	\end{figure}
+
+\end{columns}
 \end{frame}
 
 \begin{frame}
-	contexte et presentation du parc 
-
-	Première mise en evidence et quantification de la transformation du paysage.
-
+	\frametitle{Résultats de la détection}
 	\begin{figure}
 	\includegraphics[scale=0.15]{index.png}
 	\caption{Pyramide d'échelle de l'opérateur LoG grossière ( 6 octaves sans intervalle ). Image originale \copyright IGN, 2021  }
@@ -145,18 +268,26 @@
 \begin{frame}
 	\frametitle{Identification des espèces}
 	\begin{columns}
-		\column{0.5\textwidth}
-		Type de machine learning
-		
-		Utilisation de Tensorflow
+		\column{0.55\textwidth}
+		\begin{center}
+		Problème de reconnaissance de forme (<<pattern recognition>>)
+
+		$\Rightarrow$  Entraînement supervisé d'un réseau de neurones\\
+		\end{center}
+		Base de donnée : 
+		\begin{itemize}
+			\item Douglas $\times$ 173
+			\item Feuillus $\times$ 199
+			\item Non labellisées $\times$ 91
+			\item[+] transformations (rotations)
+		\end{itemize}
+
+		Architecture inspirée de RESNET-BASED TREE SPECIES CLASSIFICATION USING UAV IMAGES
 	
-		Creation d'une base de donnée : methodo et nombre d'images
 	
-		modèle choisi
-	
-		\column{0.5\textwidth}
+		\column{0.45\textwidth}
 		\centering
-		\includegraphics[scale=0.35]{train.png}
+		\includegraphics[scale=0.33]{train.png}
 	\end{columns}
 	
 \end{frame}
@@ -171,11 +302,6 @@
 \end{frame}
 
 \section{\'{E}valuation des résultats et prolongements envisageables}
-
-\begin{frame}
-	\frametitle{\'{E}valuation des résultats et prolongements envisageables}
-	tableau detection pour chaque espèce et resultat d'autres papiers 
-\end{frame}
 
 \begin{frame}
 	Différents prolongement sont envisagables: 

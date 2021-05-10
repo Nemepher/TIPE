@@ -1,6 +1,6 @@
 {
     "cSpell.enabled": true,
     "code-runner.executorMap": {
-        "latex": "pdflatex -output-directory src/Latex"
+        "latex": "pdflatex -output-directory src/Latex -shell-escape"
     }
 }

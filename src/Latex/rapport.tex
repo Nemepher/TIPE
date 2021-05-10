@@ -8,8 +8,36 @@
 \usepackage{pgf}
 \usepackage{pgfplots}
 \usepackage{caption}
+\usepackage{listings}
 \usepackage{subcaption}
 \usepackage[nottoc]{tocbibind}
+
+\lstset{
+    inputencoding = utf8,  % Input encoding
+    extendedchars = true,  % Extended ASCII
+	breaklines=true,
+	breakatwhitespace=true,
+	breakautoindent=true,
+	escapeinside={\%*}{*)},
+	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    literate      =        % Support additional characters
+      {á}{{\'a}}1  {é}{{\'e}}1  {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1
+      {Á}{{\'A}}1  {É}{{\'E}}1  {Í}{{\'I}}1 {Ó}{{\'O}}1  {Ú}{{\'U}}1
+      {à}{{\`a}}1  {è}{{\`e}}1  {ì}{{\`i}}1 {ò}{{\`o}}1  {ù}{{\`u}}1
+      {À}{{\`A}}1  {È}{{\'E}}1  {Ì}{{\`I}}1 {Ò}{{\`O}}1  {Ù}{{\`U}}1
+      {ä}{{\"a}}1  {ë}{{\"e}}1  {ï}{{\"i}}1 {ö}{{\"o}}1  {ü}{{\"u}}1
+      {Ä}{{\"A}}1  {Ë}{{\"E}}1  {Ï}{{\"I}}1 {Ö}{{\"O}}1  {Ü}{{\"U}}1
+      {â}{{\^a}}1  {ê}{{\^e}}1  {î}{{\^i}}1 {ô}{{\^o}}1  {û}{{\^u}}1
+      {Â}{{\^A}}1  {Ê}{{\^E}}1  {Î}{{\^I}}1 {Ô}{{\^O}}1  {Û}{{\^U}}1
+      {œ}{{\oe}}1  {Œ}{{\OE}}1  {æ}{{\ae}}1 {Æ}{{\AE}}1  {ß}{{\ss}}1
+      {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1  {å}{{\r a}}1 {Å}{{\r A}}1
+      {ã}{{\~a}}1  {õ}{{\~o}}1  {Ã}{{\~A}}1 {Õ}{{\~O}}1
+      {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
+      {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
+      % ¿ and ¡ are not correctly displayed if inconsolata font is used
+      % together with the lstlisting environment. Consider typing code in
+      % external files and using \lstinputlisting to display them instead.      
+  }
 
 \pagestyle{headings}
 \pgfplotsset{width=5cm,compat=1.16}
@@ -26,15 +54,13 @@
 \section*{Introduction}
 
 L'étude et le suivi de la répartition des espèces au sein de larges zones forestières est un problème complexe aux applications nombreuses :
-gestion des ressources naturelles, protection de la biodiversité, etc... Les études de terrain peuvent se révéler longues, coûteuses et imprécises du à la nécessité d'interpoler les données recueillies. 
+gestion des ressources naturelles, protection de la biodiversité, prévention des incendies, etc... Les études de terrain peuvent se révéler longues, coûteuses et imprécises du à la nécessité d'interpoler les données recueillies. 
 Parvenir à automatiser ce processus est donc un enjeu critique. 
 
 Les techniques existantes reposent sur l'utilisation de données satellite ou aériennes : L'utilisation d'images est une méthode peu coûteuse nécessitant peu de materiel et pas d'intervention sur le terrain lorsque 
 des images satellites récentes de résolution suffisantes, qui deviennent de plus en plus accessible.  
 
 UAV LIdar -> methodes plus simples qui ne requierent que des images st HR. Différentes méthodes existent, detection de blob ? LoG
-
-Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses. La luminosité des arbres peut beaucoup varier sur une meme image (à moins d'avoir des images de haute qualité "prise en une seule fois" (ex papier). Une solution = Détection de blobs. 2 problemes : -différence de luminosité et différence d'échelle. Citer algo pour. de pixels plus lumineux que leur voisins correspondants aux houppiers
 
 \subsection*{Objectifs du TIPE}		
 \begin{enumerate}
@@ -60,9 +86,9 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 		\caption{Modélisation d'un houppier}
 	 \end{wrapfigure}
 
-	On modélise un houppier par la figure hum. Il s'agit alors de repérer les amas circulaires de pixels plus lumineux que leur voisins : les blobs. Le diamètre des houppiers peut varier considérablement selon l'espèce et au sein d'une même image et la luminosité au centre des blobs n'est pas constante. Un seuillage de la luminosité est donc à exclure et une simple détection de contours se révèle peu précise lorsque la couverture forestière est dense. Une approche multi-échelle est donc nécessaire. Nous utiliserons la théorie échelle-temps développée par (\ref Lindbergh). 
+	On modélise un houppier par la figure hum. Il s'agit alors de repérer les amas circulaires de pixels plus lumineux que leur voisins : les blobs. Le diamètre des houppiers peut varier considérablement selon l'espèce et au sein d'une même image et la luminosité au centre des blobs n'est pas constante. Un seuillage de la luminosité est donc à exclure et une simple détection de contours se révèle peu précise lorsque la couverture forestière est dense. Une approche multi-échelle est donc nécessaire. Nous utiliserons la théorie de l'Espace d'échelle développée par (\ref Lindbergh). 
 	
-	L'idée est de générer à partir d'un signal d'origine une famille de signaux dont les détails fins disparaissent progressivement. Aucune opération ne doit donc faire apparaître d'artefacts supplémentaires.  
+	L'idée est de générer à partir d'un signal d'origine une famille de signaux dont les détails fins disparaissent progressivement. Aucune opération ne doit donc générer d'artefacts supplémentaires.  
 
 	L'image original est lissée de manière répété au moyen d'un filtre gaussien aux propriété de lissage exceptionnelles pour générer la pyramide d'échelle qui sera exploitée ultérieurement. ( Voir~\ref{fig:ex} )\\
 	
@@ -111,7 +137,7 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 	\begin{itemize}
 		\item L'opérateur LoG est bien approximé par la différence des gaussiennes ( "DoG" ) obtenue en réalisant la différence des niveaux successifs de la pyramide d'échelle.
 		\item Une gaussienne prend presque toute ses valeurs dans un intervalle centré de largeur 3 fois l'écart-type $\sigma$. On utilise alors un noyau gaussien de taille $1 + 3 \times E(\sigma)$
-		\item On considère un noyau gaussien de taille $h \times h$. Le produit de convolution pour une image de taille $N \times M$ nécessite $cst \times h_{2}$ opérations élémentaires. Le filtre de Gauss étant séparable: $G_{\sigma}(x,y)=G_{1D, \sigma}(x) \times G_{1D, \sigma}(y)$ o\`{u} $G_{1D, \sigma}(y) := \frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{x^{2}}{2\sigma^{2}})$, on décompose le calcul en deux étape. On réalise la convolution de l'image avec avec $G_{1D, \sigma}(x)$ puis la convolution du résultat avec $G_{1D, \sigma}(y)$, soit $cst \times 2h$ opérations au prix d'espace mémoire supplémentaire.
+		\item On considère un noyau gaussien de taille $h \times h$. Le produit de convolution pour une image de taille $N \times M$ nécessite $cst \times h^{2}$ opérations élémentaires. Le filtre de Gauss étant séparable: $G_{\sigma}(x,y)=G_{1D, \sigma}(x) \times G_{1D, \sigma}(y)$ o\`{u} $G_{1D, \sigma}(y) := \frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{x^{2}}{2\sigma^{2}})$, on décompose le calcul en deux étape. On réalise la convolution de l'image avec avec $G_{1D, \sigma}(x)$ puis la convolution du résultat avec $G_{1D, \sigma}(y)$, soit $cst \times 2h$ opérations au prix d'espace mémoire supplémentaire.
 		\item Lisser équivaut à atténuer l'amplitude des basse fréquence du spectre. D'après le théorème de Shannon, il est donc possible de sous-échantillonner les images lissés sans perdre d'information. En sous-échantillonnant à chaque étape, calculer le produit de convolution d'un niveau donné à partir du niveau précédent permet de réduire le nombre d'opération.
 	\end{itemize}
 
@@ -122,33 +148,16 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 	L'algorithme envisagé à été implémenté à l'aide du langage Python. Son fonctionnement est le suivant:
 
 	\begin{enumerate}
-	\item L'image à traiter est convertie en nuance de gris et éventuellement inversée afin que le fond soit plus clair que les houppiers. 
-	\item La pyramide d'échelle de l'opérateur DoG est générée et stockée dans un tableau Numpy à 3 dimension. 
-	\item En pratique, différentes détection peuvent avoir lieu dans la même colonne. Le maximum relatif à l'échelle devient alors local et des multiples détections n'est conservé que celle de rayon caractéristique maximal. 
-	Les minimums sont donc calculé en parcourant le tableau par échelle décroissante ( Du plus flouté au moins flouté ) afin de ne conserver que les houppiers de rayon maximum lors d'éventuels chevauchements. Chaque case du tableau étant comparée à ses 26 voisins uniquement ( Voir~\ref{fig:sche} ) 
-	\end{enumerate}
-
-	\begin{enumerate}
 		\item Conversion en nuance de gris ( Inversion éventuelle ) 
 		\item Génération de la pyramide d'échelle : 
 		\begin{itemize}
-			\item convolution par les filtre gaussien. Un  
+			\item convolution par les filtre gaussien. Pour conserver des images de même taille, un remplissage des bords ( "padding" ) de type miroir est effectué, complétant l'image naturellement. 
 			\item stockage dans un tableau Numpy 3D
 		\end{itemize}
 		\item Détection des minimums : différentes détections peuvent avoir lieu dans la même colonne donc pour conserver uniquement le houppier de rayon maximum lors d'éventuels chevauchements le tableau est parcouru par échelle décroissante, ie par rayon détectés décroissants (cf formule), chaque case est comparée à ses 26 voisins et on vérifie que les houppiers détectés ne débordent pas sur les précédents.  En outre, seul les rayons supérieurs à un certain seuil sont conservés.  
-		\item Extraction des houppiers : le rayon adapté est calculé d'après formule . Aucune délinéation supplémentaire n'est réalisé pour l'instant. 
+		\item Extraction des houppiers : le rayon adapté est calculé d'après formule . Aucune délinéation supplémentaire n'est réalisé pour l'instant et un zone carrée correspondant au rayon est extraite.
 	\end{enumerate}	
 
-	plus type de remplissage
-
-	3 paramètres permettent d'ajuster les résultats. La sélection des paramètres dépend fortement du (très heuristique comme méthode, nécessite des essais => la méthodes n'est pas completement automatique. (dépend de la taille caractéristique des arbres, de l'echelle choisie) donner les paramètre pour l'echelle et tout.
-
-		pour le site et l'echelle retenue. 
-
-		facteur limitant i
-		choix final des paramètres : + image utilisées (taille des arbres sur le terrain et échelle de l'image) 
-
-	
 	\begin{figure}[h]
 		\centering
 		\begin{tikzpicture}[scale=.6]
@@ -177,30 +186,35 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 		\label{fig:sche}
 	\end{figure}
 	
+	\subsection{Application au site d'étude}
+	Le site retenu est le parc naturel régional du Morvan. La forêt de feuillus est progressivement remplacée par de la monoculture intensive de pin Douglas. Aujourd'hui, 50 \% du parc est constitué de conifères. Les deux espèces radicalement différente par leur forme et répartition fournissent un bon sujet aux applications utiles (suivi de l'évolution du parc par exemple) 
+	Les images aériennes proviennent de Géoportail \copyright IGN, qui fournit également des données sur la couverture forestière (espèces, etc).
+	La sélection des paramètres décrit précédemment nécessite de tâtonner. Ils dépendent des rayons minimum et maximum des arbre et fortement de l'échelle des images utilisés. Cependant, un même jeu de paramètre permet dans l'étude réalisée de détecter deux espèces à la répartition et au rayon moyen différents.  
+	Les données de terrain et les paramètres retenus sont les suivants :\\
+	
+	image aérienne haute résolution : <0,1m/pixels
 
+	échelle : 1:1000
+	
+	rayons douglas : 1-5m
+	
+	rayons feuillus : 5-15m
+
+	5 octaves, 5 intervalles et $\sigma=0.5$
 	
 \section{Identification des espèces}
 
 	L'identification d'espèce est un problème de reconnaissance de forme ( "pattern recognition" ) pour lequel les algorithmes d'apprentissage automatique excellent. 
 	Dans le cadre de notre problème, toutes les espèces présentes sur le site du parc ... sont connues. Le choix se porte donc sur un apprentissage de type supervisé.
-	Un algorithme de reseau de neurones à été écrit, mais ne permet pas à ce jour le traitement d'image donc la bibliothèque Tensorflow à été utilisée à la place.
+	Un algorithme de réseau de neurones à été écrit, mais ne permet pas à ce jour le traitement d'image donc la bibliothèque Tensorflow à été utilisée à la place.
 
-	\subsection{Méthodologie de construction d'une base de donné fiable}
+	\subsection{Méthodologie de construction du modèle}
 
-		Les images satellites proviennent de Geoportail. 
+		L'algorithme précédent à été appliqué à des zones uniformément couvertes par une seule espèce et les images obtenus ont été labellisées. La base de donnée contient 173 images de douglas, 199 images de feuillus et 91 images non labellisées à des fins de vérification. Des images supplémentaires sont générés en appliquant des rotations aux images précédentes.
+		L'architecture utilisé est une version simplifiée du modèle utilisée par , lui même adapté de ResNet, suffisante étant donnée la quantité d'image et le nombre de classes (2).
 
-		Il aurait été fastidieux d'étiquetter à la main un nombre important d'images de basses résolution.   
-		- géoportail (verif autorisation... cé) et extration sur des zones ou la couverture d'espèce est uniforme : res --- images triées en 2
-	
-	\subsection{entrainement et quelle type de modèle }
-		-citer papier , à la main car ici le cas est plus simple mais l'on pourrais généraliser. (difference avec eux)
+	\subsection{\'{E}valuation des résultats} (Si temps)
 
-\section{\'{E}valuation des résultats}
-	-évalutation de la complexité 
-	-propres résultats
-	faire tableau 3 colonnes pour les trois images différentes
-	% repéré 
-	-comparaison avec les résultats des papiers 
 
 \section{Prolongements envisagables}
 
@@ -208,33 +222,41 @@ Intro: Méthode naive ( les preentations) de detection des zones plus lumineuses
 	-Sensible aux ... séparer préalablement et éventuellement grossiemerement les zones forêstières des zones d'habitation ou  industrielle. Même une route bétonné peut éventuellement altérer les réusltats. batiement/contruction quo fausserait les resultat. 
 	De plus obtient qu'un cercle autour des arbres
 	-une methode watershed segmentation avec marqueurs que l'on à trouvé pourrait etre envisagble pour delinéer plus fidèlement parfaitement les arbres (voir papier) 
-
+	-prendre en compte différentes étape de la croissance dans le modèle. 
 	
 \nocite{NatesanResNet} %à supprimer après!! 
 \bibliographystyle{alpha}
 \bibliography{references}
 
 \appendix
-
-	\section{Compléments}
-		Lien avec filtre basse fréquence (downsampling, pourqoi?)
-		le filtre de gauss retire les hautes fréquences donc permet d' augmenter la fréquence d'échantillonage 'théorme de shannon sans qu'il y ait d'artefacts. 
+	\centering
+	\newpage
+	\section{listing}
+	\begin{flushleft}
+	\lstinputlisting[language=Python]{listing.py}[breaklines=true]
+	\end{flushleft}
+	\newpage
+	\section{Résultats}
+		\centering
+		\begin{figure}[!h]
+			\scalebox{0.3}{\includegraphics{res1.png}}
+			\caption{Agencement désordonné de feuillus, \copyright IGN, 2021}
+		\end{figure}
+		\begin{figure}[!h]
+			\scalebox{0.4}{\includegraphics{res2.png}}
+			\caption{Feuillus désordonnés et douglas semi-ordonné, \copyright IGN, 2021}
+		\end{figure}
 	
-	\section{Résultats}	
-		-résultats intermédiare (pyramide de gauss)
-		-les deux 
-		-douglas seul 
-		-feuillus seul
-		-echantillon banque fourni pour feuillus
-		-echantillon banque fourni pour douglas 
-		-echantillon aléatoire parmis des images non deja vus
-	
-	\section{algorithmes}
-
-
-a faire : réaliser les tableaux de comparaison, mettre en forme le code 
-ecrire les preuves 
-
+		\begin{figure}[!h]
+			\scalebox{0.6}{\includegraphics{train.png}}
+			\caption{Entraînement du modèle}
+		\end{figure}
+		\begin{figure}
+			\includegraphics[scale=0.4]{res3.png}
+			\includegraphics[scale=0.4]{res4.png}
+			\includegraphics[scale=0.4]{res5.png}
+			\caption{Test du modèle: Feuillus et Douglas étiquettés et arbres non étiquettés, \copyright IGN, 2021 ( Légende: \%Douglas/\%Feuillus )}
+		\end{figure}
 \end{document}
 
 
