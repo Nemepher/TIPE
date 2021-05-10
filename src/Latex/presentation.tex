@@ -283,8 +283,7 @@
 		\end{itemize}
 
 		Architecture inspirée de RESNET-BASED TREE SPECIES CLASSIFICATION USING UAV IMAGES
-	
-	
+
 		\column{0.45\textwidth}
 		\centering
 		\includegraphics[scale=0.33]{train.png}
@@ -304,11 +303,15 @@
 \section{\'{E}valuation des résultats et prolongements envisageables}
 
 \begin{frame}
-	Différents prolongement sont envisagables: 
+
+	%TODO evaluation des résultats.
+
+	\frametitle{\'{E}valuation des résultats et prolongements envisageables}
+	Prolongements envisageables: 
 	\begin{enumerate}
-	\item Sensible aux ... séparer préalablement et éventuellement grossiemerement les zones forêstières des zones d'habitation ou  industrielle. Même une route bétonné peut éventuellement altérer les réusltats. batiement/contruction quo fausserait les resultat. 
-	De plus obtient qu'un cercle autour des arbres
-	\item une methode watershed segmentation avec marqueurs que l'on à trouvé pourrait etre envisagble pour delinéer parfaitement les arbres (voir papier) 
+	\item prise en compte des différents stades de la croissance du Douglas dans le modèle.
+	\item méthode de délinéation fine : segmentation par ligne de partage des eaux avec marqueurs (<<watershed segmentation>>)
+	\item séparation préalable des zones forestières des routes et zones aménagées. 
 	\end{enumerate}
 \end{frame}
 
