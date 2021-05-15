@@ -8,36 +8,8 @@
 \usepackage{pgf}
 \usepackage{pgfplots}
 \usepackage{caption}
-\usepackage{listings}
 \usepackage{subcaption}
 \usepackage[nottoc]{tocbibind}
-
-\lstset{
-    inputencoding = utf8,  % Input encoding
-    extendedchars = true,  % Extended ASCII
-	breaklines=true,
-	breakatwhitespace=true,
-	breakautoindent=true,
-	escapeinside={\%*}{*)},
-	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
-    literate      =        % Support additional characters
-      {á}{{\'a}}1  {é}{{\'e}}1  {í}{{\'i}}1 {ó}{{\'o}}1  {ú}{{\'u}}1
-      {Á}{{\'A}}1  {É}{{\'E}}1  {Í}{{\'I}}1 {Ó}{{\'O}}1  {Ú}{{\'U}}1
-      {à}{{\`a}}1  {è}{{\`e}}1  {ì}{{\`i}}1 {ò}{{\`o}}1  {ù}{{\`u}}1
-      {À}{{\`A}}1  {È}{{\'E}}1  {Ì}{{\`I}}1 {Ò}{{\`O}}1  {Ù}{{\`U}}1
-      {ä}{{\"a}}1  {ë}{{\"e}}1  {ï}{{\"i}}1 {ö}{{\"o}}1  {ü}{{\"u}}1
-      {Ä}{{\"A}}1  {Ë}{{\"E}}1  {Ï}{{\"I}}1 {Ö}{{\"O}}1  {Ü}{{\"U}}1
-      {â}{{\^a}}1  {ê}{{\^e}}1  {î}{{\^i}}1 {ô}{{\^o}}1  {û}{{\^u}}1
-      {Â}{{\^A}}1  {Ê}{{\^E}}1  {Î}{{\^I}}1 {Ô}{{\^O}}1  {Û}{{\^U}}1
-      {œ}{{\oe}}1  {Œ}{{\OE}}1  {æ}{{\ae}}1 {Æ}{{\AE}}1  {ß}{{\ss}}1
-      {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1  {å}{{\r a}}1 {Å}{{\r A}}1
-      {ã}{{\~a}}1  {õ}{{\~o}}1  {Ã}{{\~A}}1 {Õ}{{\~O}}1
-      {ñ}{{\~n}}1  {Ñ}{{\~N}}1  {¿}{{?`}}1  {¡}{{!`}}1
-      {°}{{\textdegree}}1 {º}{{\textordmasculine}}1 {ª}{{\textordfeminine}}1
-      % ¿ and ¡ are not correctly displayed if inconsolata font is used
-      % together with the lstlisting environment. Consider typing code in
-      % external files and using \lstinputlisting to display them instead.      
-  }
 
 \pagestyle{headings}
 \pgfplotsset{width=5cm,compat=1.16}
@@ -48,32 +20,31 @@
 
 \begin{document}
 
+%TODO : 
+%watershed segmentation
+%Orthoimages
+%reviser retropropagation
+%evalutaion des résultats
+
 \maketitle
 \tableofcontents
+\newpage 
 
 \section*{Introduction}
 
 L'étude et le suivi de la répartition des espèces au sein de larges zones forestières est un problème complexe aux applications nombreuses :
 gestion des ressources naturelles, protection de la biodiversité, prévention des incendies, etc... Les études de terrain peuvent se révéler longues, coûteuses et imprécises du à la nécessité d'interpoler les données recueillies. 
-Parvenir à automatiser ce processus est donc un enjeu critique. 
 
-Les techniques existantes reposent sur l'utilisation de données satellite ou aériennes : L'utilisation d'images est une méthode peu coûteuse nécessitant peu de materiel et pas d'intervention sur le terrain lorsque 
-des images satellites récentes de résolution suffisantes, qui deviennent de plus en plus accessible.  
+L'analyse automatisée d'imagerie aérienne vise à identifier les cimes des arbres (houppiers) en obtenant leur position, leur rayon ou leur forme et des caractéristiques telles que l'espèce ou l'age. La disponibilité croissante depuis les années 2000 de photographie aérienne et satellite à donné lieu à de nombreuses analyses sur différents types de végétations.
 
-UAV LIdar -> methodes plus simples qui ne requierent que des images st HR. Différentes méthodes existent, detection de blob ? LoG
+Différentes approches pour la détection à partir d'image RGB ont été envisagées et se divisent en trois catégories. A l'exception de la dernière, elles exploitent la luminance ie, les images sont converties en niveau de gris : la détection d'extremum locaux formés de pixels lumineux associés au centre des houppiers, la détection de frontières formés de pixels peu lumineux associés au contour des houppiers, et plus récemment l'emploi de l'apprentissage automatique. Mon approche initiale du problème coïncidant avec les travaux fondateurs de la première catégorie, j'ai poursuivi dans cette direction. 
 
 \subsection*{Objectifs du TIPE}		
 \begin{enumerate}
-	\item implementer un algorithme de détection et de délimitation de houppiers (Cime d'arbres) basé sur des images satellites de resolution "moyenne" à l'aide de la théorie de l'Espace d'échelle (« Scale-space ») 
-	\item entraîner un reseau neurone à l'aide de la bibliothèque Tensorflow afin d'identifier des espèces à partir d'images de houppiers de basse résolution 
-	\item appliquer ces derniers au parc ... présentant une variété d'espèces et des paternes plus ou moins réguliers pour confronter les résultats obtenus aux données de terrain et aux techniques existantes.    
+	\item Mettre au point une méthode de détection des arbres et de leur rayon à partir d'image aérienne de forêts.  
+    \item Entraîner un réseau de neurone pour classifier selon l'espèce des images de houppier.
+	\item Appliquer ces techniques au parc naturel régional du Morvan.   
 \end{enumerate}
-	
-		-limitation à des images aériennes: pourquoi(moins coûteux, accessible sur internet, différents modes d'acquisitions,  enjeux/difficultés
-		-d'une part à concevoir ... pour detecter les a
-		-d'autre part à l'utiliser pour construire une base de donné permettant identification ultérieure sur la base du machin learning
-		-application au site du parc regional...
-		
 	
 \section{Détection des houppiers}
 
@@ -86,11 +57,11 @@ UAV LIdar -> methodes plus simples qui ne requierent que des images st HR. Diff�
 		\caption{Modélisation d'un houppier}
 	 \end{wrapfigure}
 
-	On modélise un houppier par la figure hum. Il s'agit alors de repérer les amas circulaires de pixels plus lumineux que leur voisins : les blobs. Le diamètre des houppiers peut varier considérablement selon l'espèce et au sein d'une même image et la luminosité au centre des blobs n'est pas constante. Un seuillage de la luminosité est donc à exclure et une simple détection de contours se révèle peu précise lorsque la couverture forestière est dense. Une approche multi-échelle est donc nécessaire. Nous utiliserons la théorie de l'Espace d'échelle développée par (\ref Lindbergh). 
+	On modélise un houppier par la figure 1. Il s'agit alors de repérer les amas circulaires de pixels plus lumineux que leur voisins : les blobs. Le diamètre des houppiers peut varier considérablement selon l'espèce et au sein d'une même image et la luminosité au centre des blobs n'est pas constante. Un seuillage de la luminosité est donc à exclure et une simple détection de contours se révèle peu précise lorsque la couverture forestière est dense. Une approche multi-échelle est donc nécessaire. Nous utiliserons la théorie de l'Espace d'échelle développée par (\ref Lindbergh). 
 	
 	L'idée est de générer à partir d'un signal d'origine une famille de signaux dont les détails fins disparaissent progressivement. Aucune opération ne doit donc générer d'artefacts supplémentaires.  
 
-	L'image original est lissée de manière répété au moyen d'un filtre gaussien aux propriété de lissage exceptionnelles pour générer la pyramide d'échelle qui sera exploitée ultérieurement. ( Voir~\ref{fig:ex} )\\
+	L'image original est lissée de manière répété au moyen d'un filtre gaussien aux propriété de lissage exceptionnelles pour générer la pyramide d'échelle qui sera exploitée ultérieurement. (Voir figure 2)\\
 	
 	\begin{wrapfigure}{l}{3cm}
 		\centering
@@ -104,11 +75,11 @@ UAV LIdar -> methodes plus simples qui ne requierent que des images st HR. Diff�
 	\`{A} chaque étape, $\sigma$ est multiplié par un ratio fixe ( 2 dans la littérature ). Puisque la résolution de l'image est réduite de moitié à chaque étape, chaque niveau est appelé octave en référence à la théorie musicale. Il peut être utile de rajouter des intervalles supplémentaires, ce qui est fait dans la suite. 
 	On dispose donc de 3 paramètres: $\sigma$, le nombre d'octave o et le nombre d'intervalle pour chaque octave i. La hauteur ( nombre de niveau de la pyramide ) est alors $o \times i$ et le ratio $2^{\frac{1}{i}}$.\\
 
-	Un opérateur laplacien normalisé est appliqué aux images résultante afin d'obtenir la pyramide d'échelle du laplacien du Gaussien ( "LoG" ). 
+	Un opérateur laplacien normalisé est appliqué aux images résultante afin d'obtenir la pyramide d'échelle du laplacien du Gaussien (<<LoG>>). 
 
 	\[{LoG}_{\sigma}(x,y):=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
 
-	La pyramide d'échelle de l'opérateur LoG permet d'extraire des zones d'intérêt indépendamment de leur taille en exploitant la réponse de l'opérateur LoG appliqué à un signal échelon. ( Voir~\ref{fig:graph} ). Lorsque le rayon caractéristique du blob $r$ varie, le minimum (maximum en valeur absolue) du LoG est atteint au centre du blob. Lorsque le paramètre $\sigma$ varie, la réponse au centre est minimale lorsque $r$ est relié à $\sigma$ par la relation $\sqrt{2}\sigma=r$. La réponse du LoG non normalisé s'atténuant lorsque $\sigma$ augmente, l'opérateur est multiplié par $\sigma^{2}$ pour que la réponse soit indépendante de l'échelle.
+	La pyramide d'échelle de l'opérateur LoG permet d'extraire des zones d'intérêt indépendamment de leur taille en exploitant la réponse de l'opérateur LoG appliqué à un signal échelon. ( Voir figure 3). Lorsque le rayon caractéristique du blob $r$ varie, le minimum (maximum en valeur absolue) du LoG est atteint au centre du blob. Lorsque le paramètre $\sigma$ varie, la réponse au centre est minimale lorsque $r$ est relié à $\sigma$ par la relation $\sqrt{2}\sigma=r$. La réponse du LoG non normalisé s'atténuant lorsque $\sigma$ augmente, l'opérateur est multiplié par $\sigma^{2}$ pour que la réponse soit indépendante de l'échelle.
 
 	La détection des blobs se ramène ainsi à la recherche d'un minimum local relativement à l'espace et global relativement à l'échelle pour identifier à la fois les centres des houppiers et la taille caractéristique de leur rayon. 
 
@@ -135,13 +106,11 @@ UAV LIdar -> methodes plus simples qui ne requierent que des images st HR. Diff�
 
 	Ces opérations se traduisent par le produit de convolution discrèt de l'image par les fonctions $G_{\sigma}$ et le laplacien ou directement par la fonction ${LoG}_{\sigma}$. Les considérations suivantes permettent de réduire le nombre d'opérations élémentaires du programme : 
 	\begin{itemize}
-		\item L'opérateur LoG est bien approximé par la différence des gaussiennes ( "DoG" ) obtenue en réalisant la différence des niveaux successifs de la pyramide d'échelle.
+		\item L'opérateur LoG est bien approximé par la différence des gaussiennes (<<DoG>>) obtenue en réalisant la différence des niveaux successifs de la pyramide d'échelle.
 		\item Une gaussienne prend presque toute ses valeurs dans un intervalle centré de largeur 3 fois l'écart-type $\sigma$. On utilise alors un noyau gaussien de taille $1 + 3 \times E(\sigma)$
 		\item On considère un noyau gaussien de taille $h \times h$. Le produit de convolution pour une image de taille $N \times M$ nécessite $cst \times h^{2}$ opérations élémentaires. Le filtre de Gauss étant séparable: $G_{\sigma}(x,y)=G_{1D, \sigma}(x) \times G_{1D, \sigma}(y)$ o\`{u} $G_{1D, \sigma}(y) := \frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{x^{2}}{2\sigma^{2}})$, on décompose le calcul en deux étape. On réalise la convolution de l'image avec avec $G_{1D, \sigma}(x)$ puis la convolution du résultat avec $G_{1D, \sigma}(y)$, soit $cst \times 2h$ opérations au prix d'espace mémoire supplémentaire.
 		\item Lisser équivaut à atténuer l'amplitude des basse fréquence du spectre. D'après le théorème de Shannon, il est donc possible de sous-échantillonner les images lissés sans perdre d'information. En sous-échantillonnant à chaque étape, calculer le produit de convolution d'un niveau donné à partir du niveau précédent permet de réduire le nombre d'opération.
 	\end{itemize}
-
-		(-FFT) si temps
 
 	\subsection{Mise en place de l'algorithme}
 
@@ -151,7 +120,7 @@ UAV LIdar -> methodes plus simples qui ne requierent que des images st HR. Diff�
 		\item Conversion en nuance de gris ( Inversion éventuelle ) 
 		\item Génération de la pyramide d'échelle : 
 		\begin{itemize}
-			\item convolution par les filtre gaussien. Pour conserver des images de même taille, un remplissage des bords ( "padding" ) de type miroir est effectué, complétant l'image naturellement. 
+			\item convolution par les filtre gaussien. Pour conserver des images de même taille, un remplissage des bords (<<padding>>) de type miroir est effectué, complétant l'image naturellement. 
 			\item stockage dans un tableau Numpy 3D
 		\end{itemize}
 		\item Détection des minimums : différentes détections peuvent avoir lieu dans la même colonne donc pour conserver uniquement le houppier de rayon maximum lors d'éventuels chevauchements le tableau est parcouru par échelle décroissante, ie par rayon détectés décroissants (cf formule), chaque case est comparée à ses 26 voisins et on vérifie que les houppiers détectés ne débordent pas sur les précédents.  En outre, seul les rayons supérieurs à un certain seuil sont conservés.  
@@ -204,8 +173,8 @@ UAV LIdar -> methodes plus simples qui ne requierent que des images st HR. Diff�
 	
 \section{Identification des espèces}
 
-	L'identification d'espèce est un problème de reconnaissance de forme ( "pattern recognition" ) pour lequel les algorithmes d'apprentissage automatique excellent. 
-	Dans le cadre de notre problème, toutes les espèces présentes sur le site du parc ... sont connues. Le choix se porte donc sur un apprentissage de type supervisé.
+	L'identification d'espèce est un problème de reconnaissance de forme (<<pattern recognition>>) pour lequel les algorithmes d'apprentissage automatique excellent. Un réseau neuronal convolutif (<<CNN>>) est un type de réseau de neurone permettant de traiter des images. Il se différencie par l'ajout d'une couche de convolution en entrée : des produits de convolution permettant d'extraire des caractéristiques de l'image sont réalisé entre l'image et une ou plusieurs fonction puis le résultat est traité par un réseau de neurone classique. 
+	Dans le cadre de notre problème, toutes les espèces présentes sur le site du parc sont connues. Le choix se porte donc sur un apprentissage de type supervisé.
 	Un algorithme de réseau de neurones à été écrit, mais ne permet pas à ce jour le traitement d'image donc la bibliothèque Tensorflow à été utilisée à la place.
 
 	\subsection{Méthodologie de construction du modèle}
@@ -213,33 +182,36 @@ UAV LIdar -> methodes plus simples qui ne requierent que des images st HR. Diff�
 		L'algorithme précédent à été appliqué à des zones uniformément couvertes par une seule espèce et les images obtenus ont été labellisées. La base de donnée contient 173 images de douglas, 199 images de feuillus et 91 images non labellisées à des fins de vérification. Des images supplémentaires sont générés en appliquant des rotations aux images précédentes.
 		L'architecture utilisé est une version simplifiée du modèle utilisée par , lui même adapté de ResNet, suffisante étant donnée la quantité d'image et le nombre de classes (2).
 
-	\subsection{\'{E}valuation des résultats} (Si temps)
+\section{Prolongements envisageables}
+
+	Différents prolongement sont envisageables: 
+	\begin{itemize}
+		\item prise en compte des différents stades de la croissance du Douglas dans le modèle.
+		\item méthode de délinéation fine : segmentation par ligne de partage des eaux avec marqueurs (<<watershed segmentation>>)
+		\item séparation préalable des zones forestières des routes et zones aménagées. 
+	\end{itemize}
 
 
-\section{Prolongements envisagables}
-
-	Différents prolongement sont envisagables: 
-	-Sensible aux ... séparer préalablement et éventuellement grossiemerement les zones forêstières des zones d'habitation ou  industrielle. Même une route bétonné peut éventuellement altérer les réusltats. batiement/contruction quo fausserait les resultat. 
-	De plus obtient qu'un cercle autour des arbres
-	-une methode watershed segmentation avec marqueurs que l'on à trouvé pourrait etre envisagble pour delinéer plus fidèlement parfaitement les arbres (voir papier) 
-	-prendre en compte différentes étape de la croissance dans le modèle. 
-	
-\nocite{NatesanResNet} %à supprimer après!! 
 \bibliographystyle{alpha}
-\bibliography{references}
+\bibliography{src/Latex/references.bib}
+
+\nocite{1}
+\nocite{2}
+\nocite{3}
+\nocite{4}
+\nocite{5}
+
+
 
 \appendix
-	\centering
-	\newpage
-	\section{listing}
-	\begin{flushleft}
-	\lstinputlisting[language=Python]{listing.py}[breaklines=true]
-	\end{flushleft}
-	\newpage
 	\section{Résultats}
 		\centering
 		\begin{figure}[!h]
-			\scalebox{0.3}{\includegraphics{res1.png}}
+			\scalebox{0.2}{\includegraphics{index.png}}
+			\caption{Pyramide d'échelle de l'opérateur LoG grossière (6 octaves sans intervalle). Image originale \copyright IGN, 2021}
+		\end{figure}
+		\begin{figure}[!h]
+			\scalebox{0.31}{\includegraphics{res1.png}}
 			\caption{Agencement désordonné de feuillus, \copyright IGN, 2021}
 		\end{figure}
 		\begin{figure}[!h]

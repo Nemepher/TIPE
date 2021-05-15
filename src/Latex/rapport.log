@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  10 MAY 2021 12:27
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  15 MAY 2021 13:34
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -526,35 +526,10 @@ Package caption Info: Standard document class detected.
 \c@continuedfloat=\count281
 Package caption Info: wrapfig package is loaded.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count282
-\lst@gtempboxa=\box58
-\lst@token=\toks34
-\lst@length=\count283
-\lst@currlwidth=\dimen276
-\lst@column=\count284
-\lst@pos=\count285
-\lst@lostspace=\dimen277
-\lst@width=\dimen278
-\lst@newlines=\count286
-\lst@lineno=\count287
-\lst@maxwidth=\dimen279
-
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
-\c@lstnumber=\count288
-\lst@skipnumbers=\count289
-\lst@framebox=\box59
-)
-(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2020/03/24 1.8d listings configuration
-))
-Package: listings 2020/03/24 1.8d (Carsten Heinz)
-
 (/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
 Package: subcaption 2020/01/22 v1.3d Sub-captions (AR)
-\c@subfigure=\count290
-\c@subtable=\count291
+\c@subfigure=\count282
+\c@subtable=\count283
 )
 (/usr/share/texlive/texmf-dist/tex/latex/tocbibind/tocbibind.sty
 Package: tocbibind 2010/10/13 v1.5k extra ToC listings
@@ -565,43 +540,43 @@ Package tocbibind Note: Using section or other style headings.
 
 ) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdfmode.def
 File: l3backend-pdfmode.def 2020-03-12 L3 backend support: PDF mode
-\l__kernel_color_stack_int=\count292
-\l__pdf_internal_box=\box60
+\l__kernel_color_stack_int=\count284
+\l__pdf_internal_box=\box58
 )
 (src/Latex/rapport.aux)
 \openout1 = `rapport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
-LaTeX Font Info:    ... okay on input line 49.
-LaTeX Info: Redefining \degres on input line 49.
-LaTeX Info: Redefining \dots on input line 49.
-LaTeX Info: Redefining \up on input line 49.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
+LaTeX Font Info:    ... okay on input line 21.
+LaTeX Info: Redefining \degres on input line 21.
+LaTeX Info: Redefining \dots on input line 21.
+LaTeX Info: Redefining \up on input line 21.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count293
-\scratchdimen=\dimen280
-\scratchbox=\box61
-\nofMPsegments=\count294
-\nofMParguments=\count295
-\everyMPshowfont=\toks35
-\MPscratchCnt=\count296
-\MPscratchDim=\dimen281
-\MPnumerator=\count297
-\makeMPintoPDFobject=\count298
-\everyMPtoPDFconversion=\toks36
+\scratchcounter=\count285
+\scratchdimen=\dimen276
+\scratchbox=\box59
+\nofMPsegments=\count286
+\nofMParguments=\count287
+\everyMPshowfont=\toks34
+\MPscratchCnt=\count288
+\MPscratchDim=\dimen277
+\MPnumerator=\count289
+\makeMPintoPDFobject=\count290
+\everyMPtoPDFconversion=\toks35
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 
@@ -650,15 +625,13 @@ Package pgfplots notification 'compat/show suggested version=true': you might b
 enefit from \pgfplotsset{compat=1.17} (current compat level: 1.16).
 
 Package caption Info: Begin \AtBeginDocument code.
-Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count299
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 51.
+(Font)              <12> on input line 29.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 51.
+(Font)              <8> on input line 29.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 51.
+(Font)              <6> on input line 29.
 (src/Latex/rapport.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 3.
@@ -671,195 +644,166 @@ LaTeX Font Info:    External font `cmex10' loaded for size
  [1
 
 {/usr/share/texlive/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 86--86
+Underfull \hbox (badness 10000) in paragraph at lines 57--57
 []\T1/cmr/m/sc/8 Figure \T1/cmr/m/n/8 1 ^^U
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 86--86
+Underfull \hbox (badness 10000) in paragraph at lines 57--57
 |\T1/cmr/m/n/8 Mo-dé-li-sa-tion
  []
 
 
-LaTeX Warning: Reference `L' on page 2 undefined on input line 89.
+LaTeX Warning: Reference `L' on page 2 undefined on input line 60.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 93--94
+Underfull \hbox (badness 10000) in paragraph at lines 64--65
 
  []
 
-<img.png, id=16, 803.0pt x 1003.75pt>
+[2]
+<img.png, id=23, 803.0pt x 1003.75pt>
 File: img.png Graphic file (type png)
 <use img.png>
-Package pdftex.def Info: img.png  used on input line 97.
+Package pdftex.def Info: img.png  used on input line 68.
 (pdftex.def)             Requested size: 80.3047pt x 100.38087pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 104--106
+Underfull \hbox (badness 10000) in paragraph at lines 75--77
 
  []
 
-[2 <src/Latex/img.png>] (src/Latex/fig1.pgf) (src/Latex/fig2.pgf)
-(src/Latex/fig3.pgf)
-Overfull \hbox (173.0987pt too wide) in paragraph at lines 126--127
+(src/Latex/fig1.pgf) (src/Latex/fig2.pgf) (src/Latex/fig3.pgf)
+Overfull \hbox (173.0987pt too wide) in paragraph at lines 97--98
 [][] 
  []
 
 
-Overfull \hbox (2.22168pt too wide) in paragraph at lines 117--129
+Overfull \hbox (2.22168pt too wide) in paragraph at lines 88--100
 []$[]$ $[]$
  []
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-Overfull \hbox (3.8086pt too wide) in paragraph at lines 141--142
+[3 <src/Latex/img.png>]
+Overfull \hbox (3.8086pt too wide) in paragraph at lines 112--113
 \T1/cmr/m/n/10 D'après le théo-rème de Shan-non, il est donc pos-sible de sous-
 échantillonner
  []
 
-[3]
-Overfull \hbox (2.89215pt too wide) in paragraph at lines 157--158
+[4]
+Overfull \hbox (2.89215pt too wide) in paragraph at lines 126--127
 \T1/cmr/m/n/10 échelle dé-crois-sante, ie par rayon dé-tec-tés dé-crois-sants (
 cf for-mule), chaque
  []
 
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 190--194
+
+Underfull \hbox (badness 10000) in paragraph at lines 159--163
 
  []
 
-[5] (src/Latex/rapport.bbl) [6]
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2020/03/24 1.8d listings language file
-)
-(src/Latex/listing.py [7]
-Overfull \hbox (64.02177pt too wide) in paragraph at lines 44--45
-[][][][][][][][][][][][][][][][][][][][][][][][][]  
- []
+[5] (src/Latex/rapport.bbl [6])
+
+LaTeX Warning: Citation `1' undefined on input line 198.
 
 
-Overfull \hbox (46.02603pt too wide) in paragraph at lines 53--54
-[][][][][][][][][][][][][][][][][][][][]  
- []
+LaTeX Warning: Citation `2' undefined on input line 199.
 
 
-Overfull \hbox (40.02745pt too wide) in paragraph at lines 62--63
-[][][][][][][][][][][][][][][][][][][][] 
- []
-
-[8] [9] [10]
-Overfull \hbox (4.03596pt too wide) in paragraph at lines 173--174
-[][][][][][][][][][]  
- []
+LaTeX Warning: Citation `3' undefined on input line 200.
 
 
-Overfull \hbox (4.03596pt too wide) in paragraph at lines 181--182
-[][][][][][][][][][]  
- []
+LaTeX Warning: Citation `4' undefined on input line 201.
 
 
-Overfull \hbox (32.9106pt too wide) in paragraph at lines 197--198
-[][][][][][][][][][][][][][][][] 
- []
+LaTeX Warning: Citation `5' undefined on input line 202.
 
+<index.png, id=49, 2280.52pt x 452.69125pt>
+File: index.png Graphic file (type png)
+<use index.png>
+Package pdftex.def Info: index.png  used on input line 210.
+(pdftex.def)             Requested size: 2280.51447pt x 452.69014pt.
 
-Overfull \hbox (2.9177pt too wide) in paragraph at lines 198--199
-[][][][][][][][][][][][]  
- []
-
-[11]
-Overfull \hbox (44.90776pt too wide) in paragraph at lines 216--217
-[][][][][][][][][][][][][][][][]  
- []
-
-
-Overfull \hbox (16.03313pt too wide) in paragraph at lines 238--239
-[][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (16.03313pt too wide) in paragraph at lines 239--240
-[][][][][][][][][][][][][][]  
- []
-
-[12] [13] [14] [15] [16]) [17]
-<res1.png, id=85, 1169.36874pt x 989.6975pt>
-File: res1.png Graphic file (type png)
-<use res1.png>
-Package pdftex.def Info: res1.png  used on input line 242.
-(pdftex.def)             Requested size: 1169.36589pt x 989.69508pt.
-
-Overfull \hbox (5.81332pt too wide) in paragraph at lines 242--243
+Overfull \hbox (111.09593pt too wide) in paragraph at lines 210--211
 [][] 
  []
 
-<res2.png, id=86, 885.3075pt x 1125.20375pt>
+<res1.png, id=50, 1169.36874pt x 989.6975pt>
+File: res1.png Graphic file (type png)
+<use res1.png>
+Package pdftex.def Info: res1.png  used on input line 214.
+(pdftex.def)             Requested size: 1169.36589pt x 989.69508pt.
+
+Overfull \hbox (17.50056pt too wide) in paragraph at lines 214--215
+[][] 
+ []
+
+<res2.png, id=51, 885.3075pt x 1125.20375pt>
 File: res2.png Graphic file (type png)
 <use res2.png>
-Package pdftex.def Info: res2.png  used on input line 246.
+Package pdftex.def Info: res2.png  used on input line 218.
 (pdftex.def)             Requested size: 885.30533pt x 1125.20102pt.
 
-Overfull \hbox (9.11671pt too wide) in paragraph at lines 246--247
+Overfull \hbox (9.11671pt too wide) in paragraph at lines 218--219
 [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<train.png, id=87, 491.8375pt x 483.8075pt>
+<train.png, id=52, 491.8375pt x 483.8075pt>
 File: train.png Graphic file (type png)
 <use train.png>
-Package pdftex.def Info: train.png  used on input line 251.
+Package pdftex.def Info: train.png  used on input line 223.
 (pdftex.def)             Requested size: 491.83629pt x 483.80632pt.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<res3.png, id=88, 1154.3125pt x 166.6225pt>
+<res3.png, id=53, 1154.3125pt x 166.6225pt>
 File: res3.png Graphic file (type png)
 <use res3.png>
-Package pdftex.def Info: res3.png  used on input line 255.
+Package pdftex.def Info: res3.png  used on input line 227.
 (pdftex.def)             Requested size: 461.71683pt x 66.64781pt.
-<res4.png, id=89, 1154.3125pt x 166.6225pt>
+<res4.png, id=54, 1154.3125pt x 166.6225pt>
 File: res4.png Graphic file (type png)
 <use res4.png>
-Package pdftex.def Info: res4.png  used on input line 256.
+Package pdftex.def Info: res4.png  used on input line 228.
 (pdftex.def)             Requested size: 461.71683pt x 66.64781pt.
-<res5.png, id=90, 1154.3125pt x 166.6225pt>
+<res5.png, id=55, 1154.3125pt x 166.6225pt>
 File: res5.png Graphic file (type png)
 <use res5.png>
-Package pdftex.def Info: res5.png  used on input line 257.
+Package pdftex.def Info: res5.png  used on input line 229.
 (pdftex.def)             Requested size: 461.71683pt x 66.64781pt.
 
-Overfull \hbox (116.71683pt too wide) in paragraph at lines 255--258
+Overfull \hbox (116.71683pt too wide) in paragraph at lines 227--230
 [][]
  []
 
 
-Overfull \hbox (116.71683pt too wide) in paragraph at lines 255--258
+Overfull \hbox (116.71683pt too wide) in paragraph at lines 227--230
 []
  []
 
 
-Overfull \hbox (116.71683pt too wide) in paragraph at lines 255--258
+Overfull \hbox (116.71683pt too wide) in paragraph at lines 227--230
 [] 
  []
 
-[18 <src/Latex/res1.png>] [19 <src/Latex/res2.png>] [20 <src/Latex/train.png> <
-src/Latex/res3.png> <src/Latex/res4.png> <src/Latex/res5.png>]
-(src/Latex/rapport.aux)
+[7 <src/Latex/index.png> <src/Latex/res1.png>] [8 <src/Latex/res2.png>]
+[9 <src/Latex/train.png> <src/Latex/res3.png> <src/Latex/res4.png> <src/Latex/r
+es5.png>] (src/Latex/rapport.aux)
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 27380 strings out of 481718
- 666050 string characters out of 5926910
- 1198963 words of memory out of 6000000
- 42656 multiletter control sequences out of 15000+600000
- 545898 words of font info for 49 fonts, out of 8000000 for 9000
+ 25310 strings out of 481718
+ 639664 string characters out of 5926910
+ 992514 words of memory out of 6000000
+ 40607 multiletter control sequences out of 15000+600000
+ 545521 words of font info for 48 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
- 73i,8n,127p,760b,2031s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 73i,8n,127p,760b,780s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}{/us
 r/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texli
@@ -880,10 +824,10 @@ type1/public/cm-super/sfrm1200.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/cm-super/sfrm1728.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/c
 m-super/sfsl1000.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/cm-super
 /sfti1000.pfb>
-Output written on src/Latex/rapport.pdf (20 pages, 5334205 bytes).
+Output written on src/Latex/rapport.pdf (9 pages, 6114896 bytes).
 PDF statistics:
- 174 PDF objects out of 1000 (max. 8388607)
- 116 compressed objects within 2 object streams
+ 138 PDF objects out of 1000 (max. 8388607)
+ 90 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 54 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 59 words of extra memory for PDF output out of 10000 (max. 10000000)
 

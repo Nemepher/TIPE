@@ -6,8 +6,6 @@
 \contentsline {subsection}{\numberline {1.4}Application au site d'étude}{5}%
 \contentsline {section}{\numberline {2}Identification des espèces}{6}%
 \contentsline {subsection}{\numberline {2.1}Méthodologie de construction du modèle}{6}%
-\contentsline {subsection}{\numberline {2.2}\'{E}valuation des résultats}{6}%
-\contentsline {section}{\numberline {3}Prolongements envisagables}{6}%
+\contentsline {section}{\numberline {3}Prolongements envisageables}{6}%
 \contentsline {section}{R\'ef\'erences}{6}%
-\contentsline {section}{\numberline {A}listing}{7}%
-\contentsline {section}{\numberline {B}Résultats}{18}%
+\contentsline {section}{\numberline {A}Résultats}{7}%

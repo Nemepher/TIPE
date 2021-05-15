@@ -2,17 +2,14 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 
-\title{Detection des houppiers}
+\title{Détection et classification d'arbre à partir d'imagerie haute résolution de forêts}
 \begin{document}
 \maketitle
 
-[Motivation du choix de l'étude](50 mots)
-[Ancrage au thème de l'année](50 mots) 
-L'étude et le suivi de la répartition des espèces au sein de larges zones forestières est un problème complexe aux applications nombreuses :
-gestion des ressources naturelles, protection de la biodiversité, prédiction de zones à risques d'incendie, etc... Les études de terrain peuvent se révéler longues, coûteuses et imprécises du à la nécessité d'interpoler les données recueillies. 
-En particulier, l'analyse automatisé d'images satellites et aériennes de plus en plus accessibles et de haute définition ne requière pas d'intervention sur le terrain. 
-Je m'intéresserai ici à une application de la théorie de l'espace d'échelle pour détecter des cimes d'arbres et à l'apprentissage automatique pour les identifier.
-Les techniques développées seront appliqué au parc naturel régional du Morvan, sujet à la monoculture de pin Douglas.
+L'étude et le suivi de la répartition des espèces au sein des zones forestières est un problème complexe aux applications nombreuses : gestion des ressources naturelles, protection de la biodiversité, prédiction de zones à risques d'incendie, etc... 
+Les études de terrain peuvent se révéler longues, coûteuses et imprécises du à la nécessité d'interpoler les données recueillies. 
+C'est pourquoi l'analyse automatisé d'imagerie haute définition (de plus en plus accessible) est prometteuse.
+Mon intérêt est dû au sujet (traitement des images) et au cas particulier du parc naturel régional du Morvan actuellement sujet à la monoculture du pin Douglas.
 
 \section{Professeur encadrant}
 Mr Pinguet
@@ -37,31 +34,40 @@ Tree
 
 \section{Bibliographie commentée}
 
+L'analyse automatisée d'imagerie aérienne de zones forestières complémente voir remplace les traditionnelles études de terrain. Elle vise à identifier les cimes des arbres, les houppiers en obtenant leur position et éventuellement leur rayon ou leur forme et des caractéristiques telles que l'espèce ou l'age. La disponibilité croissante depuis les années 2000 de photographie aérienne et satellite à donné lieu à de nombreuses analyses sur différents types de végétation allant de plantations à la forêt amazonienne. Ces images peuvent être remplacées par de l'imagerie multispectrale ou de la télédétection par laser (lidar), plus précise, auquel cas les techniques employées diffèrent.
+
+Différentes approches pour la détection à partir d'image RGB ont été envisagées et se divisent en trois catégories. à l'exception de la dernière, elles exploitent la luminance ie, les images sont converties en niveau de gris : la détection d'extremum locaux formés de pixels lumineux associés au centre des houppiers, la détection de frontières formés de pixels peu lumineux associés au contour des houppiers, et plus récemment l'emploi de l'apprentissage automatique. Mon approche initiale du problème coïncidant avec les travaux fondateurs de la première catégorie, j'ai poursuivi dans cette direction. 
+
+Cette technique à ses limitations : elle ne permet pas d'estimer la taille des arbres détectés et lorsque la surface de ces derniers est trop irrégulière (branchage, forme particulière, surface particulièrement larges, etc.) plusieurs maximums locaux peuvent exister, résultant en plusieurs détections pour un même arbre. L'utilisation de filtres gaussiens floutant l'image permet de remédier à ce dernier problème en éliminant les détails fins non pertinents, mais seuls les arbres ayant un rayon adapté au filtre sont détecte, ce qui est inconvenant lorsque différentes espèces de rayons différents sont présents dans l'image. 
+
+Un compromis réside en la théorie de l'échelle d'espace qui permet de détecter des points caractéristiques et leur rayons caractéristique indépendamment de leur échelle et a été employé par certains chercheurs. Elle exploite  Cette méthode nécessite un paramétrage fin à déterminer manuellement dépendant fortement du type d'objet à identifier.
+
+La détection est souvent accompagnée d'une délinéation plus précise des houppiers. La segmentation par ligne de partage des eaux avec marqueurs est communément employée mais des variations existent. Elle interprète la luminosité de l'image comme une carte topographique et simule une inondation ayant pour origine les marqueurs, ici les arbres. L'eau fini par suivre la forme des arbres.
+
+Un réseau neuronal convolutif (CNN) est un type de réseau de neurone permettant de traiter des images. Il se différencie par l'ajout d'une couche de convolution en entrée : des produits de convolution permettant d'extraire des caractéristiques de l'image sont réalisé entre l'image et une ou plusieurs fonction puis le résultat est traité par un réseau de neurone classique. Une telle technique permet de classifier des arbres selon leur l'espèce. Les images, qui peuvent être des arbres dans leur entièreté ou des gros plan de feuillage sont parfois accompagnées d'information supplémentaire (). Toutefois, une résolution très élevée (50 cm/pixel) et un nombre important () d'images peuvent être nécessaires pour obtenir des résultats précis.
+
 \section{problématique retenue}
+
+Dans quelle mesure la recherche d'extremums permet-elle de détecter simultanément des espèces variées d'arbres à partir d'imagerie haute résolution. Et est-il possible de les classifier à l'aide d'un réseau de neurone entraîné avec peu d'images ou des images de faible résolution ? 
 
 \section{Objectifs du TIPE}
 
 \begin{enumerate}
-    \item fonctionnement de la théorie espace échelle / + filtre passe bas
-	\item implementer un algorithme de détection et de délimitation de houppiers (Cime d'arbres) basé sur des images satellites de resolution "moyenne" à l'aide de la théorie de l'Espace d'échelle (« Scale-space ») 
-    \item fonctionnement resau de neurone ?
-    \item entraîner un reseau neurone à l'aide de la bibliothèque Tensorflow afin d'identifier des espèces à partir d'images de houppiers de basse résolution 
-	\item appliquer ces derniers au parc ... présentant une variété d'espèces et des paternes plus ou moins réguliers pour confronter les résultats obtenus aux données de terrain et aux techniques existantes.    
+	\item Mettre au point une méthode de détection des arbres et de leur rayon à partir d'image aérienne de forêts.  
+    \item Entraîner un réseau de neurone pour classifier selon l'espèce des images de houppier.
+	\item Appliquer ces techniques au parc naturel régional du Morvan.   
 \end{enumerate}
 	
-
 \section{Réferences Bibliographiques}
 
 \section{DOT}
-4-8
-50 mots
 
-familiarisation avec les modèles rgb et ycbcr, écriture de fonction utiles : transformation en niveau de gris, histograme de la luminance et ecriture d'algorithmes naifs pour se familiariser avec le probleme (maximum de luminance, etc...)
-REcherche : Les techniques usuelles (littératures) requierent souvent du materiel avancé ou image très haute résolution donc recherche sur la détection de blob à partir d'image: théorie machin Le choix de truc me semble particulièrement adapté au problème et requiert peu de ressources. ( En fait, utilisé dans certains papiers)
-étude de la theorie espace echelle et recherche de papiers utilisant cette technique 
-Ecriture d'un algorthme de détection basé sur la théorie en utilisant des des fonctions fournies par le module numpy et scipy 
-Approfondissement de la convolution, étude de la séparabilité du filtre et de la fft pour accélérer et remplacement par des fonction maisons 
-etude du fonctionnement d'u resau de neuron et écriture d'un perceptron. Atttention : a ce jour ne traite pas les images. La bibliothèque tensorflow à ete utilisé pour réaliser les test.
-Application au parc naturel ezfe, en pleine mutaution fournissant des examples pertinance de l'algorithme et  comparaison des résultats.
+Modélisation d'un arbre et écriture d'algorithmes naïfs pour se familiariser avec le problème (détection de contours, étude de la luminance, etc ...)
+Recherche bibliographique sur la détection de blob. Découverte de la théorie de l'espace d'échelle.
+Étude de la théorie et recherche de littérature l'utilisant pour détecter des arbres.
+Écriture en Python d'un algorithme de détection utilisant les fonctions fournies par les module Numpy et Scipy 
+Étude approfondie du produit de convolution pour remplacer les librairies par ma propre implémentation et amélioration de la complexité du programme. 
+Étude du fonctionnement d'un réseau de neurone et écriture d'un perceptron pour classifier selon l'espèce des images de houppier. Toutefois, il ne traite pas à ce jour les images et a bibliothèque Tensorflow est utilisée pour réaliser les tests.
+Application au parc naturel régional du Morvan fournissant des exemples pertinents et comparaison des résultats avec la littérature.
 
 \end{document}
