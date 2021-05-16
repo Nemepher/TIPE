@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  15 MAY 2021 12:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2021.4.30)  16 MAY 2021 13:25
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
 **/home/aalbert/Sources/TIPE/src/Latex/presentation.tex
 (/home/aalbert/Sources/TIPE/src/Latex/presentation.tex
@@ -1024,12 +1024,12 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
  (src/Latex/presentation.nav)
-Overfull \hbox (110.39166pt too wide) in paragraph at lines 41--41
+Overfull \hbox (113.09203pt too wide) in paragraph at lines 41--41
  [][][][]  
  []
 
 
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1037,7 +1037,7 @@ Overfull \hbox (110.39166pt too wide) has occurred while \output is active
 
 ]
 (src/Latex/presentation.toc)
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1072,14 +1072,14 @@ File: img.png Graphic file (type png)
 Package pdftex.def Info: img.png  used on input line 84.
 (pdftex.def)             Requested size: 96.35583pt x 120.4448pt.
 
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [3
 
  <src/Latex/img.png>]
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1090,14 +1090,14 @@ Overfull \vbox (1.04178pt too high) detected at line 159
  []
 
 
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [5
 
 ] (src/Latex/fig1.pgf) (src/Latex/fig2.pgf)
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1109,21 +1109,21 @@ Overfull \hbox (3.16338pt too wide) in paragraph at lines 175--175
  []
 
 
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [7
 
 ]
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [8
 
 ]
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1141,7 +1141,7 @@ File: ilu.png Graphic file (type png)
 Package pdftex.def Info: ilu.png  used on input line 245.
 (pdftex.def)             Requested size: 175.59117pt x 92.32764pt.
 
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1154,7 +1154,7 @@ File: index.png Graphic file (type png)
 Package pdftex.def Info: index.png  used on input line 253.
 (pdftex.def)             Requested size: 342.06325pt x 67.90076pt.
 
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1172,7 +1172,7 @@ File: res2.png Graphic file (type png)
 Package pdftex.def Info: res2.png  used on input line 261.
 (pdftex.def)             Requested size: 115.09401pt x 146.28162pt.
 
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1190,7 +1190,7 @@ Overfull \hbox (8.21204pt too wide) in paragraph at lines 290--290
  []
 
 
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1228,14 +1228,14 @@ Overfull \hbox (3.8611pt too wide) in paragraph at lines 299--299
  []
 
 
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
 [14
 
  <src/Latex/res3.png> <src/Latex/res4.png> <src/Latex/res5.png>]
-Overfull \hbox (110.39166pt too wide) has occurred while \output is active
+Overfull \hbox (113.09203pt too wide) has occurred while \output is active
  [][][][]  
  []
 
@@ -1266,7 +1266,7 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of TeX's memory you used:
  24621 strings out of 481718
  482559 string characters out of 5926910
- 743169 words of memory out of 6000000
+ 743174 words of memory out of 6000000
  39715 multiletter control sequences out of 15000+600000
  555684 words of font info for 88 fonts, out of 8000000 for 9000
  430 hyphenation exceptions out of 8191
@@ -1290,7 +1290,7 @@ e/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/cm-super/sfss1200.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/cm-super/sfss1440.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/cm-super/sfsx1095.pfb>
-Output written on src/Latex/presentation.pdf (15 pages, 6952204 bytes).
+Output written on src/Latex/presentation.pdf (15 pages, 6952598 bytes).
 PDF statistics:
  804 PDF objects out of 1000 (max. 8388607)
  716 compressed objects within 8 object streams

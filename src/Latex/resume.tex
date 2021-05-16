@@ -2,14 +2,14 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 
-\title{Détection et classification d'arbre à partir d'imagerie haute résolution de forêts}
+\title{Détection et classification d'arbres à partir d'imagerie haute résolution de forêts}
 \begin{document}
 \maketitle
 
 L'étude et le suivi de la répartition des espèces au sein des zones forestières est un problème complexe aux applications nombreuses : gestion des ressources naturelles, protection de la biodiversité, prédiction de zones à risques d'incendie, etc... 
-Les études de terrain peuvent se révéler longues, coûteuses et imprécises du à la nécessité d'interpoler les données recueillies. 
-C'est pourquoi l'analyse automatisé d'imagerie haute définition (de plus en plus accessible) est prometteuse.
-Mon intérêt est dû au sujet (traitement des images) et au cas particulier du parc naturel régional du Morvan actuellement sujet à la monoculture du pin Douglas.
+Les études de terrain peuvent se révéler longues, coûteuses et imprécises de fait de la nécessité d'interpoler les données recueillies. 
+C'est pourquoi l'analyse automatisée d'imagerie haute définition (de plus en plus accessible) est prometteuse.
+Mon intérêt est dû au sujet (traitement des images) et au cas particulier du Parc Naturel Régional du Morvan actuellement menacé dans sa diversité forestière par la monoculture du pin de Douglas.
 
 \section{Professeur encadrant}
 Mr Pinguet
@@ -34,17 +34,17 @@ Tree
 
 \section{Bibliographie commentée}
 
-L'analyse automatisée d'imagerie aérienne de zones forestières complémente voir remplace les traditionnelles études de terrain. Elle vise à identifier les cimes des arbres, les houppiers en obtenant leur position et éventuellement leur rayon ou leur forme et des caractéristiques telles que l'espèce ou l'age. La disponibilité croissante depuis les années 2000 de photographie aérienne et satellite à donné lieu à de nombreuses analyses sur différents types de végétation allant de plantations à la forêt amazonienne. Ces images peuvent être remplacées par de l'imagerie multispectrale ou de la télédétection par laser (lidar), plus précise, auquel cas les techniques employées diffèrent.
+L'analyse automatisée d'imageries aériennes de zones forestières complémente voir remplace les traditionnelles études de terrain. Elle vise à identifier les cimes des arbres, les houppiers en obtenant leur position et éventuellement leur rayon ou leur forme et des caractéristiques telles que l'espèce ou l'âge. La disponibilité croissante depuis les années 2000 de photographies aériennes et satellite a donné lieu à de nombreuses analyses sur différents types de végétation allant de plantations monospécifique [5] à la forêt amazonienne [7]. Ces images peuvent être remplacées par de l'imagerie multispectrale ou de la télédétection par laser (lidar), plus précise, auquel cas les techniques employées diffèrent.
 
-Différentes approches pour la détection à partir d'image RGB ont été envisagées et se divisent en trois catégories. à l'exception de la dernière, elles exploitent la luminance ie, les images sont converties en niveau de gris : la détection d'extremum locaux formés de pixels lumineux associés au centre des houppiers, la détection de frontières formés de pixels peu lumineux associés au contour des houppiers, et plus récemment l'emploi de l'apprentissage automatique. Mon approche initiale du problème coïncidant avec les travaux fondateurs de la première catégorie, j'ai poursuivi dans cette direction. 
+Différentes approches pour la détection à partir d'image RGB ont été envisagées et se divisent en trois catégories. A l'exception de la dernière, elles exploitent la luminance ie, les images sont converties en niveau de gris : la détection d'extremum locaux formés de pixels lumineux associés au centre des houppiers, la détection de frontières formées de pixels peu lumineux associés au contour des houppiers, et plus récemment l'emploi de l'apprentissage automatique. Mon approche initiale du problème coïncidant avec les travaux fondateurs de la première catégorie, j'ai poursuivi dans cette direction. 
 
-Cette technique à ses limitations : elle ne permet pas d'estimer la taille des arbres détectés et lorsque la surface de ces derniers est trop irrégulière (branchage, forme particulière, surface particulièrement larges, etc.) plusieurs maximums locaux peuvent exister, résultant en plusieurs détections pour un même arbre. L'utilisation de filtres gaussiens floutant l'image permet de remédier à ce dernier problème en éliminant les détails fins non pertinents, mais seuls les arbres ayant un rayon adapté au filtre sont détecte, ce qui est inconvenant lorsque différentes espèces de rayons différents sont présents dans l'image. 
+Cette technique a ses limitations : elle ne permet pas d'estimer la taille des arbres détectés et lorsque la surface de ces derniers est trop irrégulière (branchage, forme particulière, surface particulièrement larges, etc.) plusieurs maximums locaux peuvent exister, résultant en plusieurs détections pour un même arbre. L'utilisation de filtres gaussiens floutant l'image permet de remédier à ce dernier problème en éliminant les détails fins non pertinents, mais seuls les arbres ayant un rayon adapté au filtre sont détectés, ce qui est un inconvenant lorsque différentes espèces de rayons différents sont présents dans l'image. 
 
-Un compromis réside en la théorie de l'échelle d'espace qui permet de détecter des points caractéristiques et leur rayons caractéristique indépendamment de leur échelle et a été employé par certains chercheurs. Elle exploite  Cette méthode nécessite un paramétrage fin à déterminer manuellement dépendant fortement du type d'objet à identifier.
+Un compromis réside en la théorie de l'échelle d'espace [2] qui permet de détecter des points caractéristiques et leurs rayon caractéristique indépendamment de leur échelle et qui a été employé par certains chercheurs. L'exploitation de cette méthode nécessite un paramétrage fin à déterminer manuellement, dépendant fortement du type d'objet à identifier.
 
-La détection est souvent accompagnée d'une délinéation plus précise des houppiers. La segmentation par ligne de partage des eaux avec marqueurs est communément employée mais des variations existent. Elle interprète la luminosité de l'image comme une carte topographique et simule une inondation ayant pour origine les marqueurs, ici les arbres. L'eau fini par suivre la forme des arbres.
+La détection est souvent accompagnée d'une délinéation plus précise des houppiers. La segmentation par ligne de partage des eaux avec marqueurs est communément employée mais des variations existent [6]. Elle interprète la luminosité de l'image comme une carte topographique et simule une inondation ayant pour origine les marqueurs, ici les arbres. L'eau finit par suivre la forme des arbres.
 
-Un réseau neuronal convolutif (CNN) est un type de réseau de neurone permettant de traiter des images. Il se différencie par l'ajout d'une couche de convolution en entrée : des produits de convolution permettant d'extraire des caractéristiques de l'image sont réalisé entre l'image et une ou plusieurs fonction puis le résultat est traité par un réseau de neurone classique. Une telle technique permet de classifier des arbres selon leur l'espèce. Les images, qui peuvent être des arbres dans leur entièreté ou des gros plan de feuillage sont parfois accompagnées d'information supplémentaire (). Toutefois, une résolution très élevée (50 cm/pixel) et un nombre important () d'images peuvent être nécessaires pour obtenir des résultats précis.
+Un réseau neuronal convolutif (CNN) est un type de réseau de neurones permettant de traiter des images. Il se différencie par l'ajout d'une couche de convolution en entrée : des produits de convolution permettant d'extraire des caractéristiques de l'image sont réalisés entre l'image et une ou plusieurs fonctions puis le résultat est traité par un réseau de neurones classique. Une telle technique permet de classifier des arbres selon leur l'espèce. Les images, qui peuvent être des arbres dans leur entièreté ou des gros plans de feuillage [1] sont parfois accompagnées d'informations supplémentaires. Toutefois, une résolution très élevée (50 cm/pixel) [1] et un nombre important (2000) d'images [4] peuvent être nécessaires pour obtenir des résultats précis.
 
 \section{problématique retenue}
 
@@ -55,11 +55,9 @@ Dans quelle mesure la recherche d'extremums permet-elle de détecter simultaném
 \begin{enumerate}
 	\item Mettre au point une méthode de détection des arbres et de leur rayon à partir d'image aérienne de forêts.  
     \item Entraîner un réseau de neurone pour classifier selon l'espèce des images de houppier.
-	\item Appliquer ces techniques au parc naturel régional du Morvan.   
+	\item Appliquer ces techniques au Parc Naturel Régional du Morvan.   
 \end{enumerate}
 	
-\section{Réferences Bibliographiques}
-
 \section{DOT}
 
 Modélisation d'un arbre et écriture d'algorithmes naïfs pour se familiariser avec le problème (détection de contours, étude de la luminance, etc ...)
@@ -67,7 +65,7 @@ Recherche bibliographique sur la détection de blob. Découverte de la théorie 
 Étude de la théorie et recherche de littérature l'utilisant pour détecter des arbres.
 Écriture en Python d'un algorithme de détection utilisant les fonctions fournies par les module Numpy et Scipy 
 Étude approfondie du produit de convolution pour remplacer les librairies par ma propre implémentation et amélioration de la complexité du programme. 
-Étude du fonctionnement d'un réseau de neurone et écriture d'un perceptron pour classifier selon l'espèce des images de houppier. Toutefois, il ne traite pas à ce jour les images et a bibliothèque Tensorflow est utilisée pour réaliser les tests.
-Application au parc naturel régional du Morvan fournissant des exemples pertinents et comparaison des résultats avec la littérature.
+Étude du fonctionnement d'un réseau de neurone et écriture d'un perceptron pour classifier selon l'espèce des images de houppier. Toutefois, il ne traite pas à ce jour les images et la bibliothèque Tensorflow est utilisée pour réaliser les tests.
+Application au Parc Naturel Régional du Morvan fournissant des exemples pertinents et comparaison des résultats avec la littérature.
 
 \end{document}

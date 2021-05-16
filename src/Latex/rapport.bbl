@@ -1,9 +1,346 @@
-\begin{thebibliography}{NAV19}
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
 
-\bibitem[NAV19]{NatesanResNet}
-Sowmya Natesan, Costas Armenakis, and Udaya Vepakomma.
-\newblock Resnet-based tree species classification using uav images.
-\newblock {\em ISPRS - International Archives of the Photogrammetry, Remote
-  Sensing and Spatial Information Sciences}, XLII-2/W13:475--481, 06 2019.
 
-\end{thebibliography}
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Egli2020}{article}{}
+      \name{author}{2}{}{%
+        {{hash=3e07be089565061c6aa0238a43337e24}{%
+           family={Egli},
+           familyi={E\bibinitperiod},
+           given={Sebastian},
+           giveni={S\bibinitperiod}}}%
+        {{hash=a79445c4e0abfe32eeb3096649c92b30}{%
+           family={Höpke},
+           familyi={H\bibinitperiod},
+           given={Martin},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {{MDPI} {AG}}%
+      }
+      \strng{namehash}{6cbb74b7a8ee825b1b2f1d51a2534b22}
+      \strng{fullhash}{6cbb74b7a8ee825b1b2f1d51a2534b22}
+      \strng{bibnamehash}{6cbb74b7a8ee825b1b2f1d51a2534b22}
+      \strng{authorbibnamehash}{6cbb74b7a8ee825b1b2f1d51a2534b22}
+      \strng{authornamehash}{6cbb74b7a8ee825b1b2f1d51a2534b22}
+      \strng{authorfullhash}{6cbb74b7a8ee825b1b2f1d51a2534b22}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Remote Sensing}
+      \field{month}{11}
+      \field{number}{23}
+      \field{title}{{CNN}-Based Tree Species Classification Using High Resolution {RGB} Image Data from Automated {UAV} Observations}
+      \field{volume}{12}
+      \field{year}{2020}
+      \true{nocite}
+      \field{pages}{3892}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/rs12233892
+      \endverb
+    \endentry
+    \entry{5}{book}{}
+      \name{author}{1}{}{%
+        {{hash=0c8382c6d88ddaed3b9ec13784ace09d}{%
+           family={Lindeberg},
+           familyi={L\bibinitperiod},
+           given={Tony},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer {US}}%
+      }
+      \strng{namehash}{0c8382c6d88ddaed3b9ec13784ace09d}
+      \strng{fullhash}{0c8382c6d88ddaed3b9ec13784ace09d}
+      \strng{bibnamehash}{0c8382c6d88ddaed3b9ec13784ace09d}
+      \strng{authorbibnamehash}{0c8382c6d88ddaed3b9ec13784ace09d}
+      \strng{authornamehash}{0c8382c6d88ddaed3b9ec13784ace09d}
+      \strng{authorfullhash}{0c8382c6d88ddaed3b9ec13784ace09d}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Scale-Space Theory in Computer Vision}
+      \field{year}{1994}
+      \verb{doi}
+      \verb 10.1007/978-1-4757-6465-9
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-1-4757-6465-9
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-1-4757-6465-9
+      \endverb
+    \endentry
+    \entry{Mahour2020}{article}{}
+      \name{author}{3}{}{%
+        {{hash=e6aa3133e45969eb03341aed63c900dc}{%
+           family={Mahour},
+           familyi={M\bibinitperiod},
+           given={Milad},
+           giveni={M\bibinitperiod}}}%
+        {{hash=2cf313b56da041467b9e38fd81c622bd}{%
+           family={Tolpekin},
+           familyi={T\bibinitperiod},
+           given={Valentyn},
+           giveni={V\bibinitperiod}}}%
+        {{hash=935483a8bd11adedd8c76a26c55d0684}{%
+           family={Stein},
+           familyi={S\bibinitperiod},
+           given={Alfred},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {{MDPI} {AG}}%
+      }
+      \strng{namehash}{0bdd1b2ce8730fc3a9c5f6176055aafd}
+      \strng{fullhash}{0bdd1b2ce8730fc3a9c5f6176055aafd}
+      \strng{bibnamehash}{0bdd1b2ce8730fc3a9c5f6176055aafd}
+      \strng{authorbibnamehash}{0bdd1b2ce8730fc3a9c5f6176055aafd}
+      \strng{authornamehash}{0bdd1b2ce8730fc3a9c5f6176055aafd}
+      \strng{authorfullhash}{0bdd1b2ce8730fc3a9c5f6176055aafd}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{month}{12}
+      \field{number}{24}
+      \field{title}{Automatic Detection of Individual Trees from {VHR} Satellite Images Using Scale-Space Methods}
+      \field{volume}{20}
+      \field{year}{2020}
+      \true{nocite}
+      \field{pages}{7194}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/s20247194
+      \endverb
+    \endentry
+    \entry{3}{article}{}
+      \name{author}{3}{}{%
+        {{hash=332cde616000b6b62731521a6ef3b9c0}{%
+           family={Natesan},
+           familyi={N\bibinitperiod},
+           given={Sowmya},
+           giveni={S\bibinitperiod}}}%
+        {{hash=bf199037cb48a472ed9cdb21b6356cc8}{%
+           family={Armenakis},
+           familyi={A\bibinitperiod},
+           given={Costas},
+           giveni={C\bibinitperiod}}}%
+        {{hash=e43849e04cb09bf47791b396f1150149}{%
+           family={Vepakomma},
+           familyi={V\bibinitperiod},
+           given={Udaya},
+           giveni={U\bibinitperiod}}}%
+      }
+      \strng{namehash}{3d204922d26a9695ad4d9b36a927fb2f}
+      \strng{fullhash}{3d204922d26a9695ad4d9b36a927fb2f}
+      \strng{bibnamehash}{3d204922d26a9695ad4d9b36a927fb2f}
+      \strng{authorbibnamehash}{3d204922d26a9695ad4d9b36a927fb2f}
+      \strng{authornamehash}{3d204922d26a9695ad4d9b36a927fb2f}
+      \strng{authorfullhash}{3d204922d26a9695ad4d9b36a927fb2f}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ISPRS - International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences}
+      \field{month}{06}
+      \field{title}{RESNET-BASED TREE SPECIES CLASSIFICATION USING UAV IMAGES}
+      \field{volume}{XLII-2/W13}
+      \field{year}{2019}
+      \true{nocite}
+      \field{pages}{475\bibrangedash 481}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.5194/isprs-archives-XLII-2-W13-475-2019
+      \endverb
+    \endentry
+    \entry{1}{article}{}
+      \name{author}{3}{}{%
+        {{hash=9e9adcb50ecb7b019477d4bd5a8b643d}{%
+           family={Neupane},
+           familyi={N\bibinitperiod},
+           given={Bipul},
+           giveni={B\bibinitperiod}}}%
+        {{hash=797bd0957cb068b7f59b829d10788daa}{%
+           family={Horanont},
+           familyi={H\bibinitperiod},
+           given={Teerayut},
+           giveni={T\bibinitperiod}}}%
+        {{hash=16c5a4eb33a9b63c2d283bf43954dc24}{%
+           family={Hung},
+           familyi={H\bibinitperiod},
+           given={Nguyen\bibnamedelima Duy},
+           giveni={N\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Public Library of Science}%
+      }
+      \strng{namehash}{5a3416e7808700b5a861bd681b613b53}
+      \strng{fullhash}{5a3416e7808700b5a861bd681b613b53}
+      \strng{bibnamehash}{5a3416e7808700b5a861bd681b613b53}
+      \strng{authorbibnamehash}{5a3416e7808700b5a861bd681b613b53}
+      \strng{authornamehash}{5a3416e7808700b5a861bd681b613b53}
+      \strng{authorfullhash}{5a3416e7808700b5a861bd681b613b53}
+      \field{sortinit}{N}
+      \field{sortinithash}{22369a73d5f88983a108b63f07f37084}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{PLOS ONE}
+      \field{month}{10}
+      \field{number}{10}
+      \field{title}{Deep learning based banana plant detection and counting using high-resolution red-green-blue (RGB) images collected from unmanned aerial vehicle (UAV)}
+      \field{volume}{14}
+      \field{year}{2019}
+      \true{nocite}
+      \field{pages}{1\bibrangedash 22}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0223906
+      \endverb
+    \endentry
+    \entry{Ozcan2015}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=3275cb171e7667aa4bc1c3d0eaf018c4}{%
+           family={Ozcan},
+           familyi={O\bibinitperiod},
+           given={Abdullah\bibnamedelima H.},
+           giveni={A\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=a65b85a3be97eef87924363f609c9237}{%
+           family={Sayar},
+           familyi={S\bibinitperiod},
+           given={Yetkin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=25102222697c463794a44f11050f4b94}{%
+           family={Hisar},
+           familyi={H\bibinitperiod},
+           given={Dilara},
+           giveni={D\bibinitperiod}}}%
+        {{hash=ab2c8307fe49fc9bab83feb338ed79ee}{%
+           family={Unsalan},
+           familyi={U\bibinitperiod},
+           given={Cem},
+           giveni={C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{1797332f126551121946159c120a6423}
+      \strng{fullhash}{73967262816850083369a30ae780d4e3}
+      \strng{bibnamehash}{1797332f126551121946159c120a6423}
+      \strng{authorbibnamehash}{1797332f126551121946159c120a6423}
+      \strng{authornamehash}{1797332f126551121946159c120a6423}
+      \strng{authorfullhash}{73967262816850083369a30ae780d4e3}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2015 7th International Conference on Recent Advances in Space Technologies ({RAST})}
+      \field{month}{6}
+      \field{title}{Multiscale tree analysis from satellite images}
+      \field{year}{2015}
+      \true{nocite}
+      \verb{doi}
+      \verb 10.1109/rast.2015.7208353
+      \endverb
+    \endentry
+    \entry{4}{article}{}
+      \name{author}{10}{}{%
+        {{hash=985ece0a63091d2574414dc04f001bdd}{%
+           family={Wagner},
+           familyi={W\bibinitperiod},
+           given={Fabien\bibnamedelima Hubert},
+           giveni={F\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=e3319f04a28396a95aeffe3c88a22c15}{%
+           family={Ferreira},
+           familyi={F\bibinitperiod},
+           given={Matheus\bibnamedelima Pinheiro},
+           giveni={M\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=d84b642e5bb7168213ed10957fa24b54}{%
+           family={Sanchez},
+           familyi={S\bibinitperiod},
+           given={Alber},
+           giveni={A\bibinitperiod}}}%
+        {{hash=e1dcdd679ecb39fed2859abb68cc3f2a}{%
+           family={Hirye},
+           familyi={H\bibinitperiod},
+           given={Mayumi\bibnamedelima C.M.},
+           giveni={M\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=18bc43a3e9b4f9c3556f08fb6f89bd23}{%
+           family={Zortea},
+           familyi={Z\bibinitperiod},
+           given={Maciel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=5f599275f516c0e127b688460b3d7778}{%
+           family={Gloor},
+           familyi={G\bibinitperiod},
+           given={Emanuel},
+           giveni={E\bibinitperiod}}}%
+        {{hash=ea4e95e28680b01d0b08bb30a973eb4a}{%
+           family={Phillips},
+           familyi={P\bibinitperiod},
+           given={Oliver\bibnamedelima L.},
+           giveni={O\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=4f96da58807395242a7b2fc77c53b2a7}{%
+           family={Filho]},
+           familyi={F\bibinitperiod},
+           given={Carlos\bibnamedelimb Roberto\bibnamedelimb [de\bibnamedelima Souza},
+           giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim [\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=4fc47b417481d9898cc2a72e4bc3b0dd}{%
+           family={Shimabukuro},
+           familyi={S\bibinitperiod},
+           given={Yosio\bibnamedelima Edemir},
+           giveni={Y\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=79dbd5651dd00eff06d979789c8a6ac6}{%
+           family={Aragão},
+           familyi={A\bibinitperiod},
+           given={Luiz\bibnamedelima E.O.C.},
+           giveni={L\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{60285072bfddd624581870aab6cf47d1}
+      \strng{fullhash}{fc421ea19fb83a5bd3833b6437173b41}
+      \strng{bibnamehash}{60285072bfddd624581870aab6cf47d1}
+      \strng{authorbibnamehash}{60285072bfddd624581870aab6cf47d1}
+      \strng{authornamehash}{60285072bfddd624581870aab6cf47d1}
+      \strng{authorfullhash}{fc421ea19fb83a5bd3833b6437173b41}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0924-2716}
+      \field{journaltitle}{ISPRS Journal of Photogrammetry and Remote Sensing}
+      \field{note}{SI: Latin America Issue}
+      \field{title}{Individual tree crown delineation in a highly diverse tropical forest using very high resolution satellite images}
+      \field{volume}{145}
+      \field{year}{2018}
+      \true{nocite}
+      \field{pages}{362\bibrangedash 377}
+      \range{pages}{16}
+      \verb{doi}
+      \verb https://doi.org/10.1016/j.isprsjprs.2018.09.013
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

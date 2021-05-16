@@ -1,46 +1,20 @@
-This is BibTeX, Version 0.99d (TeX Live 2019/dev/Debian)
-Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
-The top-level auxiliary file: rapport.aux
-The style file: alpha.bst
-Database file #1: references.bib
-You've used 1 entry,
-            2543 wiz_defined-function locations,
-            567 strings with 4708 characters,
-and the built_in function-call counts, 467 in all, are:
-= -- 44
-> -- 25
-< -- 0
-+ -- 9
-- -- 9
-* -- 39
-:= -- 87
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 7
-chr.to.int$ -- 1
-cite$ -- 1
-duplicate$ -- 14
-empty$ -- 30
-format.name$ -- 10
-if$ -- 90
-int.to.chr$ -- 1
-int.to.str$ -- 0
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 3
-pop$ -- 4
-preamble$ -- 1
-purify$ -- 8
-quote$ -- 0
-skip$ -- 13
-stack$ -- 0
-substring$ -- 28
-swap$ -- 1
-text.length$ -- 0
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 8
-warning$ -- 0
-while$ -- 4
-width$ -- 2
-write$ -- 15
+[0] Config.pm:304> INFO - This is Biber 2.14
+[0] Config.pm:307> INFO - Logfile is 'rapport.blg'
+[98] biber:322> INFO - === dim. mai 16, 2021, 13:25:32
+[148] Biber.pm:415> INFO - Reading 'rapport.bcf'
+[233] Biber.pm:940> INFO - Using all citekeys in bib section 0
+[256] Biber.pm:4256> INFO - Processing section 0
+[257] Utils.pm:75> INFO - Globbing data source 'references.bib'
+[257] Utils.pm:91> INFO - Globbed data source 'references.bib' to references.bib
+[286] Biber.pm:4455> INFO - Looking for bibtex format file 'references.bib' for section 0
+[288] bibtex.pm:1653> INFO - LaTeX decoding ...
+[307] bibtex.pm:1471> INFO - Found BibTeX data source 'references.bib'
+[403] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_IF6t/references.bib_5271.utf8, line 29, warning: 41 characters of junk seen at toplevel
+[403] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_IF6t/references.bib_5271.utf8, line 41, warning: 48 characters of junk seen at toplevel
+[426] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[427] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[427] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
+[427] Biber.pm:4090> INFO - No sort tailoring available for locale 'fr-FR'
+[476] bbl.pm:652> INFO - Writing 'rapport.bbl' with encoding 'UTF-8'
+[489] bbl.pm:755> INFO - Output to rapport.bbl
+[491] Biber.pm:128> INFO - WARNINGS: 2

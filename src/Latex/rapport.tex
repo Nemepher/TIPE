@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
+\usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
@@ -10,6 +11,10 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage[nottoc]{tocbibind}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{references.bib}
+
 
 \pagestyle{headings}
 \pgfplotsset{width=5cm,compat=1.16}
@@ -33,17 +38,17 @@
 \section*{Introduction}
 
 L'étude et le suivi de la répartition des espèces au sein de larges zones forestières est un problème complexe aux applications nombreuses :
-gestion des ressources naturelles, protection de la biodiversité, prévention des incendies, etc... Les études de terrain peuvent se révéler longues, coûteuses et imprécises du à la nécessité d'interpoler les données recueillies. 
+gestion des ressources naturelles, protection de la biodiversité, prévention des incendies, etc... Les études de terrain peuvent se révéler longues, coûteuses et imprécises du fait de la nécessité d'interpoler les données recueillies. 
 
-L'analyse automatisée d'imagerie aérienne vise à identifier les cimes des arbres (houppiers) en obtenant leur position, leur rayon ou leur forme et des caractéristiques telles que l'espèce ou l'age. La disponibilité croissante depuis les années 2000 de photographie aérienne et satellite à donné lieu à de nombreuses analyses sur différents types de végétations.
+L'analyse automatisée d'imagerie aérienne vise à identifier les cimes des arbres (houppiers) en obtenant leur position, leur rayon ou leur forme et des caractéristiques telles que l'espèce ou l'âge. La disponibilité croissante depuis les années 2000 de photographies aériennes et satellite a donné lieu à de nombreuses analyses sur différents types de végétations.
 
-Différentes approches pour la détection à partir d'image RGB ont été envisagées et se divisent en trois catégories. A l'exception de la dernière, elles exploitent la luminance ie, les images sont converties en niveau de gris : la détection d'extremum locaux formés de pixels lumineux associés au centre des houppiers, la détection de frontières formés de pixels peu lumineux associés au contour des houppiers, et plus récemment l'emploi de l'apprentissage automatique. Mon approche initiale du problème coïncidant avec les travaux fondateurs de la première catégorie, j'ai poursuivi dans cette direction. 
+Différentes approches pour la détection à partir d'image RGB ont été envisagées et se divisent en trois catégories. A l'exception de la dernière, elles exploitent la luminance ie, les images sont converties en niveau de gris : la détection d'extremum locaux formées de pixels lumineux associés au centre des houppiers, la détection de frontières formés de pixels peu lumineux associés au contour des houppiers, et plus récemment l'emploi de l'apprentissage automatique. Mon approche initiale du problème coïncidant avec les travaux fondateurs de la première catégorie, j'ai poursuivi dans cette direction. 
 
 \subsection*{Objectifs du TIPE}		
 \begin{enumerate}
-	\item Mettre au point une méthode de détection des arbres et de leur rayon à partir d'image aérienne de forêts.  
-    \item Entraîner un réseau de neurone pour classifier selon l'espèce des images de houppier.
-	\item Appliquer ces techniques au parc naturel régional du Morvan.   
+	\item Mettre au point une méthode de détection des arbres et de leur rayon à partir d'images aériennes de forêts.  
+    \item Entraîner un réseau de neurones pour classifier selon l'espèce des images de houppier.
+	\item Appliquer ces techniques au Parc Naturel Régional du Morvan.   
 \end{enumerate}
 	
 \section{Détection des houppiers}
@@ -57,11 +62,11 @@ Différentes approches pour la détection à partir d'image RGB ont été envisa
 		\caption{Modélisation d'un houppier}
 	 \end{wrapfigure}
 
-	On modélise un houppier par la figure 1. Il s'agit alors de repérer les amas circulaires de pixels plus lumineux que leur voisins : les blobs. Le diamètre des houppiers peut varier considérablement selon l'espèce et au sein d'une même image et la luminosité au centre des blobs n'est pas constante. Un seuillage de la luminosité est donc à exclure et une simple détection de contours se révèle peu précise lorsque la couverture forestière est dense. Une approche multi-échelle est donc nécessaire. Nous utiliserons la théorie de l'Espace d'échelle développée par (\ref Lindbergh). 
+	On modélise un houppier par la figure 1. Il s'agit alors de repérer les amas circulaires de pixels plus lumineux que leur voisins : les blobs. Le diamètre des houppiers peut varier considérablement selon l'espèce et au sein d'une même image et la luminosité au centre des blobs n'est pas constante. Un seuillage de la luminosité est donc à exclure et une simple détection de contours se révèle peu précise lorsque la couverture forestière est dense. Une approche multi-échelle est donc nécessaire. Nous utiliserons la théorie de l'Espace d'échelle développée par Lindbergh \cite{5}. 
 	
 	L'idée est de générer à partir d'un signal d'origine une famille de signaux dont les détails fins disparaissent progressivement. Aucune opération ne doit donc générer d'artefacts supplémentaires.  
 
-	L'image original est lissée de manière répété au moyen d'un filtre gaussien aux propriété de lissage exceptionnelles pour générer la pyramide d'échelle qui sera exploitée ultérieurement. (Voir figure 2)\\
+	L'image originale est lissée de manière répétée au moyen d'un filtre gaussien aux propriétés de lissage exceptionnelles pour générer la pyramide d'échelle qui sera exploitée ultérieurement. (Voir figure 2)\\
 	
 	\begin{wrapfigure}{l}{3cm}
 		\centering
@@ -70,12 +75,12 @@ Différentes approches pour la détection à partir d'image RGB ont été envisa
 		\label{fig:ex}
 	\end{wrapfigure}	 
 
-	Les fonction gaussiennes utilisée sont paramétrées par le paramètre d'échelle $\sigma$ : \[G_{\sigma}(x,y):=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
+	Les fonctions gaussiennes utilisées sont paramétrées par le paramètre d'échelle $\sigma$ : \[G_{\sigma}(x,y):=\frac{1}{2\pi\sigma^{2}}\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\]
 
 	\`{A} chaque étape, $\sigma$ est multiplié par un ratio fixe ( 2 dans la littérature ). Puisque la résolution de l'image est réduite de moitié à chaque étape, chaque niveau est appelé octave en référence à la théorie musicale. Il peut être utile de rajouter des intervalles supplémentaires, ce qui est fait dans la suite. 
 	On dispose donc de 3 paramètres: $\sigma$, le nombre d'octave o et le nombre d'intervalle pour chaque octave i. La hauteur ( nombre de niveau de la pyramide ) est alors $o \times i$ et le ratio $2^{\frac{1}{i}}$.\\
 
-	Un opérateur laplacien normalisé est appliqué aux images résultante afin d'obtenir la pyramide d'échelle du laplacien du Gaussien (<<LoG>>). 
+	Un opérateur laplacien normalisé est appliqué aux images résultantes afin d'obtenir la pyramide d'échelle du laplacien du Gaussien (<<LoG>>). 
 
 	\[{LoG}_{\sigma}(x,y):=-\frac{1}{\pi\sigma^{4}}(1-\frac{x^{2}+y^{2}}{2\sigma^{2}})\exp(-\frac{x^{2}+y^{2}}{2\sigma^{2}})\] 
 
@@ -101,30 +106,29 @@ Différentes approches pour la détection à partir d'image RGB ont été envisa
 	\label{fig:graph}
 \end{figure}
 
-
 	\subsection{Convolution et séparabilité du filtre gaussien}
 
 	Ces opérations se traduisent par le produit de convolution discrèt de l'image par les fonctions $G_{\sigma}$ et le laplacien ou directement par la fonction ${LoG}_{\sigma}$. Les considérations suivantes permettent de réduire le nombre d'opérations élémentaires du programme : 
 	\begin{itemize}
 		\item L'opérateur LoG est bien approximé par la différence des gaussiennes (<<DoG>>) obtenue en réalisant la différence des niveaux successifs de la pyramide d'échelle.
 		\item Une gaussienne prend presque toute ses valeurs dans un intervalle centré de largeur 3 fois l'écart-type $\sigma$. On utilise alors un noyau gaussien de taille $1 + 3 \times E(\sigma)$
-		\item On considère un noyau gaussien de taille $h \times h$. Le produit de convolution pour une image de taille $N \times M$ nécessite $cst \times h^{2}$ opérations élémentaires. Le filtre de Gauss étant séparable: $G_{\sigma}(x,y)=G_{1D, \sigma}(x) \times G_{1D, \sigma}(y)$ o\`{u} $G_{1D, \sigma}(y) := \frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{x^{2}}{2\sigma^{2}})$, on décompose le calcul en deux étape. On réalise la convolution de l'image avec avec $G_{1D, \sigma}(x)$ puis la convolution du résultat avec $G_{1D, \sigma}(y)$, soit $cst \times 2h$ opérations au prix d'espace mémoire supplémentaire.
-		\item Lisser équivaut à atténuer l'amplitude des basse fréquence du spectre. D'après le théorème de Shannon, il est donc possible de sous-échantillonner les images lissés sans perdre d'information. En sous-échantillonnant à chaque étape, calculer le produit de convolution d'un niveau donné à partir du niveau précédent permet de réduire le nombre d'opération.
+		\item On considère un noyau gaussien de taille $h \times h$. Le produit de convolution pour une image de taille $N \times M$ nécessite $cst \times h^{2}$ opérations élémentaires. Le filtre de Gauss étant séparable: $G_{\sigma}(x,y)=G_{1D, \sigma}(x) \times G_{1D, \sigma}(y)$ o\`{u} $G_{1D, \sigma}(y) := \frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{x^{2}}{2\sigma^{2}})$, on décompose le calcul en deux étapes. On réalise la convolution de l'image avec avec $G_{1D, \sigma}(x)$ puis la convolution du résultat avec $G_{1D, \sigma}(y)$, soit $cst \times 2h$ opérations au prix d'espace mémoire supplémentaire.
+		\item Lisser équivaut à atténuer l'amplitude des basses fréquences du spectre. D'après le théorème de Shannon, il est donc possible de sous-échantillonner les images lissées sans perdre d'information. En sous-échantillonnant à chaque étape, calculer le produit de convolution d'un niveau donné à partir du niveau précédent permet de réduire le nombre d'opérations.
 	\end{itemize}
 
 	\subsection{Mise en place de l'algorithme}
 
-	L'algorithme envisagé à été implémenté à l'aide du langage Python. Son fonctionnement est le suivant:
+	L'algorithme envisagé a été implémenté à l'aide du langage Python. Son fonctionnement est le suivant:
 
 	\begin{enumerate}
 		\item Conversion en nuance de gris ( Inversion éventuelle ) 
 		\item Génération de la pyramide d'échelle : 
 		\begin{itemize}
-			\item convolution par les filtre gaussien. Pour conserver des images de même taille, un remplissage des bords (<<padding>>) de type miroir est effectué, complétant l'image naturellement. 
+			\item convolution par les noyaux gaussiens. Pour conserver des images de même taille, un remplissage des bords (<<padding>>) de type miroir est effectué, complétant l'image naturellement. 
 			\item stockage dans un tableau Numpy 3D
 		\end{itemize}
-		\item Détection des minimums : différentes détections peuvent avoir lieu dans la même colonne donc pour conserver uniquement le houppier de rayon maximum lors d'éventuels chevauchements le tableau est parcouru par échelle décroissante, ie par rayon détectés décroissants (cf formule), chaque case est comparée à ses 26 voisins et on vérifie que les houppiers détectés ne débordent pas sur les précédents.  En outre, seul les rayons supérieurs à un certain seuil sont conservés.  
-		\item Extraction des houppiers : le rayon adapté est calculé d'après formule . Aucune délinéation supplémentaire n'est réalisé pour l'instant et un zone carrée correspondant au rayon est extraite.
+		\item Détection des minimums : différentes détections peuvent avoir lieu dans la même colonne donc pour conserver uniquement le houppier de rayon maximum lors d'éventuels chevauchements le tableau est parcouru par échelle décroissante, ie par rayons détectés décroissants (cf formule), chaque case est comparée à ses 26 voisins et on vérifie que les houppiers détectés ne débordent pas sur les précédents.  En outre, seul les rayons supérieurs à un certain seuil sont conservés.  
+		\item Extraction des houppiers : le rayon adapté est calculé d'après formule . Aucune délinéation supplémentaire n'est réalisée pour l'instant et un zone carrée correspondant au rayon est extraite.
 	\end{enumerate}	
 
 	\begin{figure}[h]
@@ -156,9 +160,9 @@ Différentes approches pour la détection à partir d'image RGB ont été envisa
 	\end{figure}
 	
 	\subsection{Application au site d'étude}
-	Le site retenu est le parc naturel régional du Morvan. La forêt de feuillus est progressivement remplacée par de la monoculture intensive de pin Douglas. Aujourd'hui, 50 \% du parc est constitué de conifères. Les deux espèces radicalement différente par leur forme et répartition fournissent un bon sujet aux applications utiles (suivi de l'évolution du parc par exemple) 
+	Le site retenu est le Parc Naturel Régional du Morvan. La forêt de feuillus est progressivement remplacée par de la monoculture intensive de pin Douglas. Aujourd'hui, 50 \% du Parc est constitué de conifères. Les deux espèces radicalement différentes par leur forme et répartition fournissent un bon sujet aux applications utiles (suivi de l'évolution du parc par exemple) 
 	Les images aériennes proviennent de Géoportail \copyright IGN, qui fournit également des données sur la couverture forestière (espèces, etc).
-	La sélection des paramètres décrit précédemment nécessite de tâtonner. Ils dépendent des rayons minimum et maximum des arbre et fortement de l'échelle des images utilisés. Cependant, un même jeu de paramètre permet dans l'étude réalisée de détecter deux espèces à la répartition et au rayon moyen différents.  
+	La sélection des paramètres décrit précédemment nécessite de tâtonner. Ils dépendent des rayons minimum et maximum des arbre et fortement de l'échelle des images utilisées. Cependant, un même jeu de paramètre permet dans l'étude réalisée de détecter deux espèces à la répartition et au rayon moyen différents.  
 	Les données de terrain et les paramètres retenus sont les suivants :\\
 	
 	image aérienne haute résolution : <0,1m/pixels
@@ -173,14 +177,14 @@ Différentes approches pour la détection à partir d'image RGB ont été envisa
 	
 \section{Identification des espèces}
 
-	L'identification d'espèce est un problème de reconnaissance de forme (<<pattern recognition>>) pour lequel les algorithmes d'apprentissage automatique excellent. Un réseau neuronal convolutif (<<CNN>>) est un type de réseau de neurone permettant de traiter des images. Il se différencie par l'ajout d'une couche de convolution en entrée : des produits de convolution permettant d'extraire des caractéristiques de l'image sont réalisé entre l'image et une ou plusieurs fonction puis le résultat est traité par un réseau de neurone classique. 
-	Dans le cadre de notre problème, toutes les espèces présentes sur le site du parc sont connues. Le choix se porte donc sur un apprentissage de type supervisé.
+	L'identification d'espèce est un problème de reconnaissance de forme (<<pattern recognition>>) pour lequel les algorithmes d'apprentissage automatique excellent. Un réseau neuronal convolutif (<<CNN>>) est un type de réseau de neurones permettant de traiter des images. Il se différencie par l'ajout d'une couche de convolution en entrée : des produits de convolution permettant d'extraire des caractéristiques de l'image sont réalisés entre l'image et une ou plusieurs fonctions puis le résultat est traité par un réseau de neurone classique. 
+	Dans le cadre de notre problème, toutes les espèces présentes sur le site du Parc sont connues. Le choix se porte donc sur un apprentissage de type supervisé.
 	Un algorithme de réseau de neurones à été écrit, mais ne permet pas à ce jour le traitement d'image donc la bibliothèque Tensorflow à été utilisée à la place.
 
 	\subsection{Méthodologie de construction du modèle}
 
-		L'algorithme précédent à été appliqué à des zones uniformément couvertes par une seule espèce et les images obtenus ont été labellisées. La base de donnée contient 173 images de douglas, 199 images de feuillus et 91 images non labellisées à des fins de vérification. Des images supplémentaires sont générés en appliquant des rotations aux images précédentes.
-		L'architecture utilisé est une version simplifiée du modèle utilisée par , lui même adapté de ResNet, suffisante étant donnée la quantité d'image et le nombre de classes (2).
+		L'algorithme précédent a été appliqué à des zones uniformément couvertes par une seule espèce et les images obtenues ont été labellisées. La base de donnée contient 173 images de douglas, 199 images de feuillus et 91 images non labellisées à des fins de vérification. Des images supplémentaires sont générés en appliquant des rotations aux images précédentes.
+		L'architecture utilisée est une version simplifiée du modèle utilisée par , lui même adapté de ResNet, version suffisante étant donnée le nombre d'images et de classes (2).
 
 \section{Prolongements envisageables}
 
@@ -191,17 +195,8 @@ Différentes approches pour la détection à partir d'image RGB ont été envisa
 		\item séparation préalable des zones forestières des routes et zones aménagées. 
 	\end{itemize}
 
-
-\bibliographystyle{alpha}
-\bibliography{src/Latex/references.bib}
-
-\nocite{1}
-\nocite{2}
-\nocite{3}
-\nocite{4}
-\nocite{5}
-
-
+\nocite{*}
+\printbibliography 
 
 \appendix
 	\section{Résultats}
