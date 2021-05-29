@@ -1,5 +1,6 @@
+# TIPE 2019-2020
 
-# Importations nécessaires
+# Importations
 
 import numpy as np
 import scipy.ndimage as nd
@@ -17,30 +18,27 @@ import tensorflow.keras.layers as layers
 import sqlite3
 import pickle
 
-# Fonctions pratiques, manipulations basiques d'images 
+# Fonctions pratiques, manipulation basique d'images 
 
 luminance_image = lambda image : np.dot(image[...,:3], [0.2989, 0.5870, 0.1140]) 
 
-def luminance_distribution ( im ) :
-
-    '''Expect a &w image and return an histogram of luminance'''
+def distribution_luminance(im) :
     l,c = np.shape(im)
-    hist = np.array([0]*256)
+    histo = np.array([0]*256)
     for i in range(l) :
         for j in range(c) :
-            hist[ im[i,j] ] += 1
-    return hist/(l*c) 
+            histo[ im[i,j] ] += 1
+    return histo/(l*c) 
 
 
 def intersection_cercles(x,y,r, x2,y2,r2):
     distance = np.sqrt((x2-x)**2+(y2-y)**2)
     return distance + r <= r2 or (abs(r-r2) <= distance <= r+r2) 
-    return distance/2 <= r2 #attention, multiplier les ratios par 2
 
-def imshowcircles (img, ax, ratio, cmap="gray"):
+def imshowcircles (image, points, ax, ratio, cmap="gray"):
     ax.imshow(image, cmap)
-    for i in range(len(m)):
-        x,y,h = m[i]
+    for i in range(len(points)):
+        x,y,h = points[i]
         c = plt.Circle((y,x),1.4*ratio**h,color='blue',fill=False)
         ax.add_artist(c)
         plt.text(y, x, str(i), color="white", fontsize=12)
@@ -54,15 +52,15 @@ def extraction(img, minis, sigma, ratio, dir, prefix=""):
         except :
             pass
 
-# Convolution, noyaux de Gauss et FFT (Fast Fourier Transform) 
+# Convolution et noyaux gaussiens 
 
-def kernel_Gauss(sigma, twoD=True):
-    size = 2*int(np.ceil(sigma))+3
-    if twoD:
-        kernel = np.fromfunction(lambda x, y: (1/(2*np.pi*sigma**2)) * np.exp((-1*((x-(size-1)/2)**2+(y-(size-1)/2)**2)) / (2*sigma**2)), (size, size))
+def noyau_gauss(sigma, dim2D=True):
+    taille = 2*int(np.ceil(sigma))+3
+    if dim2D:
+        noyau = np.fromfunction(lambda x, y: (1/(2*np.pi*sigma**2)) * np.exp((-1*((x-(taille-1)/2)**2+(y-(taille-1)/2)**2)) / (2*sigma**2)), (taille, taille))
     else:
-        kernel = np.fromfunction(lambda x: np.exp((-1*(x-(size-1)/2)**2) / (2*sigma**2)), (size,))
-    return kernel / np.sum(kernel)
+        noyau = np.fromfunction(lambda x: np.exp((-1*(x-(taille-1)/2)**2) / (2*sigma**2)), (taille,))
+    return noyau / np.sum(noyau)
 
 def etendre(image,d):
     etendu = np.c_[ np.flip(image[:,2:2+d],1), image, np.flip(image[:,-2-d+1:-1],1)]
@@ -76,22 +74,17 @@ def etendre(image,d):
 
 def convolution(image, noyau ):
     d = (noyau.shape[0]-1)//2
-    
     etendu = etendre(image,d)
-
     resultat = np.zeros((image.shape[0], image.shape[1]))
     for i in range(d,image.shape[0]):
         for j in range(d,image.shape[1]):
-            resultat[i,j] = np.sum((etendu[i-d:i+d+1, j-d:j+d+1]*noyau)) #beaucoup de copies, très mauvais
+            resultat[i,j] = np.sum((etendu[i-d:i+d+1, j-d:j+d+1]*noyau))
     return resultat
 
 def convolution_separabilite(image, noyauX, noyauY):
     d = (noyauX.shape[0]-1)//2
-
     etendu = etendre(image,d)
-
     resX = np.zeros((image.shape[0]+2*d, image.shape[1]))
-    print(np.shape(resX))
     for i, v in enumerate(noyauX):
         resX += v * etendu[:, i : image.shape[1] + i]
     resY = np.zeros((image.shape[0], image.shape[1]))
@@ -109,7 +102,6 @@ def minimas(img ,pyramid_height, sigma, ratio, min=0):
     minis = []
  
     for i in range(pyramid_height):
-       # temp2 = nd.gaussian_filter(temp,sigma*ratio**i)
         temp2 = nd.gaussian_filter(img,sigma*ratio**i)
         pyramid[i,:,:] = temp-temp2
         temp = temp2
@@ -157,9 +149,6 @@ def minimas(img ,pyramid_height, sigma, ratio, min=0):
                     if not inside : minis.append((x,y,h))
     
     return pyramid, minis
-  
-    ##complexité bof...
-
 
 # Apprentissage automatique 
 
@@ -190,7 +179,7 @@ AUTOTUNE = tf.data.experimental.AUTOTUNE
 train_ds = train_ds.cache().prefetch(buffer_size=AUTOTUNE)
 val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
 
-num_classes = 2 # Important to check !
+num_classes = 2 
 
 data_augmentation = tf.keras.Sequential(
   [
@@ -237,7 +226,7 @@ def test_sample(dir, randomize=True, max=8):
     try: 
       image = tf.keras.preprocessing.image.load_img(img_path, target_size=(img_height, img_width))
       input_arr = tf.keras.preprocessing.image.img_to_array(image)
-      input_arr = np.array([input_arr])  # Convert single image to a batch.
+      input_arr = np.array([input_arr])
       p1,p2 = probability_model.predict(input_arr)[0]
       ax=fig.add_subplot(1,max,i+1)
       ax.imshow(image)
@@ -248,7 +237,7 @@ def test_sample(dir, randomize=True, max=8):
 def test_image(dir):
   image = tf.keras.preprocessing.image.load_img(dir, target_size=(img_height, img_width))
   input_arr = tf.keras.preprocessing.image.img_to_array(image)
-  input_arr = np.array([input_arr])  # Convert single image to a batch.
+  input_arr = np.array([input_arr])
   predictions = probability_model.predict(input_arr)
 
   plt.imshow(image)
@@ -368,7 +357,7 @@ class Perceptron:
         n=len(X)
         X_forwarded = np.array([ self.feedforward(k) for k in X ])
         mean_error = self.cost_function( X_forwarded, Y) / n
-        range_of_forwarded_values = np.max(X_forwarded) - np.min(X_forwarded)
+        range_of_values = np.max(X_forwarded) - np.min(X_forwarded)
         return 1 - ( mean_error / range_of_forwarded_values )
 
 

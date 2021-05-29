@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{lmodern}  % for bold teletype font
+\usepackage{amsmath}  % for \hookrightarrow
+\usepackage{xcolor}   % for \textcolor
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={210mm,297mm},
+ left=20mm,
+ right=20mm,
+ top=20mm,
+ bottom=20mm,
+ }
+
+\lstset{
+    keywordstyle=\bfseries\color{blue},
+    commentstyle=\itshape\color{green!40!black},
+    stringstyle=\color{orange},
+    basicstyle=\ttfamily,
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    literate={á}{{\'a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {è}{{\`e}}1
+}
+
+\begin{document}
+\lstinputlisting[language=Python]{listing.py}
+\end{document}
