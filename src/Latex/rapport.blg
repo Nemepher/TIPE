@@ -1,20 +1,20 @@
 [0] Config.pm:304> INFO - This is Biber 2.14
-[0] Config.pm:307> INFO - Logfile is 'rapport.blg'
-[98] biber:322> INFO - === dim. mai 16, 2021, 13:25:32
+[1] Config.pm:307> INFO - Logfile is 'rapport.blg'
+[113] biber:322> INFO - === mar. juin  8, 2021, 20:36:10
 [148] Biber.pm:415> INFO - Reading 'rapport.bcf'
-[233] Biber.pm:940> INFO - Using all citekeys in bib section 0
-[256] Biber.pm:4256> INFO - Processing section 0
-[257] Utils.pm:75> INFO - Globbing data source 'references.bib'
-[257] Utils.pm:91> INFO - Globbed data source 'references.bib' to references.bib
-[286] Biber.pm:4455> INFO - Looking for bibtex format file 'references.bib' for section 0
-[288] bibtex.pm:1653> INFO - LaTeX decoding ...
-[307] bibtex.pm:1471> INFO - Found BibTeX data source 'references.bib'
-[403] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_IF6t/references.bib_5271.utf8, line 29, warning: 41 characters of junk seen at toplevel
-[403] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_IF6t/references.bib_5271.utf8, line 41, warning: 48 characters of junk seen at toplevel
-[426] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
-[427] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[427] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
-[427] Biber.pm:4090> INFO - No sort tailoring available for locale 'fr-FR'
-[476] bbl.pm:652> INFO - Writing 'rapport.bbl' with encoding 'UTF-8'
-[489] bbl.pm:755> INFO - Output to rapport.bbl
-[491] Biber.pm:128> INFO - WARNINGS: 2
+[237] Biber.pm:940> INFO - Using all citekeys in bib section 0
+[260] Biber.pm:4256> INFO - Processing section 0
+[260] Utils.pm:75> INFO - Globbing data source 'references.bib'
+[261] Utils.pm:91> INFO - Globbed data source 'references.bib' to references.bib
+[291] Biber.pm:4455> INFO - Looking for bibtex format file 'references.bib' for section 0
+[293] bibtex.pm:1653> INFO - LaTeX decoding ...
+[315] bibtex.pm:1471> INFO - Found BibTeX data source 'references.bib'
+[446] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_Zk2d/references.bib_3120.utf8, line 29, warning: 41 characters of junk seen at toplevel
+[446] Utils.pm:304> WARN - BibTeX subsystem: /tmp/biber_tmp_Zk2d/references.bib_3120.utf8, line 41, warning: 48 characters of junk seen at toplevel
+[474] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[475] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[475] Biber.pm:4084> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
+[475] Biber.pm:4090> INFO - No sort tailoring available for locale 'fr-FR'
+[524] bbl.pm:652> INFO - Writing 'rapport.bbl' with encoding 'UTF-8'
+[536] bbl.pm:755> INFO - Output to rapport.bbl
+[537] Biber.pm:128> INFO - WARNINGS: 2
